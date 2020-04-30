@@ -58,6 +58,15 @@ class UserRepo {
         let user = await User.findOne({email:email})
         return user.items
     }
+
+    async autoBitcoin(){
+        // let users = await User.find().exec()
+        let updated = await User.updateMany(
+            { },
+            {$inc: {bitcoin:5}}
+        )
+        return updated
+    }
 }
 module.exports = UserRepo;
 

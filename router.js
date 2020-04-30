@@ -22,6 +22,8 @@ module.exports = function(app){
     app.get('/Game/getItems', cors(), GameController.getItems)
     app.post('/user/makeTransaction', cors(), UserController.makeTransaction)
     app.post('/user/getItemArray', cors(), UserController.getItemArray)
+    app.get('/user/autoBitcoin', cors(), UserController.autoBitcoin)
+    
     // Sign in
     app.post(
         '/auth', cors(),

@@ -8,6 +8,8 @@ const _itemRepo = new ItemRepo();
 var   passport       = require('passport');
 const RequestService = require('../services/RequestService');
 
+var timer = false;
+
 // This function returns data to authenticated users only.
 exports.SecureAreaJwt  = async function(req, res) {
     let reqInfo = await RequestService.jwtReqHelper(req);
@@ -161,4 +163,16 @@ exports.getItemArray = async function(req, res){
     let itemArray = await _userRepo.getItemArray(req.body.email)
     
     res.json(itemArray)
+}
+
+exports.autoBitcoin = async function(req, res){
+    if(timer == false){
+        timer = true
+        setInterval(async function(){
+            let response = await _userRepo.autoBitcoin()
+        }, 5000)
+    } else {
+        res.json('Bitcoins already incrementing automatically.')
+    }
+
 }

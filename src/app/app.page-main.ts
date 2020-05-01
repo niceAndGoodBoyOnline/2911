@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './page-main.html',
-  styleUrls: ['./page-main.css']
+//   styleUrls: ['./page-main.css']
 })
 export class PageMainComponent {
     // Hard-code credentials for convenience.

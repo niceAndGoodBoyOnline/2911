@@ -4,7 +4,7 @@ import { ApiService } from './ApiService';
 @Component({
   selector: 'app-root',
   templateUrl: './page-register.html',
-  styleUrls:['./page-register.css']
+//   styleUrls:['./page-register.css']
 })
 export class PageRegisterComponent {
     // Hard-code credentials for convenience.

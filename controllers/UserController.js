@@ -66,6 +66,7 @@ exports.RegisterUser  = async function(req, res){
         var newUser = new User({
             email:        req.body.email,
             username:     req.body.username,
+            bitcoin:      0
         });
        
         // Uses passport to register the user.

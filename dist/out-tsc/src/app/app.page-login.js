@@ -51,7 +51,8 @@ let PageLoginComponent = class PageLoginComponent {
 PageLoginComponent = __decorate([
     Component({
         selector: 'app-root',
-        templateUrl: './page-login.html'
+        templateUrl: './page-login.html',
+        styleUrls: ['./page-login.css']
     })
 ], PageLoginComponent);
 export { PageLoginComponent };

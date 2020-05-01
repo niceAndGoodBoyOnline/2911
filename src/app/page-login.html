@@ -1,14 +1,34 @@
-<style>
-    * {
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-    }
-</style>
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
 
-<h3>Login</h3>
+    <body>
+        <h1>Hackermans:Outbreak</h1>
+        <br>
+        
 
+        <h2>Login</h2>
+        <table>
+            <tr>
+                <td>
+                    <p class="lable">Login name:</p> 
+                </td>
+                <td>
+                    <input class="boxes" type='text' [(ngModel)]='username'/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="lable">Password:</p>   
+                </td>
+                <td>
+                    <input class="boxes" type='password' [(ngModel)]='password'/>
+                </td>
+            </tr>
+        </table>
+        <input class ="submit" type='button' value='login' (click)='login()'/>
 
-Login name: <input type='text' [(ngModel)]='username'/><br/>
-Password:   <input type='password' [(ngModel)]='password'/><br/>
-<input type='button' value='login' (click)='login()'/>
-
-<p>{{message}}</p>
+        <p class="message">{{message}}</p>
+    </body>
+</html>

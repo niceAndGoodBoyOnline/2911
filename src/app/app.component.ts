@@ -30,7 +30,7 @@ export class AppComponent {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this);
         this.showContentIfLoggedIn();
-        this.startAutoBitcoin()
+        // this.startAutoBitcoin()
     }
 
     startAutoBitcoin(){

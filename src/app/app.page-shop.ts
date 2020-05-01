@@ -29,9 +29,16 @@ export class PageShopComponent {
     constructor(private http: HttpClient, private router:Router) {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this);
+        this.checkLoggedIn()
         this.getItems()
         this.getBitcoin()
 
+    }
+
+    checkLoggedIn() {
+        if(sessionStorage.getItem('username') == null){
+            this.router.navigate(['page-login'])
+        }
     }
 
     getBitcoin() {

@@ -31,6 +31,7 @@ export class PageMainComponent {
         this.getItems()
         this.getBitcoin()
         this.getUserItemArray()
+        // COMMENT FUNCTION BELOW TO ALLOW UNIT TESTING
         this.startAutosave()
     }
 

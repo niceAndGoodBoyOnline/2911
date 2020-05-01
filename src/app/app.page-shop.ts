@@ -4,8 +4,7 @@ import { ApiService } from './ApiService';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
-  templateUrl: './page-shop.html',
-  styleUrls: ['./page-shop.css']
+  templateUrl: './page-shop.html'
 })
 export class PageShopComponent {
     // Hard-code credentials for convenience.

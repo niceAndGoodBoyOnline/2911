@@ -84,8 +84,7 @@ let PageMainComponent = class PageMainComponent {
 PageMainComponent = __decorate([
     Component({
         selector: 'app-root',
-        templateUrl: './page-main.html',
-        styleUrls: ['./page-main.css']
+        templateUrl: './page-main.html'
     })
 ], PageMainComponent);
 export { PageMainComponent };

@@ -24,8 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/app/page-login.css"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -89,8 +88,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css",
-              "src/app/page-login.css"
+              "src/styles.css"
             ],
             "scripts": []
           }

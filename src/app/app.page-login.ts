@@ -47,6 +47,7 @@ export class PageLoginComponent {
                 sessionStorage.setItem('auth_token', data["token"]);
                 sessionStorage.setItem('username', data["username"]);
                 sessionStorage.setItem('email', data['email']);
+                sessionStorage.setItem('save', 'false')
                 this.message = "The user has been logged in."
                 this.router.navigate([''])
 

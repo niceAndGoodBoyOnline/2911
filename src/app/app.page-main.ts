@@ -20,6 +20,8 @@ export class PageMainComponent {
     userItemArray: any
     itemArray: any
     totalPower: number
+
+
     public site='http://localhost:1337/';
 
     // Since we are using a provider above we can receive 
@@ -109,18 +111,23 @@ export class PageMainComponent {
 
     //Can someone figure out how to call saveProgress() in setInterval? I cant seem to do it so i just retyped the saveProgress() function lol
     startAutosave() {
-        setInterval(() => {
-            console.log('Saving Progress..')
-            let url = this.site + 'user/saveProgress'
-            this.http.post<any>(url, {
-                email: sessionStorage.getItem("email"),
-                bitcoin: this.bitcoin
-            })
-                .subscribe(
-                    (data) => {
-                        console.log(data)
-                    } )
-        }, 5000)
+        if(sessionStorage.getItem('save') == 'false'){
+            sessionStorage.setItem('save', 'true')
+            setInterval(() => {
+                console.log('Saving Progress..')
+                let url = this.site + 'user/saveProgress'
+                this.http.post<any>(url, {
+                    email: sessionStorage.getItem("email"),
+                    bitcoin: this.bitcoin
+                })
+                    .subscribe(
+                        (data) => {
+                            console.log(data)
+                        } )
+            }, 5000)
+        } else {
+            console.log('Automated saving is already activated.')
+        }
     }
 
 }

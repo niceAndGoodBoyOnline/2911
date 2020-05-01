@@ -1,39 +1,40 @@
-<style>
-    * {
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-    }
-</style>
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h1>Welcome to the Deep Web Shop!</h1>
+        <h2>Your bitcoins: {{bitcoin}}</h2>
 
-<h3>Welcome to the Deep Web Shop!</h3>
-<h4>Your bitcoins: {{bitcoin}}</h4>
+        <table>
+            <tr>
+                <td>
+                    item:
+                </td>
+                <td>
+                    power:
+                </td>
+                <td>
+                    price:
+                </td>
+            </tr>
+            <tr *ngFor="let thing of itemArray">
+                <td>
+                    {{thing.item}}
+                </td>
+                <td>
+                    {{thing.power}}
+                </td>
+                <td>
+                    {{thing.price}}
+                </td>
+                <td>
+                    <input type='button' value='Buy... anonymously' (click)='buy(thing.item, thing.price)'/>
+                </td>
+            </tr>
+            
+        </table>
 
-<table>
-    <tr>
-        <td>
-            item:
-        </td>
-        <td>
-            power:
-        </td>
-        <td>
-            price:
-        </td>
-    </tr>
-    <tr *ngFor="let thing of itemArray">
-        <td>
-            {{thing.item}}
-        </td>
-        <td>
-            {{thing.power}}
-        </td>
-        <td>
-            {{thing.price}}
-        </td>
-        <td>
-            <input type='button' value='Buy... anonymously' (click)='buy(thing.item, thing.price)'/>
-        </td>
-    </tr>
-    
-</table>
-
-{{message}}
+        {{message}}
+    </body>
+</html>

@@ -53,7 +53,8 @@ let PageRegisterComponent = class PageRegisterComponent {
 PageRegisterComponent = __decorate([
     Component({
         selector: 'app-root',
-        templateUrl: './page-register.html'
+        templateUrl: './page-register.html',
+        styleUrls: ['./page-register.css']
     })
 ], PageRegisterComponent);
 export { PageRegisterComponent };

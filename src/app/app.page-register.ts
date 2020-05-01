@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './ApiService';
 @Component({
   selector: 'app-root',
-  templateUrl: './page-register.html'
+  templateUrl: './page-register.html',
+  styleUrls:['./page-register.css']
 })
 export class PageRegisterComponent {
     // Hard-code credentials for convenience.

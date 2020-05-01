@@ -4,7 +4,8 @@ import { ApiService } from './ApiService';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
-  templateUrl: './page-login.html'
+  templateUrl: './page-login.html',
+  styleUrls: ['./page-login.css']
 })
 export class PageLoginComponent {
     // Hard-code credentials for convenience.

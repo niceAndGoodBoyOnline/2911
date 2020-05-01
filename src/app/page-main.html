@@ -1,46 +1,40 @@
-<style>
-    table, tr {
-        border: 1px solid black;
-        /* border-collapse: collapse; */
-        width: 80%;
-        /* height: 50px */
-    }
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
 
-    * {
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-    }
-</style>
+        <h2>Hackermans: Outbreak</h2>
 
-<h3>Hackermans: Outbreak</h3>
+        <img src='assets/images/firewall.jpg' (click)="increaseBitcoin()" witdth='100px' height='100px'>
 
-<img src='assets/images/firewall.jpg' (click)="increaseBitcoin()" witdth='100px' height='100px'>
+        <p class="bitcoin">Bitcoin: {{bitcoin}}</p>
 
-<p>Bitcoin: {{bitcoin}}</p>
+        <input type="button" value="Shop" (click)="openShop()">
+        <input type="button" value="Save Game" (click)="saveProgress()">
 
-<input type="button" value="Shop" (click)="openShop()">
-<br/>
-<input type="button" value="Save Game" (click)="saveProgress()">
+        <p>{{message}}</p>
 
-<p>{{message}}</p>
-
-<!-- <table *ngFor="let event of eventArray">
-    <tr>
-        <td><b>Date</b></td>
-        <td><b>Time</b></td>
-        <td><b>Event Name</b></td>
-    </tr>
-    <tr>
-        <td>{{event.eventDate}}</td>
-        <td>{{event.eventTime}}</td>
-        <td>{{event.eventName}}</td>
-    </tr>
-    <br/>
-    <tr>
-        <td><b>Description:</b></td>
-        <td><input type="button" value="Attend" (click)=attend(event.eventName)></td>
-    </tr>
-    <tr>
-        <td>{{event.eventDescription}}</td>
-    </tr>
-</table>
-<p>{{message}}</p> -->
+        <!-- <table *ngFor="let event of eventArray">
+            <tr>
+                <td><b>Date</b></td>
+                <td><b>Time</b></td>
+                <td><b>Event Name</b></td>
+            </tr>
+            <tr>
+                <td>{{event.eventDate}}</td>
+                <td>{{event.eventTime}}</td>
+                <td>{{event.eventName}}</td>
+            </tr>
+            <br/>
+            <tr>
+                <td><b>Description:</b></td>
+                <td><input type="button" value="Attend" (click)=attend(event.eventName)></td>
+            </tr>
+            <tr>
+                <td>{{event.eventDescription}}</td>
+            </tr>
+        </table>
+        <p>{{message}}</p> -->
+    </body>
+</html>

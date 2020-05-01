@@ -1,25 +1,31 @@
-<p>register</p>
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <h2>Register</h2>
 
-<table>
-    <tr>
-        <td>Username:</td>
-        <td><input type='text' [(ngModel)]='username'/></td>
-    </tr>
-    <tr>
-        <td>Email:</td>
-        <td><input type='text' [(ngModel)]='email'/></td>
-    </tr>
-    <tr>
-        <td>Password:</td>
-        <td><input type='password' [(ngModel)]='password'/></td>
-    </tr>
-    <tr>
-        <td>Password Confirmation:</td>
-        <td><input type='password' [(ngModel)]='passwordConfirmation'/></td>
-    </tr>
-</table>
+        <table>
+            <tr>
+                <td><p class="lable">Username:</p></td>
+                <td><input class="boxes" type='text' [(ngModel)]='username'/></td>
+            </tr>
+            <tr>
+                <td><p class="lable">Email:</p></td>
+                <td><input class="boxes" type='text' [(ngModel)]='email'/></td>
+            </tr>
+            <tr>
+                <td><p class="lable">Password:</p></td>
+                <td><input class="boxes" type='password' [(ngModel)]='password'/></td>
+            </tr>
+            <tr>
+                <td><p class="lable">Password Confirmation:</p></td>
+                <td><input class="boxes" type='password' [(ngModel)]='passwordConfirmation'/></td>
+            </tr>
+        </table>
 
-<input type='button' value='Register' (click)='register()'/>
+        <input class="submit" type='button' value='Register' (click)='register()'/>
 
-<p>{{message}}</p>
-
+        <p class="message">{{message}}</p>
+    </body>
+</html>

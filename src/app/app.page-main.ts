@@ -17,8 +17,8 @@ export class PageMainComponent {
     _apiService:ApiService;
 
     bitcoin: number
-    userItemArray: any
-    itemArray: any
+    // userItemArray: any
+    // itemArray: any
     totalPower: number
 
 
@@ -30,7 +30,7 @@ export class PageMainComponent {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this);
         this.checkLoggedIn()
-        this.getItems()
+        // this.getItems()
         this.getBitcoin()
         this.getUserItemArray()
         this.startAutosave()
@@ -53,7 +53,7 @@ export class PageMainComponent {
                 } )
     }
 
-    getUserItemArray(){
+    async getUserItemArray(){
         let url = this.site + 'user/getItemArray'
         this.http.post<any>(url, {
             email: sessionStorage.getItem("email")
@@ -61,12 +61,13 @@ export class PageMainComponent {
             .subscribe(
                 (data) => {
                     console.log(data)
-                    this.userItemArray = data
-                    this.calculateTotalPower()
+                    let userItemArray = data
+                    this.getItems(userItemArray)
                 } )
+
     }
 
-    getItems() {
+    getItems(userItemArray) {
         let url = this.site + 'Game/getItems'
         this.http.get<any>(url)
             .subscribe(
@@ -75,14 +76,14 @@ export class PageMainComponent {
                     for(let i=0;i<data.length;i++){
                         array.push(data[i].power)
                     }
-                    this.itemArray = array
+                    this.calculateTotalPower(array, userItemArray)
                 } )
     }
 
-    calculateTotalPower() {
+    calculateTotalPower(itemArray, userItemArray) {
         this.totalPower = 0
-        for(let i=0;i<this.userItemArray.length;i++){
-            this.totalPower += this.userItemArray[i] * this.itemArray[i]
+        for(let i=0;i < userItemArray.length;i++){
+            this.totalPower += userItemArray[i] * itemArray[i]
         }
 
     }

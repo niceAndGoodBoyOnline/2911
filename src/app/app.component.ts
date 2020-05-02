@@ -45,7 +45,7 @@ export class AppComponent {
 
 
     updateLinks() {
-        console.log(sessionStorage.getItem('email'))
+        // console.log(sessionStorage.getItem('email'))
         if(sessionStorage.getItem("username")==null) {
             this.loggedin = false;
         }

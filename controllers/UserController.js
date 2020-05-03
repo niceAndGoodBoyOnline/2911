@@ -72,18 +72,6 @@ exports.RegisterUser  = async function(req, res){
         res.json({message: checkUser})
     }
 
-    // if(password.value.match(validation) == false){
-
-    // }
-
-    // if(password.length < 8){
-    //     return res.json("Password must have at least 8 characters")
-    // }
-    // if(password.value.match(letters) == false){
-    //     return res.json("Password must have at least 1 letter and 1 number")
-    // }
-    // if(password)
-
     if (password == passwordConfirm) {
 
         // Creates user object with mongoose model.

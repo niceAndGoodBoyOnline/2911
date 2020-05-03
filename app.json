@@ -1,0 +1,22 @@
+{
+  "name": "HackermansOutbreak",
+  "description": "Hacks up, fry boy.",
+  "keywords": [
+    "MEAN",
+    "Angular",
+    "Node",
+    "MongoDB",
+    "mLab"
+  ],
+  "repository": "https://github.com/niceAndGoodBoyOnline/HackermansOutbreak",
+  "success_url": "/",
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": [
+    "mongolab"
+  ]
+}

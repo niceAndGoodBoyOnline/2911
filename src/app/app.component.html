@@ -1,0 +1,27 @@
+<style>
+    @font-face {
+    font-family: HackerFont;
+    src: url(../assets/text/PressStart2P-Regular.ttf)
+}
+
+* {
+    font-family: HackerFont;
+    color: green;
+    text-align: center;
+}
+</style>
+
+{{updateLinks()}}
+
+<nav>
+    <a routerLink="/page-main" routerLinkActive="active">Main | </a>
+    <a *ngIf="loggedin == false" routerLink="/page-register" routerLinkActive="active">Register | </a>
+    <a *ngIf="loggedin == false" routerLink="/page-login" routerLinkActive="active">Login</a>
+    <a *ngIf="loggedin == true" routerLink="/page-login" routerLinkActive="active" (click)='logout()'>Logout {{username}}</a> 
+    <!-- <a *ngIf="loggedin == true" routerLink="/page-shop" routerLinkActive="active">Shop</a> | -->
+
+</nav>
+<br/>
+<br/>
+
+<router-outlet></router-outlet>

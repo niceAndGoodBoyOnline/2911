@@ -67,6 +67,21 @@ class UserRepo {
         )
         return updated
     }
+
+    async checkUser(email, username){
+        let user = await User.findOne({email:email})
+        console.log(user)
+        if(user){
+            return "User already exists with that email."
+        }
+        let user2 = await User.findOne({username:username})
+        console.log(user)
+        if(user2){
+            return "User already exists with that username."
+        }
+
+        return ''
+    }
 }
 module.exports = UserRepo;
 

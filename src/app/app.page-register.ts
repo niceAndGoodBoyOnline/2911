@@ -14,6 +14,7 @@ export class PageRegisterComponent {
     lastName = '';
     password = '';
     passwordConfirmation = '';
+    errorMessage = '';
 
     
     token                 = '';
@@ -50,7 +51,7 @@ export class PageRegisterComponent {
         (data) => {
             // Inspect the data to know how to parse it.
             console.log(JSON.stringify(data));
-            this.message = "Registration successful. Please login."
+            this.message = data['message']
             
             // if(data["token"]  != null)  {
             //     this.token = data["token"]     

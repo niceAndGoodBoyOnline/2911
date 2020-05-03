@@ -55,9 +55,34 @@ exports.Register = async function(req, res) {
 
 // Handles 'POST' with registration form submission.
 exports.RegisterUser  = async function(req, res){
-   
+    // var specials = '!@#$%^&*'
+    // var letters = /^[0-9a-zA-Z]+$/;
+    var validation = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+
     var password        = req.body.password;
     var passwordConfirm = req.body.passwordConfirm;
+
+
+    if(validation.test(password) != true){
+        res.json({message:'Password must have 1 lowercase and uppercase, 1 number, 1 special character, and at least 8 characters long.'})
+    }
+
+    let checkUser = await _userRepo.checkUser(req.body.email, req.body.username)
+    if(checkUser){
+        res.json({message: checkUser})
+    }
+
+    // if(password.value.match(validation) == false){
+
+    // }
+
+    // if(password.length < 8){
+    //     return res.json("Password must have at least 8 characters")
+    // }
+    // if(password.value.match(letters) == false){
+    //     return res.json("Password must have at least 1 letter and 1 number")
+    // }
+    // if(password)
 
     if (password == passwordConfirm) {
 
@@ -84,7 +109,7 @@ exports.RegisterUser  = async function(req, res){
                     // User registered so authenticate and redirect to secure 
                     // area.
                     passport.authenticate('local') (req, res, 
-                            function () { res.json( {user: newUser, message:'it worked'}); });
+                            function () { res.json( {user: newUser, message:'Registration successful. Please login.'}); });
                 });
 
     }

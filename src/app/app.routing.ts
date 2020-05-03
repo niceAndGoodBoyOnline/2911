@@ -6,6 +6,8 @@ import { PageRegisterComponent } from './app.page-register';
 import { PageLoginComponent } from './app.page-login';
 import { PageShopComponent } from './app.page-shop';
 
+
+// This is so that the program knows where to redirect to what page.
 const appRoutes: Routes = [
   { path: 'page-main', component: PageMainComponent },
   { path: '', redirectTo: '/page-login', pathMatch: 'full' },

@@ -8,74 +8,48 @@ const _itemRepo = new ItemRepo();
 var   passport       = require('passport');
 const RequestService = require('../services/RequestService');
 
+//This variable is to prevent multiple instances of autosaves / autobitcoin
 var timer = false;
-
-// This function returns data to authenticated users only.
-exports.SecureAreaJwt  = async function(req, res) {
-    let reqInfo = await RequestService.jwtReqHelper(req);
-
-    if(reqInfo.authenticated) {
-        res.json({errorMessage:"", reqInfo:reqInfo,
-                  secureData: "Congratulations! You are authenticated and you have "
-                           +  "successfully accessed this message."})
-    }
-    else {
-        res.json( {errorMessage:'/user/Login?errorMessage=You ' + 
-                  'must be logged in to view this page.'})
-    }
-}
-
-// This function returns data to logged in managers only.
-exports.ManagerAreaJwt  = async function(req, res) {
-    let reqInfo = await RequestService.jwtReqHelper(req, ['Admin', 'Manager']);
-
-    if(reqInfo.rolePermitted) {
-        res.json({errorMessage:"", reqInfo:reqInfo})
-    }
-    else {
-        res.json({errorMessage:'You must be logged in with proper ' +
-                'permissions to view this page.'});
-    }
-}
-
-// This function receives a post from logged in users only.
-exports.PostAreaJwt = async function(req, res) {
-    let reqInfo = await RequestService.jwtReqHelper(req, []);
-    console.log(req.body.obj.msgFromClient);
-    res.json({errorMessage:"", reqInfo:reqInfo, 
-              msgFromServer:"Hi from server"})
-};
-
 
 // Displays registration form.
 exports.Register = async function(req, res) {
     let reqInfo = RequestService.reqHelper(req);
+    //Return the below information (stuff in {}) to 'user/Register' for rendering the page.
     res.render('user/Register', {errorMessage:"", user:{}, reqInfo:reqInfo})
 };
 
 // Handles 'POST' with registration form submission.
+// Registers the user.
 exports.RegisterUser  = async function(req, res){
-    // var specials = '!@#$%^&*'
-    // var letters = /^[0-9a-zA-Z]+$/;
+    // RegEx formula for a strong password
     var validation = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
 
+    // Grab the password from the POST request
     var password        = req.body.password;
     var passwordConfirm = req.body.passwordConfirm;
 
-
+    // If the password does not follow the RegEx formula,
     if(validation.test(password) != true){
+        // Return the following message.
+        // This data is recieved by "(data)" in whatever function in the frontend that called this function.
         res.json({message:'Password must have 1 lowercase and uppercase, 1 number, 1 special character, and at least 8 characters long.'})
     }
 
+    // Call checkUser() function in UserRepo.js and assigned whatever returned to checkUser variable.
     let checkUser = await _userRepo.checkUser(req.body.email, req.body.username)
+    // If checkUser is true
     if(checkUser){
+        // Return the following message
+        // This data is recieved by "(data) => " in whatever function in the frontend that called this function.
         res.json({message: checkUser})
     }
 
+    // If password is the same as the password confirmation,
     if (password == passwordConfirm) {
 
+        //!!!!The following comments and code are not mine lol, it was taken from a previous assignment that was given to us!!!!!
+
         // Creates user object with mongoose model.
-        // Note that the password is not present.
         var newUser = new User({
             email:        req.body.email,
             username:     req.body.username,
@@ -106,29 +80,22 @@ exports.RegisterUser  = async function(req, res){
     };
 }
 
+
 // Shows login form.
+// !!!This function is not mine!!!
 exports.Login = async function(req, res) {
+    // reqInfo is basically important user information/credentials.
+    // I dont really know much about it. We were never taught reqInfo thoroughly.
     let reqInfo      = RequestService.reqHelper(req);
     let errorMessage = req.query.errorMessage; 
 
+    // Return information to user/Login page for rendering.
     res.render('user/Login', { user:{}, errorMessage:errorMessage, 
                                reqInfo:reqInfo});
 }
 
-// Receives login information & redirects 
-// depending on pass or fail.
-exports.LoginUser = async function(req, res, next) {
-    let roles = await _userRepo.getRolesByUsername(req.body.username);
-    sessionData = req.session;
-    sessionData.roles  = roles;
-  
-  passport.authenticate('local', {
-      successRedirect : '/user/SecureArea', 
-      failureRedirect : '/user/Login?errorMessage=Invalid login.', 
-  }) (req, res, next);
-};
-
 // Log user out and direct them to the login screen.
+// !!!This function is not mine!!!!
 exports.Logout = (req, res) => {
     req.logout();
     let reqInfo = RequestService.reqHelper(req);
@@ -137,55 +104,67 @@ exports.Logout = (req, res) => {
                                reqInfo:reqInfo});
 };
 
-// This displays a view called 'securearea' but only 
-// if user is authenticated.
-exports.SecureArea  = async function(req, res) {
-    let reqInfo = RequestService.reqHelper(req);
-
-    if(reqInfo.authenticated) {
-        res.render('user/SecureArea', {errorMessage:"", reqInfo:reqInfo})
-    }
-    else {
-        res.redirect('/user/Login?errorMessage=You ' + 
-                     'must be logged in to view this page.')
-    }
-}
-
-
+// Gets the bitcoin from the database
 exports.getBitcoin = async function(req, res) {
+    // Call getBitcoin() function from UserRepo.js with user email from POST request as parameter
     let bitcoin = await _userRepo.getBitcoin(req.body.email)
 
+    // Return amount of bitcoins.
+    // This data is recieved by "(data) => " in whatever function in the frontend that called this function.
     res.json(bitcoin)
 }
 
+// Save progress
 exports.saveProgress = async function(req, res){
+    // Call saveProgress() function from UserRepo.js with email and bitcoin from POST request as parameter
     let response = await _userRepo.saveProgress(req.body.email, req.body.bitcoin)
 
+    // Return whatever is returned from saveProgress from UserRepo.js
+    // This data is recieved by "(data) => " in whatever function in the frontend that called this function.
     res.json(response)
 }
 
 
+// Make the transaction from buying items
 exports.makeTransaction = async function(req, res){
-    console.log('hi')
+    // Call getIndex() function from ItemRepo.js with item name from POST request as parameter
+    // This function returns the index.
     let index = await _itemRepo.getIndex(req.body.name)
+    // Call makeTransaction() function from UserRepo.js with email from POST request and index as parameter
     let response = await _userRepo.makeTransaction(req.body.email, index)
 
+    // Return whatever is returned from makeTransaction() from UserRepo.js
+    // This data is recieved by "(data) => " in whatever function in the frontend that called this function.
     res.json(response)
 }
 
+
+// Get amount of items the user bought
 exports.getItemArray = async function(req, res){
+    // Call getItemArray() from UserRepo.js with email from POST request as parameter
     let itemArray = await _userRepo.getItemArray(req.body.email)
     
+    // Return whatever is returned from getItemArray from UserRepo.js
+    // This data is recieved by "(data) => " in whatever function in the frontend that called this function.
     res.json(itemArray)
 }
 
+// Increase bitcoin for ALL USERS every 5 seconds.
+// This is the afk bitcoin gain function.
 exports.autoBitcoin = async function(req, res){
+    // If timer is false,
     if(timer == false){
+        // Make it true. This is so that there arent multiple instances of this function running at the same time.
         timer = true
+        // Set how often the code below is executed.
         setInterval(async function(){
+            // Call autoBitcoin() function from UserRepo.js
             let response = await _userRepo.autoBitcoin()
+        // Execute above code every 5000 miliseconds (5 seconds)
         }, 5000)
+    // If timer is not false,
     } else {
+        // let em know that this is already running.
         res.json('Bitcoins already incrementing automatically.')
     }
 

@@ -6,22 +6,20 @@ import { ApiService } from './ApiService';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-    // Hard-code credentials for convenience.
+    // Ready the information needed
     password              = '';         
     username              = '';
     
     token                 = '';
     message               = 'Not logged in.';
-    secureData:string     = '';
-    managerData:string    = '';
     reqInfo:any           = null;
-    msgFromServer:string  = '';
     _apiService:ApiService;
-    public site='http://localhost:1337/';
 
-    // roles:Array<any> = [];
+    // Where the backend site is located
+    public site='http://localhost:1337/';
+    
+    // Is the user logged in or not?
     loggedin = false;
-    // isadmin = false;
 
 
     // Since we are using a provider above we can receive 
@@ -29,96 +27,60 @@ export class AppComponent {
     constructor(private http: HttpClient) {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this);
-        this.showContentIfLoggedIn();
+        this.getToken();
         // COMMENT FUNCTION BELOW TO ALLOW UNIT TESTING
         this.startAutoBitcoin()
     }
 
+    // Starts automatic bitcoin gain for all users
     startAutoBitcoin(){
+        // Locate what appropriate controller to use in the backend
+        // (This path refers to a path in router.js)
         let url = this.site + 'user/autoBitcoin'
+
+        // Send a GET request to the above URL
         this.http.get<any>(url)
             .subscribe(
+
+                // If data is recieved,
                 (data) => {
                     console.log(data)
                 } )
     }
 
 
+    // Constantly checks if the user is logged in. Right now, this is
+    // to update the links above the screen. (Main | Register | Login)
     updateLinks() {
-        // console.log(sessionStorage.getItem('email'))
+        // If the user is logged out (if there is no data in the sessionStorage),
         if(sessionStorage.getItem("username")==null) {
+            // let loggedin equal to false
             this.loggedin = false;
         }
+        // otherwise,
         else {
             this.loggedin = true;
+            // get the logged in user's username
             this.username = '(' + sessionStorage.getItem("username") + ')'
         }
     }
   
-    //------------------------------------------------------------
-    // Either shows content when logged in or clears contents.
-    //------------------------------------------------------------
-    showContentIfLoggedIn() {
-        // Logged in if token exists in browser cache.
+    // Assigns this.token to user's token if logged in. If logged out, clear it.
+    getToken() {
+        // Get the user's token
         if(sessionStorage.getItem('auth_token')!=null) {
             this.token   = sessionStorage.getItem('auth_token');
-            this.message = "The user has been logged in."
         }
         else {
-            this.message = "Not logged in.";
+            // Clear this.token if logged out
             this.token   = ''
         }
     }
 
-    getSecureData() {  
-        this._apiService.getData('user/SecureAreaJwt', 
-                                 this.secureDataCallback);
-    }
-    // Callback needs a pointer '_this' to current instance.
-    secureDataCallback(result, _this) {
-        if(result.errorMessage == "") {
-            _this.secureData = result.secureData;
-        }
-        else {
-            alert(JSON.stringify(result.errorMessage));
-        }   
-    }
-
-    getManagerData() {  
-        this._apiService.getData('user/ManagerAreaJwt', 
-                                 this.managerDataCallback);
-    }
-    // Callback needs a pointer '_this' to current instance.
-    managerDataCallback(result, _this) {
-        if(result.errorMessage == "") {
-            _this.reqInfo = result.reqInfo;
-        }
-        else {
-            alert(JSON.stringify(result.errorMessage)); 
-        }
-    }
-    
-    postSecureMessage() {
-        let dataObject = {
-            msgFromClient: 'hi from client'
-        }
-        this._apiService.postData('user/PostAreaJwt', dataObject, 
-                                  this.securePostCallback);                              
-    }
-    // Callback needs a pointer '_this' to current instance.
-    securePostCallback(result, _this) {
-        if(result.errorMessage == '') {
-            _this.msgFromServer = result['msgFromServer']; 
-        }
-        else {
-            alert(JSON.stringify(result.errorMessage)); 
-        }   
-    }
-
-    //------------------------------------------------------------
-    // Log user in. 
-    //------------------------------------------------------------
+    // Login
     login() {
+        // Locate what appropriate controller to use in the backend
+        // (This path refers to a path in router.js)
         let url = this.site + "auth";
     
         // This free online service receives post submissions.
@@ -129,14 +91,16 @@ export class AppComponent {
         .subscribe( 
         // Data is received from the post request.
         (data) => {
-            // Inspect the data to know how to parse it.
+            // console.log the recieved data (this is for debugging purposes)
             console.log(JSON.stringify(data));
             
+            //if there is a token in the data recieved,
             if(data["token"]  != null)  {
-                this.token = data["token"]     
+                this.token = data["token"]
+                // Set 'auth_token' in the session storage to the user's token
                 sessionStorage.setItem('auth_token', data["token"]);
-                this.message = "The user has been logged in."  
-            }    
+                this.message = "The user has been logged in."
+            }
         },
         // An error occurred. Data is not received. 
         error => {
@@ -144,20 +108,14 @@ export class AppComponent {
         });
     }
 
-    //------------------------------------------------------------
-    // Log user out. Destroy token.
-    //------------------------------------------------------------
+    // Log out, clear everything.
     logout() {
         sessionStorage.clear();
-        this.showContentIfLoggedIn();
+        this.getToken();
 
         // Clear data.
-        this.secureData    = ""; 
-        this.managerData   = "";
         this.reqInfo       = {};
-        this.msgFromServer = "";
         this.username = '';
         this.loggedin = false
-        // this.isadmin = false;
     }
 }

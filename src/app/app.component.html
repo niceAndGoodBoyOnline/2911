@@ -10,18 +10,21 @@
     text-align: center;
 }
 </style>
-
+<!-- Constantly call updateLinks function in app.component.ts -->
 {{updateLinks()}}
 
+<!-- This shows the links in the top middle of the page. -->
+<!-- Its like <a href> in html -->
 <nav>
     <a routerLink="/page-main" routerLinkActive="active">Main | </a>
     <a *ngIf="loggedin == false" routerLink="/page-register" routerLinkActive="active">Register | </a>
     <a *ngIf="loggedin == false" routerLink="/page-login" routerLinkActive="active">Login</a>
     <a *ngIf="loggedin == true" routerLink="/page-login" routerLinkActive="active" (click)='logout()'>Logout {{username}}</a> 
-    <!-- <a *ngIf="loggedin == true" routerLink="/page-shop" routerLinkActive="active">Shop</a> | -->
 
 </nav>
 <br/>
 <br/>
 
+<!-- This shows the appropriate page when clicking on a link. -->
+<!-- Basically, everything on that page is shown here. -->
 <router-outlet></router-outlet>

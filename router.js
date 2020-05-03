@@ -23,19 +23,4 @@ module.exports = function(app){
         authMiddleware.signIn,
         authMiddleware.signJWTForUser
         )
-
-    // Accessible to authenticated user. CORS must be enabled 
-    // for client App to access it.
-    app.get('/user/SecureAreaJwt', cors(),  
-        authMiddleware.requireJWT, UserController.SecureAreaJwt)
-
-    // Accessible to manager or admin. CORS must be enabled for 
-    // client App to access it.
-    app.get('/user/ManagerAreaJwt', cors(), 
-        authMiddleware.requireJWT, UserController.ManagerAreaJwt)
-    
-    // Receives posted data from authenticated users.
-    app.post('/user/PostAreaJwt', cors(), 
-        authMiddleware.requireJWT, UserController.PostAreaJwt)
-
 };

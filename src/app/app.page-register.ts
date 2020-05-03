@@ -3,11 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './ApiService';
 @Component({
   selector: 'app-root',
+  // Assign which html page to this component.
   templateUrl: './page-register.html',
   styleUrls:['./page-register.css']
 })
 export class PageRegisterComponent {
-    // Hard-code credentials for convenience.
+    // User's register credentials. These are filled when user submits their credentials.
     username = '';
     email = '';
     firstName = '';
@@ -18,10 +19,6 @@ export class PageRegisterComponent {
     
     token                 = '';
     message               = '';
-    secureData:string     = '';
-    managerData:string    = '';
-    reqInfo:any           = null;
-    msgFromServer:string  = '';
     _apiService:ApiService;
     public site='http://localhost:1337/';
 
@@ -34,9 +31,13 @@ export class PageRegisterComponent {
     }
 
     register() {
+        // Locate which appropriate controller function to use. In this case, we're using RegisterUser in UserController.js.
+        // (You can find where this leads in router.js file.)
         let url = this.site + "user/RegisterUser";
     
-        // This free online service receives post submissions.
+        // Send a POST request with below data.
+        // In UserController.js, this below data is recieved by "req.body.[whatever we want to grab]"
+        // This is how we get data from frontend(Andular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
         this.http.post(url, {
                 password: this.password,
                 passwordConfirm: this.passwordConfirmation,
@@ -47,18 +48,13 @@ export class PageRegisterComponent {
             })
         .subscribe( 
         // Data is received from the post request.
+        // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
         (data) => {
-            // Inspect the data to know how to parse it.
+            // console log the recieved data (for debugging purposes)
             console.log(JSON.stringify(data));
+            // let the user know what happened
             this.message = data["message"]
-            
-            // if(data["token"]  != null)  {
-            //     this.token = data["token"]     
-            //     sessionStorage.setItem('auth_token', data["token"]);
-            //     this.message = "The user has been logged in."  
-            // }    
-        }
-        // An error occurred. Data is not received. 
+            }
         )
     }
 }

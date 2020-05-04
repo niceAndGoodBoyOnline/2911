@@ -7,12 +7,13 @@ import { PageMainComponent } from './app.page-main';
 import { PageRegisterComponent } from './app.page-register';
 import { PageLoginComponent } from './app.page-login';
 import { PageShopComponent } from './app.page-shop'
+import { PagePrestigeComponent } from './app.page-prestige'
 import { routing } from './app.routing';
 
 @NgModule({
   declarations: [
     AppComponent, PageMainComponent, PageRegisterComponent, PageLoginComponent,
-    PageShopComponent
+    PageShopComponent, PagePrestigeComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, routing

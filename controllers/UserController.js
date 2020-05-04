@@ -169,3 +169,21 @@ exports.autoBitcoin = async function(req, res){
     }
 
 }
+
+// Get the user's prestige points
+exports.getPrestigePoints = async function(req, res){
+    // Call getPrestigePoints() from UserRepo.js to get prestige points
+    let prestigePoints = await _userRepo.getPrestigePoints(req.body.email)
+
+    // Return the points
+    res.json(prestigePoints)
+}
+
+// Save the user's prestige points
+exports.savePrestigeProgress = async function(req, res){
+    // Call savePrestigeProgress() from UserRepo.js to save their prestige points
+    let respond = await _userRepo.savePrestigeProgress(req.body.email, req.body.prestigePoints)
+
+    // return whatever lol
+    res.json(respond)
+}

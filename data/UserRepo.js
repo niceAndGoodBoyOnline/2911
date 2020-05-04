@@ -117,6 +117,31 @@ class UserRepo {
         // If there is no user with the same username and email in the database, return nothing.
         return ''
     }
+
+    // Get user's prestige points from the database by email
+    async getPrestigePoints(email,){
+        // Find the user with the corresponding email
+        let user = await User.findOne({email:email})
+
+        // Return the user's prestige points
+        return user.prestige
+    }
+
+    // Save the user's prestige points to the database
+    async saveProgress(email, prestigePoints) {
+        //updateOne() means to update one user in the database.
+        let updated = await User.updateOne(
+            // This is to find the user with the following information
+            { email:email},
+            // $set means to change the information.
+            // In this case, we change the user's prestige points data to the data that was passed into this function.
+            {$set: {prestigePoints:prestigePoints}}
+        )
+        // return a message
+        return "Prestige points has been saved."
+    }
+
+
 }
 module.exports = UserRepo;
 

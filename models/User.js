@@ -15,7 +15,8 @@ var userSchema = mongoose.Schema({
   },
   prestige: {type: Array, default: [0, 0]},
   items : {type: Array, default: [0, 0]},
-  bitcoin: {type: Number, default: 0}
+  bitcoin: {type: Number, default: 0},
+  prestigePoints: {type: Number, default: 0}
 });
 userSchema.plugin(passportLocalMongoose);
 var User = module.exports = mongoose.model('User', userSchema);

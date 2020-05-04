@@ -179,9 +179,7 @@ export class PageMainComponent {
             // Code below is the same thing as saveProgress()
             let interval = setInterval(() => {
                 // If the user is logged out, or if user is in shop,
-                console.log(sessionStorage.getItem('inshop'), sessionStorage.getItem('auth_token'))
                 if((sessionStorage.getItem('auth_token') == null) || ((sessionStorage.getItem('inshop') != 'false'))){
-                    console.log(interval)
                     // Stop the autosave.
                     clearInterval(interval)
                     console.log('Autosave has been stopped.')
@@ -200,16 +198,6 @@ export class PageMainComponent {
                         (data) => {
                             console.log(data)
                         } )
-                // // If the user is logged out, or if user is in shop,
-                // console.log(sessionStorage.getItem('inshop'), sessionStorage.getItem('auth_token'))
-                // if((sessionStorage.getItem('auth_token') == null) || ((sessionStorage.getItem('inshop') == 'true'))){
-                //     console.log(interval)
-                //     // Stop the autosave.
-                //     clearInterval(interval)
-                //     console.log('Autosave has been stopped.')
-                //     sessionStorage.setItem('save', 'false')
-                // }
-            // Execute above code every 5000 miliseconds (5 seconds. Can change this to be longer.)
             }, 3000)
         } else {
             // If there is an existing autosave instance, let em know in the console.

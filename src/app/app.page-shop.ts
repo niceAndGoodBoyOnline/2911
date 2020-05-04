@@ -25,11 +25,12 @@ export class PageShopComponent {
         this._apiService = new ApiService(http, this);
         this.getItems()
         this.getBitcoin()
-
     }
 
     // Get user's bitcoin from the database
     getBitcoin() {
+        // Set variable 'inshop' in session storage to 'true'. This is used to tell the autosave that the user is in the shop and should not be auto saving.
+        sessionStorage.setItem('inshop', 'true')
         // Locate which appropriate controller function to use. In this case, we use getBitcoin function in UserController.js
         // You can find this out in router.js
         let url = this.site + 'user/getBitcoin'

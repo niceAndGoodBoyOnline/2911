@@ -29,6 +29,7 @@ export class PageMainComponent {
         this.getBitcoin()
         this.getUserItemArray()
         this.startAutosave()
+        sessionStorage.setItem('inshop', 'false')
     }
 
     // Checks if user is logged in
@@ -138,9 +139,9 @@ export class PageMainComponent {
     }
 
     // This function is called every time the user clicks on the shop button
-    openShop() {
+    async openShop() {
         // Save progress
-        this.saveProgress()
+        await this.saveProgress()
         // Navigate user to the shop page
         this.router.navigate(['page-shop'])
     }
@@ -176,7 +177,18 @@ export class PageMainComponent {
             sessionStorage.setItem('save', 'true')
             // Set how often the below code is executed.
             // Code below is the same thing as saveProgress()
-            setInterval(() => {
+            let interval = setInterval(() => {
+                // If the user is logged out, or if user is in shop,
+                console.log(sessionStorage.getItem('inshop'), sessionStorage.getItem('auth_token'))
+                if((sessionStorage.getItem('auth_token') == null) || ((sessionStorage.getItem('inshop') != 'false'))){
+                    console.log(interval)
+                    // Stop the autosave.
+                    clearInterval(interval)
+                    console.log('Autosave has been stopped.')
+                    sessionStorage.setItem('save', 'false')
+                    return
+                }
+                // otherwise, save
                 console.log('Saving Progress..')
                 let url = this.site + 'user/saveProgress'
                 this.http.post<any>(url, {
@@ -188,11 +200,20 @@ export class PageMainComponent {
                         (data) => {
                             console.log(data)
                         } )
+                // // If the user is logged out, or if user is in shop,
+                // console.log(sessionStorage.getItem('inshop'), sessionStorage.getItem('auth_token'))
+                // if((sessionStorage.getItem('auth_token') == null) || ((sessionStorage.getItem('inshop') == 'true'))){
+                //     console.log(interval)
+                //     // Stop the autosave.
+                //     clearInterval(interval)
+                //     console.log('Autosave has been stopped.')
+                //     sessionStorage.setItem('save', 'false')
+                // }
             // Execute above code every 5000 miliseconds (5 seconds. Can change this to be longer.)
-            }, 5000)
+            }, 3000)
         } else {
             // If there is an existing autosave instance, let em know in the console.
-            console.log('Automated saving is already activated.')
+            console.log('Automated saving is not allowed to be (re)activated at this time.')
         }
     }
 

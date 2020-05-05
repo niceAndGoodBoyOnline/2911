@@ -146,6 +146,14 @@ export class PageMainComponent {
         this.router.navigate(['page-shop'])
     }
 
+    // This function is called every time the user clicks on the prestige shop button
+    async openPrestige() {
+        // Save progress
+        await this.saveProgress()
+        // Navigate user to the prestige shop page
+        this.router.navigate(['page-prestige'])
+    }
+
     // Function to save progress
     saveProgress() {
         // Let em know that this function is being called (for debugging purposes)

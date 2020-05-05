@@ -6,5 +6,5 @@ var itemSchema = mongoose.Schema({
   price: {type: Number},
   power: {type: Number}
 });
-var Item = module.exports = mongoose.model('Item', itemSchema);
+var Item = module.exports = mongoose.model('items', itemSchema);
 module.exports = Item;

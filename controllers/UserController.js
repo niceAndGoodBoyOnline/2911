@@ -5,6 +5,9 @@ const _userRepo      = new UserRepo();
 const ItemRepo = require('../data/ItemRepo');
 const _itemRepo = new ItemRepo();
 
+const PrestigeRepo = require('../data/PrestigeRepo')
+const _prestigeRepo = new PrestigeRepo();
+
 var   passport       = require('passport');
 const RequestService = require('../services/RequestService');
 
@@ -53,7 +56,8 @@ exports.RegisterUser  = async function(req, res){
         var newUser = new User({
             email:        req.body.email,
             username:     req.body.username,
-            bitcoin:      0
+            bitcoin:      0,
+            prestigePoints: 0
         });
        
         // Uses passport to register the user.
@@ -185,5 +189,18 @@ exports.savePrestigeProgress = async function(req, res){
     let respond = await _userRepo.savePrestigeProgress(req.body.email, req.body.prestigePoints)
 
     // return whatever lol
+    res.json(respond)
+}
+
+exports.resetGainPrestige = async function(req, res){
+    let respond = await _userRepo.resetGainPrestige(req.body.email)
+
+    res.json(respond)
+}
+
+exports.makePrestigeTransaction = async function(req, res){
+    let index = await _prestigeRepo.getPrestigeIndex(req.body.name)
+    let respond = await _userRepo.makePrestigeTransaction(req.body.email, index)
+
     res.json(respond)
 }

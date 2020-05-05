@@ -65,17 +65,33 @@ export class PagePrestigeComponent {
                 } )
     }
 
+    buyPrestigePoint(){
+        if(this.bitcoin < 10){
+            this.message = "You don't have enough bitcoin!"
+        } else {
+            let url = this.site + "user/resetGainPrestige"
+            this.http.post<any>(url, {
+                email: sessionStorage.getItem("email")
+            })
+            .subscribe(
+                (data) => {
+                    console.log(data)
+                }
+            )
+        }
+    }
+
     // Buy. This function is called whenver user buys something. In the parameters, name is the item name and price is the item price.
     buy(name, price) {
         // If user doesnt have enough bitcoins,
-        if(this.bitcoin < price){
+        if(this.prestigePoints < price){
             // let em know.
-            this.message = "You don't have enough bitcoin!"
+            this.message = "You don't have enough prestige points!"
         }
         // If user DOES have enough bitcoin,
         else {
             // Deduct bitcoin from item price (Visually only).
-            this.bitcoin -= price
+            this.prestigePoints -= price
             // Thank the user
             this.message = "Thank you come again!"
             // Call make_transaction function with the item name
@@ -89,7 +105,7 @@ export class PagePrestigeComponent {
     make_transaction(name){
         // Locate whic appropriate controller function to use. In this case, we use makeTransaction function in UserController.js
         // You can tell how by looking in router.js
-        let url = this.site + 'user/makeTransaction'
+        let url = this.site + 'user/makePrestigeTransaction'
         // Send a POST request with email and item name data.
         // In UserController.js, this data is recieved by "req.body.[whatever we want to grab]"
         // This is how we get data from frontend(Andular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).

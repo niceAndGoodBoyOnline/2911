@@ -124,11 +124,11 @@ class UserRepo {
         let user = await User.findOne({email:email})
 
         // Return the user's prestige points
-        return user.prestige
+        return user.prestigePoints
     }
 
     // Save the user's prestige points to the database
-    async saveProgress(email, prestigePoints) {
+    async savePrestigeProgress(email, prestigePoints) {
         //updateOne() means to update one user in the database.
         let updated = await User.updateOne(
             // This is to find the user with the following information
@@ -139,6 +139,38 @@ class UserRepo {
         )
         // return a message
         return "Prestige points has been saved."
+    }
+
+    async resetGainPrestige(email){
+        let updated = await User.updateOne(
+            {email:email},
+            {$inc: {prestigePoints:1}},
+            {$set: {items:[0,0], bitcoin:0}}
+        )
+
+        return updated
+    }
+
+    // Make the prestige transaction happen.
+    // Basically, increase the user's prestige quantity.
+    async makePrestigeTransaction(email, index) {
+        // findOne() means to find the user with the matching information
+        let user = await User.findOne({email:email});
+        // Grab the user's item quantity
+        let prestigeArray = user.prestige
+        // Increase appropriate quantity by one
+        prestigeArray[index] = prestigeArray[index] + 1
+        console.log(prestigeArray)
+        //updateOne() means to update one user in the database
+        let updated = await User.updateOne(
+            // Find the user with the following information
+            {email:email},
+            // $set means to change the information.
+            // In this case, we change the user's item array quantity to the data we grabbed and changed above.
+            {$set: {prestige:prestigeArray}}
+        )
+        //thank the user
+        return "Thank you come again!"
     }
 
 

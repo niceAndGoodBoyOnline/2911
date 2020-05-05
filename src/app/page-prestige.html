@@ -9,6 +9,11 @@
         <!-- You can find out what data is available to grab by looking at the variables below "export class PagePrestigeComponent" in app.page-prestige.ts -->
         <h2>Your prestige points: {{prestigePoints}}</h2>
 
+
+        <p>Prestige points require 10 bitcoins... but reset the game. <b>This is your only warning.</b></p>
+        <p>Everything will be reset except your prestige points. These prestige items help hasten your game progress and bring special benefits.</p>
+        <input type="button" value="Buy Prestige Point" (click)="buyPrestigePoint()">
+
         <table>
             <tr>
                 <td>

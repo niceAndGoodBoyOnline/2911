@@ -19,5 +19,5 @@ var userSchema = mongoose.Schema({
   prestigePoints: {type: Number, default: 0}
 });
 userSchema.plugin(passportLocalMongoose);
-var User = module.exports = mongoose.model('User', userSchema);
+var User = module.exports = mongoose.model('users', userSchema);
 module.exports = User;

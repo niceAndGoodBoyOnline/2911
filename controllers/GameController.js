@@ -5,7 +5,7 @@ const _itemRepo      = new ItemRepo();
 
 const Prestige       = require('../models/Prestige');
 const PrestigeRepo   = require('../data/PrestigeRepo')
-const _prestigeRepo  = new PrestigeRepo
+const _prestigeRepo  = new PrestigeRepo();
 
 //Get all the items from the database
 exports.getItems = async function(req, res){
@@ -13,7 +13,7 @@ exports.getItems = async function(req, res){
     let items = await _itemRepo.getItems()
 
     //return the result back into Angular
-    return res.json(items)
+    res.json(items)
 }
 
 // Get all prestige items from the database
@@ -22,6 +22,6 @@ exports.getPrestigeItems = async function(req, res){
     let prestigeItems = await _prestigeRepo.getPrestigeItems()
 
     // return the result back into Angular
-    return res.json(prestigeItems)
+    res.json(prestigeItems)
 }
 

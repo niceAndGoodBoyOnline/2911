@@ -21,9 +21,13 @@ export class PageMainComponent {
     audioArray = ['assets/sounds/sfx1.mp3', 'assets/sounds/sfx2.mp3', 'assets/sounds/sfx3.mp3']
     sound: boolean = false;
     soundImg: string = "assets/images/SoundOn.png";
-    songList: ["assets/sound/theme.mp3"];
+    songList: ["assets/sound/songs/theme.mp3"];
     currentSong: string = "assets/sound/theme.mp3";
     musicPlayer = new Audio();
+
+
+    // firewall stuff
+    currentFirewall = "assets/images/firewalls/firewall25.gif"
     
     public site='/';
 
@@ -86,7 +90,7 @@ export class PageMainComponent {
                 // If data is recieved from the backend,
                 (data) => {
                     //console log the data (for debugging purposes)
-                    console.log(data)
+                    //console.log(data)
                     // create a variable here and assign it to data
                     let userItemArray = data
                     // use that variable as parameter to getItems function
@@ -109,7 +113,7 @@ export class PageMainComponent {
                 (data) => {
                     // make a new array here
                     let array = []
-                    console.log(data)
+                    //console.log(data)
                     // for each item in the recieved data, put the item power in the array we just made.
                     for(let i=0;i<data.length;i++){
                         array.push(data[i].power)
@@ -175,7 +179,7 @@ export class PageMainComponent {
     // Function to save progress
     saveProgress() {
         // Let em know that this function is being called (for debugging purposes)
-        console.log('Saving Progress..')
+        //console.log('Saving Progress..')
         // Locate what appropriate controller to use in the backend
         // (This path refers to a path in router.js)
         let url = this.site + 'user/saveProgress'
@@ -208,12 +212,12 @@ export class PageMainComponent {
                 if((sessionStorage.getItem('auth_token') == null) || ((sessionStorage.getItem('inshop') != 'false'))){
                     // Stop the autosave.
                     clearInterval(interval)
-                    console.log('Autosave has been stopped.')
+                    //console.log('Autosave has been stopped.')
                     sessionStorage.setItem('save', 'false')
                     return
                 }
                 // otherwise, save
-                console.log('Saving Progress..')
+                //console.log('Saving Progress..')
                 let url = this.site + 'user/saveProgress'
                 this.http.post<any>(url, {
                     email: sessionStorage.getItem("email"),
@@ -222,12 +226,12 @@ export class PageMainComponent {
                     .subscribe(
                         // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
                         (data) => {
-                            console.log(data)
+                           // console.log(data)
                         } )
             }, 3000)
         } else {
             // If there is an existing autosave instance, let em know in the console.
-            console.log('Automated saving is not allowed to be (re)activated at this time.')
+            //console.log('Automated saving is not allowed to be (re)activated at this time.')
         }
     }
 

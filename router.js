@@ -8,17 +8,17 @@ const cors = require('cors');
 module.exports = function(app){  
     // Main Routes
 
-    app.post('/user/RegisterUser', cors(), UserController.RegisterUser);
-    app.post('/user/getBitcoin', cors(), UserController.getBitcoin);
-    app.post('/user/saveProgress', cors(), UserController.saveProgress)
-    app.get('/Game/getItems', cors(), GameController.getItems)
-    app.post('/user/makeTransaction', cors(), UserController.makeTransaction)
-    app.post('/user/getItemArray', cors(), UserController.getItemArray)
-    app.get('/user/autoBitcoin', cors(), UserController.autoBitcoin)
+    app.post('user/RegisterUser', cors(), UserController.RegisterUser);
+    app.post('user/getBitcoin', cors(), UserController.getBitcoin);
+    app.post('user/saveProgress', cors(), UserController.saveProgress)
+    app.get('Game/getItems', cors(), GameController.getItems)
+    app.post('user/makeTransaction', cors(), UserController.makeTransaction)
+    app.post('user/getItemArray', cors(), UserController.getItemArray)
+    app.get('user/autoBitcoin', cors(), UserController.autoBitcoin)
     
     // Sign in
     app.post(
-        '/auth', cors(),
+        'auth', cors(),
         // middleware that handles the sign in process
         authMiddleware.signIn,
         authMiddleware.signJWTForUser

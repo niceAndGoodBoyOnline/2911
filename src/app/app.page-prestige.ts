@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
-  templateUrl: './page-prestige.html',
-  styleUrls: ['./page-prestige.css']
+  templateUrl: './app.page-prestige.html',
+  styleUrls: ['./app.page-prestige.css']
 })
 export class PagePrestigeComponent {
     // Variables we're gonna use in this page

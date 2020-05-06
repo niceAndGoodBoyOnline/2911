@@ -8,7 +8,7 @@
 // require = a node.js method that will include a module
 // the module can be a built-in one
 // or the module can be from the node_modules folder
-const asset = require('assert')
+const asset = require('chai').assert
 
 
 //it = how we declare a new test

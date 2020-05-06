@@ -36,6 +36,8 @@ export class PageLoginComponent {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this, pathService);
         this.site = pathService.path;
+        this.musicPlayer.loop = true;
+        this.musicPlayer.volume = 0.5;
         this.titleShuffle()
         this.themeSong()
     }

@@ -23,7 +23,7 @@ export class PageMainComponent {
     sound: boolean = false;
     soundImg: string = "assets/images/SoundOn.png";
     songList: ["assets/sounds/songs/theme.mp3"];
-    currentSong: string = "assets/sounds/theme.mp3";
+    currentSong: string = "assets/sounds/songs/theme.mp3";
     musicPlayer = new Audio();
 
 
@@ -39,6 +39,8 @@ export class PageMainComponent {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this, pathService);
         this.site = pathService.path;
+        this.musicPlayer.loop = true;
+        this.musicPlayer.volume = 0.5;
         this.checkLoggedIn()
         this.getBitcoin()
         this.getUserItemArray()

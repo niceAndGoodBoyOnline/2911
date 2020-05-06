@@ -29,7 +29,7 @@ export class PageMainComponent {
         this.getBitcoin()
         this.getUserItemArray()
         this.startAutosave()
-        this.changeSound()
+        this.setSound()
         sessionStorage.setItem('inshop', 'false')
     }
 
@@ -129,7 +129,7 @@ export class PageMainComponent {
     increaseBitcoin() {
         // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
         this.bitcoin += 1 + this.totalPower
-        if (this.sound == true) {
+        if (sessionStorage.getItem('sound') == 'true') {
             // Instantiate an audio player to play the clicking sounds.
             let audio = new Audio()
             // Randomly pick which sound to play from this.audioArray array
@@ -141,18 +141,32 @@ export class PageMainComponent {
         }
     }
 
+    setSound() {
+        if (sessionStorage.getItem('sound') == 'true'){
+            sessionStorage.setItem('sound', 'true')
+        }
+        else if (sessionStorage.getItem('sound') == 'false'){
+            sessionStorage.setItem('sound', 'false')
+        }
+        else {
+            sessionStorage.setItem('sound', 'true')
+        }
+    }
+
+    // This function is called every time the user clicks on the sound icon to turn on/off the sound
     changeSound() {
-        if (this.sound == true) {
-            this.sound = false;
+        // If the session variable "sound" is set to "true"
+        if (sessionStorage.getItem('sound') == 'true') {
+            //Set the session variable "sound" to false and change the image accordingly
+            sessionStorage.setItem('sound', 'false');
             (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOff.png"
         }
 
-        else if (this.sound == false) {
-            this.sound = true;
+        // If the session variable "sound" is set to "false"
+        else if (sessionStorage.getItem('sound') == 'false') {
+            //Set the session variable "sound" to true and change the image accordingly
+            sessionStorage.setItem('sound', 'true');
             (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOn.png"
-        }
-        else {
-            this.sound = true
         }
     }
 

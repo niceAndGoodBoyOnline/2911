@@ -82,6 +82,7 @@ export class PageLoginComponent {
                 sessionStorage.setItem('email', data['email']);
                 sessionStorage.setItem('save', 'false')
                 this.message = "The user has been logged in."
+                this.themeSong()
                 // When logged in successfully, take user to main page
                 this.router.navigate(['/page-main'])
 

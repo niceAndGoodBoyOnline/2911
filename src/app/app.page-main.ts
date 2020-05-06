@@ -21,7 +21,7 @@ export class PageMainComponent {
     audioArray = ['assets/sounds/sfx1.mp3', 'assets/sounds/sfx2.mp3', 'assets/sounds/sfx3.mp3']
     sound: boolean = false;
     soundImg: string = "assets/images/SoundOn.png";
-    songList: ["assets/sound/songs/theme.mp3"];
+    songList: ["assets/sounds/songs/theme.mp3"];
     currentSong: string = "assets/sound/theme.mp3";
     musicPlayer = new Audio();
 

@@ -23,6 +23,7 @@ export class PageLoginComponent {
     
     // for title screen music
     musicPlayer = new Audio();
+    musicBool: boolean = false;
 
     public site='';
 
@@ -36,9 +37,16 @@ export class PageLoginComponent {
     }
 
     themeSong(){
-        this.musicPlayer.src = "assets/sounds/songs/theme.mp3"
-        this.musicPlayer.load()
-        this.musicPlayer.play()
+        if (this.musicBool == false) {
+            this.musicBool = true;
+            this.musicPlayer.src = "assets/sounds/songs/theme.mp3";
+            this.musicPlayer.load();
+            this.musicPlayer.play();
+        }
+        else{
+            this.musicPlayer.pause()
+            this.musicBool = false;
+        }
     }
 
     titleShuffle() {

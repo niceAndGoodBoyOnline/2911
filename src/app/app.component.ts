@@ -16,7 +16,7 @@ export class AppComponent {
     _apiService:ApiService;
 
     // Where the backend site is located
-    public site='http://localhost:1337/';
+    public site='';
     
     // Is the user logged in or not?
     loggedin = false;

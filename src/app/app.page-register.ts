@@ -2,6 +2,7 @@ import { Component  } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './services/ApiService';
 import { pathService } from './services/path.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
@@ -26,7 +27,7 @@ export class PageRegisterComponent {
 
     // Since we are using a provider above we can receive 
     // an instance through an constructor.
-    constructor(private http: HttpClient, pathService: pathService) {
+    constructor(private http: HttpClient, pathService: pathService, private router: Router) {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this, pathService);
         this.site = pathService.path;
@@ -56,6 +57,10 @@ export class PageRegisterComponent {
             console.log(JSON.stringify(data));
             // let the user know what happened
             this.message = data["message"]
+            if(data["message"] == "Registration successful. Please login."){
+                console.log('Navigating...')
+                this.router.navigate(['/page-login'])
+            }
             }
         )
     }

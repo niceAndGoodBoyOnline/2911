@@ -23,7 +23,7 @@ export class PageMainComponent {
     sound: boolean = false;
     soundImg: string = "assets/images/SoundOn.png";
     songList: ["assets/sounds/songs/theme.mp3"];
-    currentSong: string = "assets/sound/theme.mp3";
+    currentSong: string = "assets/sounds/theme.mp3";
     musicPlayer = new Audio();
 
 

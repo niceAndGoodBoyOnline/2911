@@ -8,6 +8,7 @@ import { PageRegisterComponent } from './app.page-register';
 import { PageLoginComponent } from './app.page-login';
 import { PageShopComponent } from './app.page-shop'
 import { routing } from './app.routing';
+import { pathService } from './services/path.service';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { routing } from './app.routing';
   imports: [
     BrowserModule, HttpClientModule, FormsModule, routing
   ],
-  providers: [],
+  providers: [pathService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

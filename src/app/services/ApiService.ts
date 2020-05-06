@@ -1,13 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { pathService } from './path.service';
 
 export class ApiService {
-    public site='/';
+    public site: string;
     // Pointer to component using ApiService.
     _that:any; 
+    path :any;
 
-    constructor(private http: HttpClient, that) {
+    constructor(private http: HttpClient, that, pathService: pathService) {
         // Pointer to component using ApiService.
-        this._that = that; 
+        this._that = that;
+        this.site = pathService.path;
     }
 
     //------------------------------------------------------------

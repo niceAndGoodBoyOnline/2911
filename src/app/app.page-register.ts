@@ -1,6 +1,7 @@
 import { Component  } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ApiService } from './ApiService';
+import { ApiService } from './services/ApiService';
+import { pathService } from './services/path.service';
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
@@ -20,14 +21,15 @@ export class PageRegisterComponent {
     token                 = '';
     message               = '';
     _apiService:ApiService;
-    public site='/';
+    public site:string;
+    path:       any;
 
     // Since we are using a provider above we can receive 
     // an instance through an constructor.
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, pathService: pathService) {
         // Pass in http module and pointer to AppComponent.
-        this._apiService = new ApiService(http, this);
-
+        this._apiService = new ApiService(http, this, pathService);
+        this.site = pathService.path;
     }
 
     register() {

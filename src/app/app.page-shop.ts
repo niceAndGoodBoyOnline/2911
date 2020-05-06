@@ -1,7 +1,8 @@
 import { Component  } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ApiService } from './ApiService';
+import { ApiService } from './services/ApiService';
 import { Router } from '@angular/router';
+import { pathService } from './services/path.service';
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
@@ -15,14 +16,16 @@ export class PageShopComponent {
     token                 = '';
     message               = '';
     _apiService:ApiService;
-    public site='/';
+    public site: string;
+    path: any
 
     itemArray:any
     bitcoin: number
 
     // This constructor is basically "do these things when the page is being loaded"
-    constructor(private http: HttpClient, private router:Router) {
-        this._apiService = new ApiService(http, this);
+    constructor(private http: HttpClient, private router:Router, pathService: pathService) {
+        this._apiService = new ApiService(http, this,pathService);
+        this.site = pathService.path;
         this.getItems()
         this.getBitcoin()
     }

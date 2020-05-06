@@ -1,7 +1,10 @@
 import { Component  } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ApiService } from './ApiService';
+import { ApiService } from './services/ApiService';
 import { Router } from '@angular/router';
+import { pathService } from './services/path.service';
+
+
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
@@ -25,13 +28,14 @@ export class PageLoginComponent {
     musicPlayer = new Audio();
     musicBool: boolean = false;
 
-    public site='/';
-
+    site: string;
+    path: any;
     // Since we are using a provider above we can receive 
     // an instance through an constructor.
-    constructor(private http: HttpClient, private router:Router) {
+    constructor(private http: HttpClient, private router:Router, pathService: pathService) {
         // Pass in http module and pointer to AppComponent.
-        this._apiService = new ApiService(http, this);
+        this._apiService = new ApiService(http, this, pathService);
+        this.site = pathService.path;
         this.titleShuffle()
         this.themeSong()
     }

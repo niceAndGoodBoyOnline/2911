@@ -26,10 +26,17 @@ export class PagePrestigeComponent {
     constructor(private http: HttpClient, private router:Router, pathService: pathService) {
         this._apiService = new ApiService(http, this, pathService);
         this.site = pathService.path;
-        this.getPrestigeItems()
-        this.getPrestigePoints()
-        this.getBitcoin()
-        this.setSound()
+        this.setup()
+    }
+
+    // Used when page is loaded up. Loads each function one at a time in order to fix potential
+    // issues with functions relying on other functions finishing to work.
+    async setup(){
+        await this.getPrestigeItems()
+        await this.getPrestigePoints()
+        await this.getBitcoin()
+        await this.setSound()
+        console.log("Setup Complete!")
     }
 
     // Get user's bitcoin from the database
@@ -172,21 +179,24 @@ export class PagePrestigeComponent {
 
     // This function is called when the using comes to the main page. Changes image and sound
     // settings based on what they were the last time you entered the main page.
-    setSound() {
+    async setSound() {
         // If sound is turned on
         if (sessionStorage.getItem('sound') == 'true'){
             // Keep sound on and change the image accordingly
-            sessionStorage.setItem('sound', 'true')
+            sessionStorage.setItem('sound', 'true');
+            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOn.png"
         }
         // If sound is turned off
         else if (sessionStorage.getItem('sound') == 'false'){
             // Keep sound off and change the image accordingly
-            sessionStorage.setItem('sound', 'false')
+            sessionStorage.setItem('sound', 'false');
+            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOff.png"
         }
         // If sound has not been set this session
         else {
             // Turn sound on
-            sessionStorage.setItem('sound', 'true')
+            sessionStorage.setItem('sound', 'true');
+            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOn.png"
         }
     }
 

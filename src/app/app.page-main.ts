@@ -41,12 +41,19 @@ export class PageMainComponent {
         this.site = pathService.path;
         this.musicPlayer.loop = true;
         this.musicPlayer.volume = 0.5;
-        this.checkLoggedIn()
-        this.getBitcoin()
-        this.getUserItemArray()
-        this.startAutosave()
-        this.setSound()
+        this.setup()
         sessionStorage.setItem('inshop', 'false')
+    }
+    
+    // Used when page is loaded up. Loads each function one at a time in order to fix potential
+    // issues with functions relying on other functions finishing to work.
+    async setup(){
+        await this.checkLoggedIn()
+        await this.getBitcoin()
+        await this.getUserItemArray()
+        await this.startAutosave()
+        await this.setSound()
+        console.log("Setup Complete!")
     }
 
     // Checks if user is logged in
@@ -138,7 +145,6 @@ export class PageMainComponent {
             // Math Formula: Sigma of items bought multiplied by item power
             this.totalPower += userItemArray[i] * itemArray[i]
         }
-
     }
 
     // This is how bitcoin is increased each click.
@@ -159,7 +165,7 @@ export class PageMainComponent {
            
     // This function is called when the using comes to the main page. Changes image and sound
     // settings based on what they were the last time you entered the main page.
-    setSound() {
+    async setSound() {
         // If sound is turned on
         if (sessionStorage.getItem('sound') == 'true'){
             // Keep sound on and change the image accordingly

@@ -143,13 +143,13 @@ export class PageMainComponent {
 
     changeSound() {
         if (this.sound == true) {
-            this.sound = false
-            document.getElementById("sound").src = "assets/images/SoundOff.png"
+            this.sound = false;
+            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOff.png"
         }
 
         else if (this.sound == false) {
-            this.sound = true
-            document.getElementById("sound").src = "assets/images/SoundOn.png"
+            this.sound = true;
+            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOn.png"
         }
         else {
             this.sound = true

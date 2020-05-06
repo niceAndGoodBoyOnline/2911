@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
-  templateUrl: './page-login.html',
-  styleUrls: ['./page-login.css']
+  templateUrl: './app.page-login.html',
+  styleUrls: ['./app.page-login.css']
 })
 export class PageLoginComponent {
     // Hard-code credentials for convenience.
@@ -16,6 +16,11 @@ export class PageLoginComponent {
     token                 = '';
     message               = '';
     _apiService:ApiService;
+
+    // for title screen animation
+    osImgPath: string = "";
+    osImgArray = ["os0p1.gif", "os1p1.gif", "os2p1.gif", "os3p1.gif","os4p1.gif"]
+
     public site='http://localhost:1337/';
 
     // Since we are using a provider above we can receive 
@@ -23,7 +28,19 @@ export class PageLoginComponent {
     constructor(private http: HttpClient, private router:Router) {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this);
+        this.titleShuffle()
+    }
 
+    titleShuffle() {
+        let rollNum = Math.floor(Math.random() * (this.osImgArray.length) );
+
+        console.log("shuffle ON")
+        console.log(this.osImgArray[rollNum])
+
+        this.osImgPath = "assets/images/title_animations/" + this.osImgArray[rollNum];
+        setTimeout (() => {
+            this.titleShuffle();
+         }, 6000);
     }
 
     login() {
@@ -53,7 +70,7 @@ export class PageLoginComponent {
                 // When logged in successfully, take user to main page
                 this.router.navigate([''])
 
-                
+
             }    
         },
         // An error occurred. Data is not received. 

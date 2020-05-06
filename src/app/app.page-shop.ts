@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
-  templateUrl: './page-shop.html',
-  styleUrls: ['./page-shop.css']
+  templateUrl: './app.page-shop.html',
+  styleUrls: ['./app.page-shop.css']
 })
 export class PageShopComponent {
     // Variables we're gonna use in this page

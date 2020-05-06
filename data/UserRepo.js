@@ -142,14 +142,21 @@ class UserRepo {
     }
 
     async resetGainPrestige(email){
+        let items = [0,0]
+        let bitcoin = 0
         let updated = await User.updateOne(
             {email:email},
-            {$inc: {prestigePoints:1}},
-            {$set: {items:[0,0], bitcoin:0}}
+            {$inc: {prestigePoints:1}}
         )
 
-        return updated
+        let updated2 = await User.updateOne(
+            {email:email},
+            {$set: {items:items, bitcoin:bitcoin}}
+        )
+
+        return updated, updated2
     }
+
 
     // Make the prestige transaction happen.
     // Basically, increase the user's prestige quantity.

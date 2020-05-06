@@ -26,6 +26,28 @@ export class PagePrestigeComponent {
         this._apiService = new ApiService(http, this);
         this.getPrestigeItems()
         this.getPrestigePoints()
+        this.getBitcoin()
+    }
+
+    // Get user's bitcoin from the database
+    getBitcoin() {
+        // Set variable 'inshop' in session storage to 'true'. This is used to tell the autosave that the user is in the shop and should not be auto saving.
+        sessionStorage.setItem('inshop', 'true')
+        // Locate which appropriate controller function to use. In this case, we use getBitcoin function in UserController.js
+        // You can find this out in router.js
+        let url = this.site + 'user/getBitcoin'
+        // Send a POST request with email data.
+        // In UserController.js, this email data is recieved by "req.body.email"
+        // This is how we get data from frontend(Andular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
+        this.http.post<any>(url, {
+            email: sessionStorage.getItem("email")
+        })
+            .subscribe(
+                // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                // If data is recieved,
+                (data) => {
+                    this.bitcoin = data
+                } )
     }
 
     // Get user's prestige points from the database
@@ -69,6 +91,7 @@ export class PagePrestigeComponent {
         if(this.bitcoin < 10){
             this.message = "You don't have enough bitcoin!"
         } else {
+            this.bitcoin = 0
             let url = this.site + "user/resetGainPrestige"
             this.http.post<any>(url, {
                 email: sessionStorage.getItem("email")
@@ -76,6 +99,7 @@ export class PagePrestigeComponent {
             .subscribe(
                 (data) => {
                     console.log(data)
+                    this.getPrestigePoints()
                 }
             )
         }
@@ -96,8 +120,6 @@ export class PagePrestigeComponent {
             this.message = "Thank you come again!"
             // Call make_transaction function with the item name
             this.make_transaction(name)
-            // Save progress (This is so that bitcoins are officially deducted).
-            this.saveProgress()
         }
     }
 
@@ -119,6 +141,7 @@ export class PagePrestigeComponent {
                 (data) => {
                     // console log the data (for debugging purposes)
                     console.log(data)
+                    this.saveProgress()
                 }
             )
     }

@@ -89,6 +89,8 @@ export class PageMainComponent {
 
     // Get all of the items in the database
     getItems(userItemArray) {
+        // make a new array here
+        var array = []
         // Locate what appropriate controller to use in the backend
         // (This path refers to a path in router.js)
         let url = this.site + 'Game/getItems'
@@ -99,8 +101,7 @@ export class PageMainComponent {
                 // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
                 // If data is recieved from backend,
                 (data) => {
-                    // make a new array here
-                    let array = []
+
                     // for each item in the recieved data, put the item power in the array we just made.
                     for(let i=0;i<data.length;i++){
                         array.push(data[i].power)

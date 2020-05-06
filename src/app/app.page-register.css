@@ -27,6 +27,7 @@ table {
     font-size: 25px;
     border-color: green;
     border-style: solid;
+    background-color: black;
     outline: none;
     margin-bottom: 5px;
 }
@@ -36,6 +37,7 @@ table {
     font-size: 25px;
     border-color: green;
     border-style: solid;
+    background-color: black;
     outline: none;
     cursor: pointer;
 }

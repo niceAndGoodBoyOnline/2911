@@ -17,8 +17,7 @@ export class PageMainComponent {
     bitcoin: number
     totalPower: number
     audioArray = ['assets/sounds/sfx1.mp3', 'assets/sounds/sfx2.mp3', 'assets/sounds/sfx3.mp3']
-
-
+    sound: boolean
     public site='http://localhost:1337/';
 
     // Since we are using a provider above we can receive 
@@ -30,6 +29,7 @@ export class PageMainComponent {
         this.getBitcoin()
         this.getUserItemArray()
         this.startAutosave()
+        this.changeSound()
         sessionStorage.setItem('inshop', 'false')
     }
 
@@ -130,14 +130,31 @@ export class PageMainComponent {
     increaseBitcoin() {
         // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
         this.bitcoin += 1 + this.totalPower
-        // Instantiate an audio player to play the clicking sounds.
-        let audio = new Audio()
-        // Randomly pick which sound to play from this.audioArray array
-        audio.src = this.audioArray[Math.floor(Math.random() * this.audioArray.length)]
-        // Once a sound is chosen, load it.
-        audio.load();
-        // Play it.
-        audio.play();
+        if (this.sound == true) {
+            // Instantiate an audio player to play the clicking sounds.
+            let audio = new Audio()
+            // Randomly pick which sound to play from this.audioArray array
+            audio.src = this.audioArray[Math.floor(Math.random() * this.audioArray.length)]
+            // Once a sound is chosen, load it.
+            audio.load();
+            // Play it.
+            audio.play();
+        }
+    }
+
+    changeSound() {
+        if (this.sound == true) {
+            this.sound = false
+            document.getElementById("sound").src = "assets/images/SoundOff.png"
+        }
+
+        else if (this.sound == false) {
+            this.sound = true
+            document.getElementById("sound").src = "assets/images/SoundOn.png"
+        }
+        else {
+            this.sound = true
+        }
     }
 
     // This function is called every time the user clicks on the shop button

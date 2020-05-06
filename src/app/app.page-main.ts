@@ -43,7 +43,7 @@ export class PageMainComponent {
         this.getBitcoin()
         this.getUserItemArray()
         this.startAutosave()
-        this.changeSound()
+        this.setSound()
         sessionStorage.setItem('inshop', 'false')
     }
 
@@ -104,6 +104,8 @@ export class PageMainComponent {
 
     // Get all of the items in the database
     getItems(userItemArray) {
+        // make a new array here
+        var array = []
         // Locate what appropriate controller to use in the backend
         // (This path refers to a path in router.js)
         let url = this.site + 'Game/getItems'
@@ -114,9 +116,6 @@ export class PageMainComponent {
                 // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
                 // If data is recieved from backend,
                 (data) => {
-                    // make a new array here
-                    let array = []
-                    //console.log(data)
                     // for each item in the recieved data, put the item power in the array we just made.
                     for(let i=0;i<data.length;i++){
                         array.push(data[i].power)
@@ -144,8 +143,8 @@ export class PageMainComponent {
     increaseBitcoin() {
         // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
         this.bitcoin += 1 + this.totalPower
-        if (this.sound == true) {
-            // InstamusicPlayer: element.find('musicPlayer')ntiate an audio player to play the clicking sounds.
+        if (sessionStorage.getItem('sound') == 'true') {
+            // Instantiate an audio player to play the clicking sounds.
             let audio = new Audio()
             // Randomly pick which sound to play from this.audioArray array
             audio.src = this.audioArray[Math.floor(Math.random() * this.audioArray.length)]
@@ -155,15 +154,45 @@ export class PageMainComponent {
             audio.play();
         }
     }
+           
+    // This function is called when the using comes to the main page. Changes image and sound
+    // settings based on what they were the last time you entered the main page.
+    setSound() {
+        // If sound is turned on
+        if (sessionStorage.getItem('sound') == 'true'){
+            // Keep sound on and change the image accordingly
+            sessionStorage.setItem('sound', 'true')
+            this.changeSound()
+        }
+        // If sound is turned off
+        else if (sessionStorage.getItem('sound') == 'false'){
+            // Keep sound off and change the image accordingly
+            sessionStorage.setItem('sound', 'false')
+            this.changeSound()
+        }
+        // If sound has not been set this session
+        else {
+            // Turn sound on
+            sessionStorage.setItem('sound', 'true')
+            this.changeSound()
+        }
+    }
 
+    // This function is called every time the user clicks on the sound icon to turn on/off the sound
     changeSound() {
-        if (this.sound == true) {
-            this.sound = false;
+        // If the session variable "sound" is set to "true"
+        if (sessionStorage.getItem('sound') == 'true') {
+            //Set the session variable "sound" to false and change the image accordingly
+            sessionStorage.setItem('sound', 'false');
             this.soundImg = "assets/images/SoundOff.png";
             this.musicPlayer.pause()
+           
         }
-        else if (this.sound == false) {
-            this.sound = true;
+
+        // If the session variable "sound" is set to "false"
+        else if (sessionStorage.getItem('sound') == 'false') {
+            //Set the session variable "sound" to true and change the image accordingly
+            sessionStorage.setItem('sound', 'true');
             this.soundImg = "assets/images/SoundOn.png";
             this.musicPlayer.src = this.currentSong;
             this.musicPlayer.load();
@@ -177,6 +206,14 @@ export class PageMainComponent {
         await this.saveProgress()
         // Navigate user to the shop page
         this.router.navigate(['page-shop'])
+    }
+
+    // This function is called every time the user clicks on the prestige shop button
+    async openPrestige() {
+        // Save progress
+        await this.saveProgress()
+        // Navigate user to the prestige shop page
+        this.router.navigate(['page-prestige'])
     }
 
     // Function to save progress

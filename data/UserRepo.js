@@ -117,6 +117,70 @@ class UserRepo {
         // If there is no user with the same username and email in the database, return nothing.
         return ''
     }
+
+    // Get user's prestige points from the database by email
+    async getPrestigePoints(email,){
+        // Find the user with the corresponding email
+        let user = await User.findOne({email:email})
+
+        // Return the user's prestige points
+        return user.prestigePoints
+    }
+
+    // Save the user's prestige points to the database
+    async savePrestigeProgress(email, prestigePoints) {
+        //updateOne() means to update one user in the database.
+        let updated = await User.updateOne(
+            // This is to find the user with the following information
+            { email:email},
+            // $set means to change the information.
+            // In this case, we change the user's prestige points data to the data that was passed into this function.
+            {$set: {prestigePoints:prestigePoints}}
+        )
+        // return a message
+        return "Prestige points has been saved."
+    }
+
+    async resetGainPrestige(email){
+        let items = [0,0]
+        let bitcoin = 0
+        let updated = await User.updateOne(
+            {email:email},
+            {$inc: {prestigePoints:1}}
+        )
+
+        let updated2 = await User.updateOne(
+            {email:email},
+            {$set: {items:items, bitcoin:bitcoin}}
+        )
+
+        return updated, updated2
+    }
+
+
+    // Make the prestige transaction happen.
+    // Basically, increase the user's prestige quantity.
+    async makePrestigeTransaction(email, index) {
+        // findOne() means to find the user with the matching information
+        let user = await User.findOne({email:email});
+        // Grab the user's item quantity
+        let prestigeArray = user.prestige
+        // Increase appropriate quantity by one
+        prestigeArray[index] = prestigeArray[index] + 1
+        console.log(prestigeArray)
+        //updateOne() means to update one user in the database
+        let updated = await User.updateOne(
+            // Find the user with the following information
+            {email:email},
+            // $set means to change the information.
+            // In this case, we change the user's item array quantity to the data we grabbed and changed above.
+            {$set: {prestige:prestigeArray}}
+        )
+        //thank the user
+        return "Thank you come again!"
+    }
+
+
 }
 module.exports = UserRepo;
 

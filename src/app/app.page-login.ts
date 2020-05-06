@@ -20,6 +20,9 @@ export class PageLoginComponent {
     // for title screen animation
     osImgPath: string = "";
     osImgArray = ["os0p1.gif", "os1p1.gif", "os2p1.gif", "os3p1.gif", "os4p1.gif"]
+    
+    // for title screen music
+    musicPlayer = new Audio();
 
     public site='';
 
@@ -29,6 +32,13 @@ export class PageLoginComponent {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this);
         this.titleShuffle()
+        this.themeSong()
+    }
+
+    themeSong(){
+        this.musicPlayer.src = "assets/sounds/songs/theme.mp3"
+        this.musicPlayer.load()
+        this.musicPlayer.play()
     }
 
     titleShuffle() {
@@ -68,7 +78,7 @@ export class PageLoginComponent {
                 sessionStorage.setItem('save', 'false')
                 this.message = "The user has been logged in."
                 // When logged in successfully, take user to main page
-                this.router.navigate([''])
+                this.router.navigate(['/page-main'])
 
 
             }    

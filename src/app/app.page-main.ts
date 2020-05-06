@@ -90,6 +90,8 @@ export class PageMainComponent {
 
     // Get all of the items in the database
     getItems(userItemArray) {
+        // make a new array here
+        var array = []
         // Locate what appropriate controller to use in the backend
         // (This path refers to a path in router.js)
         let url = this.site + 'Game/getItems'
@@ -100,9 +102,6 @@ export class PageMainComponent {
                 // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
                 // If data is recieved from backend,
                 (data) => {
-                    // make a new array here
-                    let array = []
-                    console.log(data)
                     // for each item in the recieved data, put the item power in the array we just made.
                     for(let i=0;i<data.length;i++){
                         array.push(data[i].power)
@@ -144,13 +143,13 @@ export class PageMainComponent {
 
     changeSound() {
         if (this.sound == true) {
-            this.sound = false
-            document.getElementById("sound").src = "assets/images/SoundOff.png"
+            this.sound = false;
+            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOff.png"
         }
 
         else if (this.sound == false) {
-            this.sound = true
-            document.getElementById("sound").src = "assets/images/SoundOn.png"
+            this.sound = true;
+            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOn.png"
         }
         else {
             this.sound = true
@@ -163,6 +162,14 @@ export class PageMainComponent {
         await this.saveProgress()
         // Navigate user to the shop page
         this.router.navigate(['page-shop'])
+    }
+
+    // This function is called every time the user clicks on the prestige shop button
+    async openPrestige() {
+        // Save progress
+        await this.saveProgress()
+        // Navigate user to the prestige shop page
+        this.router.navigate(['page-prestige'])
     }
 
     // Function to save progress

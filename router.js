@@ -15,6 +15,11 @@ module.exports = function(app){
     app.post('/user/makeTransaction', cors(), UserController.makeTransaction)
     app.post('/user/getItemArray', cors(), UserController.getItemArray)
     app.get('/user/autoBitcoin', cors(), UserController.autoBitcoin)
+    app.get('/Game/getPrestigeItems', cors(), GameController.getPrestigeItems)
+    app.post('/user/getPrestigePoints', cors(), UserController.getPrestigePoints)
+    app.post('/user/savePrestigeProgress', cors(), UserController.savePrestigeProgress)
+    app.post('/user/resetGainPrestige', cors(), UserController.resetGainPrestige)
+    app.post('/user/makePrestigeTransaction', cors(), UserController.makePrestigeTransaction)
     
     // Sign in
     app.post(

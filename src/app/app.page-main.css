@@ -32,6 +32,15 @@ img {
     bottom:1%;
 }
 
+#music {
+    width:10%;
+    height:auto;
+    float:left;
+    position: fixed;
+    bottom:1%;
+    left: 10%;
+}
+
 .bitcoin {
     font-size:25px;
 }

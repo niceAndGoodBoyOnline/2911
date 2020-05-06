@@ -22,6 +22,7 @@ export class PageMainComponent {
     audioArray = ['assets/sounds/sfx1.mp3', 'assets/sounds/sfx2.mp3', 'assets/sounds/sfx3.mp3']
     sound: boolean = false;
     soundImg: string = "assets/images/SoundOn.png";
+    musicImg: string = "assets/images/musicOn.png";
     songList: ["assets/sounds/songs/theme.mp3"];
     currentSong: string = "assets/sounds/songs/theme.mp3";
     musicPlayer = new Audio();
@@ -53,6 +54,7 @@ export class PageMainComponent {
         await this.getUserItemArray()
         await this.startAutosave()
         await this.setSound()
+        await this.setMusic()
         console.log("Setup Complete!")
     }
 
@@ -170,19 +172,19 @@ export class PageMainComponent {
         if (sessionStorage.getItem('sound') == 'true'){
             // Keep sound on and change the image accordingly
             sessionStorage.setItem('sound', 'true')
-            this.changeSound()
+            this.soundImg = "assets/images/SoundOn.png";
         }
         // If sound is turned off
         else if (sessionStorage.getItem('sound') == 'false'){
             // Keep sound off and change the image accordingly
             sessionStorage.setItem('sound', 'false')
-            this.changeSound()
+            this.soundImg = "assets/images/SoundOff.png";
         }
         // If sound has not been set this session
         else {
             // Turn sound on
             sessionStorage.setItem('sound', 'true')
-            this.changeSound()
+            this.soundImg = "assets/images/SoundOn.png";
         }
     }
 
@@ -193,8 +195,6 @@ export class PageMainComponent {
             //Set the session variable "sound" to false and change the image accordingly
             sessionStorage.setItem('sound', 'false');
             this.soundImg = "assets/images/SoundOff.png";
-            this.musicPlayer.pause()
-           
         }
 
         // If the session variable "sound" is set to "false"
@@ -202,9 +202,43 @@ export class PageMainComponent {
             //Set the session variable "sound" to true and change the image accordingly
             sessionStorage.setItem('sound', 'true');
             this.soundImg = "assets/images/SoundOn.png";
+        }
+    }
+
+    async setMusic() {
+        if (sessionStorage.getItem('music') == 'true'){
+            sessionStorage.setItem('music', 'true')
             this.musicPlayer.src = this.currentSong;
             this.musicPlayer.load();
             this.musicPlayer.play();
+            this.musicImg = "assets/images/musicOn.png"
+        }
+
+        else if (sessionStorage.getItem('music') == 'false'){
+            sessionStorage.setItem('sound', 'false');
+            this.musicPlayer.pause()
+            this.musicImg = "assets/images/musicOff.png"
+        }
+        else {
+            sessionStorage.setItem('music', 'true')
+            this.musicPlayer.src = this.currentSong;
+            this.musicPlayer.load();
+            this.musicPlayer.play();
+            this.musicImg = "assets/images/musicOn.png"
+        }
+    }
+
+    changeMusic() {
+        if (sessionStorage.getItem('music') == 'true'){
+            sessionStorage.setItem('music', 'false');
+            this.musicPlayer.pause()
+            this.musicImg = "assets/images/musicOff.png"
+        }
+
+        else if (sessionStorage.getItem('music') == 'false'){
+            sessionStorage.setItem('music', 'true')
+            this.musicPlayer.play();
+            this.musicImg = "assets/images/musicOn.png"
         }
     }
 

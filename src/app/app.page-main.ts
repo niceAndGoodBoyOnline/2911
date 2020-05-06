@@ -18,7 +18,7 @@ export class PageMainComponent {
     totalPower: number
     audioArray = ['assets/sounds/sfx1.mp3', 'assets/sounds/sfx2.mp3', 'assets/sounds/sfx3.mp3']
     sound: boolean
-    public site='http://localhost:1337/';
+    public site='';
 
     // Since we are using a provider above we can receive 
     // an instance through an constructor.

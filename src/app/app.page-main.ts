@@ -16,8 +16,15 @@ export class PageMainComponent {
     _apiService:ApiService;
     bitcoin: number
     totalPower: number
+
+    //Sound stuff
     audioArray = ['assets/sounds/sfx1.mp3', 'assets/sounds/sfx2.mp3', 'assets/sounds/sfx3.mp3']
-    sound: boolean
+    sound: boolean = false;
+    soundImg: string = "assets/images/SoundOn.png";
+    songList: ["assets/sound/theme.mp3"];
+    currentSong: string = "assets/sound/theme.mp3";
+    musicPlayer = new Audio();
+    
     public site='';
 
     // Since we are using a provider above we can receive 
@@ -29,7 +36,7 @@ export class PageMainComponent {
         this.getBitcoin()
         this.getUserItemArray()
         this.startAutosave()
-       // this.changeSound()
+        this.changeSound()
         sessionStorage.setItem('inshop', 'false')
     }
 
@@ -131,7 +138,7 @@ export class PageMainComponent {
         // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
         this.bitcoin += 1 + this.totalPower
         if (this.sound == true) {
-            // Instantiate an audio player to play the clicking sounds.
+            // InstamusicPlayer: element.find('musicPlayer')ntiate an audio player to play the clicking sounds.
             let audio = new Audio()
             // Randomly pick which sound to play from this.audioArray array
             audio.src = this.audioArray[Math.floor(Math.random() * this.audioArray.length)]
@@ -142,23 +149,20 @@ export class PageMainComponent {
         }
     }
 
-
-    /*
     changeSound() {
         if (this.sound == true) {
-            this.sound = false
-            document.getElementById("sound").src = "assets/images/SoundOff.png"
+            this.sound = false;
+            this.soundImg = "assets/images/SoundOff.png";
+            this.musicPlayer.pause()
         }
-
         else if (this.sound == false) {
-            this.sound = true
-            document.getElementById("sound").src = "assets/images/SoundOn.png"
-        }
-        else {
-            this.sound = true
+            this.sound = true;
+            this.soundImg = "assets/images/SoundOn.png";
+            this.musicPlayer.src = this.currentSong;
+            this.musicPlayer.load();
+            this.musicPlayer.play();
         }
     }
-    */
 
     // This function is called every time the user clicks on the shop button
     async openShop() {

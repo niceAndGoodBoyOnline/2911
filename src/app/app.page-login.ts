@@ -25,7 +25,7 @@ export class PageLoginComponent {
     musicPlayer = new Audio();
     musicBool: boolean = false;
 
-    public site='';
+    public site='/';
 
     // Since we are using a provider above we can receive 
     // an instance through an constructor.
@@ -51,9 +51,6 @@ export class PageLoginComponent {
 
     titleShuffle() {
         let rollNum = Math.floor(Math.random() * (this.osImgArray.length) );
-
-        console.log("shuffle ON")
-        console.log(this.osImgArray[rollNum])
 
         this.osImgPath = "assets/images/title_animations/" + this.osImgArray[rollNum];
         setTimeout (() => {

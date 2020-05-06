@@ -20,7 +20,7 @@ export class PageRegisterComponent {
     token                 = '';
     message               = '';
     _apiService:ApiService;
-    public site='';
+    public site='/';
 
     // Since we are using a provider above we can receive 
     // an instance through an constructor.

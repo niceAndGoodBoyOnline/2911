@@ -15,7 +15,7 @@ export class PageShopComponent {
     token                 = '';
     message               = '';
     _apiService:ApiService;
-    public site='';
+    public site='/';
 
     itemArray:any
     bitcoin: number

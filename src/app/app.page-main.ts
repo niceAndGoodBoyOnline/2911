@@ -25,7 +25,7 @@ export class PageMainComponent {
     currentSong: string = "assets/sound/theme.mp3";
     musicPlayer = new Audio();
     
-    public site='';
+    public site='/';
 
     // Since we are using a provider above we can receive 
     // an instance through an constructor.

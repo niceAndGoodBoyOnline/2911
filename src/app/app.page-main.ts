@@ -29,7 +29,7 @@ export class PageMainComponent {
         this.getBitcoin()
         this.getUserItemArray()
         this.startAutosave()
-        this.changeSound()
+       // this.changeSound()
         sessionStorage.setItem('inshop', 'false')
     }
 
@@ -142,6 +142,8 @@ export class PageMainComponent {
         }
     }
 
+
+    /*
     changeSound() {
         if (this.sound == true) {
             this.sound = false
@@ -156,6 +158,7 @@ export class PageMainComponent {
             this.sound = true
         }
     }
+    */
 
     // This function is called every time the user clicks on the shop button
     async openShop() {

@@ -25,12 +25,19 @@ export class PageMainComponent {
     constructor(private http: HttpClient, private router: Router) {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this);
-        this.checkLoggedIn()
-        this.getBitcoin()
-        this.getUserItemArray()
-        this.startAutosave()
-        this.setSound()
+        this.setup()
         sessionStorage.setItem('inshop', 'false')
+    }
+    
+    // Used when page is loaded up. Loads each function one at a time in order to fix potential
+    // issues with functions relying on other functions finishing to work.
+    async setup(){
+        await this.checkLoggedIn()
+        await this.getBitcoin()
+        await this.getUserItemArray()
+        await this.startAutosave()
+        await this.setSound()
+        console.log("Setup Complete!")
     }
 
     // Checks if user is logged in
@@ -122,7 +129,6 @@ export class PageMainComponent {
             // Math Formula: Sigma of items bought multiplied by item power
             this.totalPower += userItemArray[i] * itemArray[i]
         }
-
     }
 
     // This is how bitcoin is increased each click.
@@ -143,21 +149,24 @@ export class PageMainComponent {
 
     // This function is called when the using comes to the main page. Changes image and sound
     // settings based on what they were the last time you entered the main page.
-    setSound() {
+    async setSound() {
         // If sound is turned on
         if (sessionStorage.getItem('sound') == 'true'){
             // Keep sound on and change the image accordingly
-            sessionStorage.setItem('sound', 'true')
+            sessionStorage.setItem('sound', 'true');
+            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOn.png"
         }
         // If sound is turned off
         else if (sessionStorage.getItem('sound') == 'false'){
             // Keep sound off and change the image accordingly
-            sessionStorage.setItem('sound', 'false')
+            sessionStorage.setItem('sound', 'false');
+            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOff.png"
         }
         // If sound has not been set this session
         else {
             // Turn sound on
-            sessionStorage.setItem('sound', 'true')
+            sessionStorage.setItem('sound', 'true');
+            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOn.png"
         }
     }
 

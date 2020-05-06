@@ -1,0 +1,149 @@
+/*
+css styles that do not need to be responsive
+*/
+
+@font-face {
+    font-family: HackerFont;
+    src: url(assets/text/PressStart2P-Regular.ttf)
+}
+
+body{
+    font-family: HackerFont;
+    color: green;
+    text-align: center;
+    overflow: hidden;
+}
+
+#osImg{
+    z-index: -1;
+    position: absolute;
+}
+
+.boxes{
+    border-color: rgba(00,00,00,0);
+    border-bottom-color: green;
+    border-style: solid;
+    background-color: rgba(11,11,11,.5);
+    outline: none;
+}
+
+.submit{
+    border-color:rgba(00,00,00,0);
+    border-bottom-color: green;
+    border-style: solid;
+    background-color: rgba(00,00,00,0);
+    outline: none;
+    cursor: pointer;
+}
+
+.submit:hover, .submit:active {
+    background-color: greenyellow;
+}
+
+/*
+this @media rule applies when the width < height of browser.
+*/
+@media only screen and (orientation: portrait) {
+
+    body {
+        font-size: 8vw;
+        width: 80vw;
+        height: auto;
+       
+    }
+
+    #osImg{
+        width: 80vw;
+        height: auto;
+       
+        top: 10vh;
+        left: 10vw;
+    }
+
+    table {
+        position: absolute;
+        bottom:15vh;
+        margin-left: 3vw;
+        margin-right: auto;
+    }
+
+    .label {
+        font-size: 2vw;
+        text-align: right;
+    }
+
+    .boxes {
+        padding:1vw;
+        font-size: 4vw;
+        margin-bottom: 1vh;
+        width: 50vw;
+        height: 8vw
+    }
+
+    .submit {
+        position: absolute;
+        right: 0;
+        bottom: 5vh;
+        padding:auto;
+        font-size: 4vw;
+        width: auto;
+    }
+
+    .message {
+        font-size: 5vw;
+    }
+
+}
+
+/*
+this @media rule applies when the height < width of browser.
+*/
+@media only screen and (orientation: landscape) {
+
+    body {
+        font-size: 8vh;
+        width: 80vw;
+        height: auto;
+    }
+
+    #osImg{
+        width: auto;
+        height: 120vh;
+        top: 5vh;
+        right: 5vw;
+    }
+
+    table {
+        position: absolute;
+        bottom:25vh;
+        margin-left: 3vw;
+        margin-right: auto;
+    }
+
+    .label {
+        font-size: 2vh;
+        text-align: right;
+    }
+
+    .boxes {
+        padding:1vw;
+        font-size: 4vh;
+        margin-left: 1vw;
+        width: 40vw;
+        height: 8vh
+    }
+
+    .submit {
+        position: absolute;
+        left: 5vw;
+        bottom: 5vh;
+        padding:auto;
+        font-size: 4vw;
+        width: auto;
+    }
+
+    .message {
+        font-size: 5vw;
+    }
+
+}

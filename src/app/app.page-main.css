@@ -10,44 +10,47 @@
 }
 
 h2 {
-    font-size: 30px;
+    font-size:30px;
 }
 
-table {
+img {
+    display: block;
     margin-left: auto;
     margin-right: auto;
 }
-.lable {
+
+.firewall {
+    width:30%;
+    height:auto;
+}
+
+#sound {
+    width:10%;
+    height:auto;
+    float:left;
+    position: fixed;
+    bottom:1%;
+}
+
+.bitcoin {
+    font-size:25px;
+}
+
+input {
+    padding:10px;
     font-size: 20px;
-    text-align: right;
-}
-
-.boxes {
-    padding:15px;
-    font-size: 25px;
     border-color: green;
     border-style: solid;
-    outline: none;
-    margin-bottom: 5px;
-}
-
-.submit {
-    padding:15px;
-    font-size: 25px;
-    border-color: green;
-    border-style: solid;
+    background-color: black;
     outline: none;
     cursor: pointer;
+    margin:10px;
 }
 
-.submit:hover {
+input:hover {
     background-color: greenyellow;
 }
 
-.submit:active {
+input:active {
     background-color: greenyellow;
   }
-
-.message {
-    font-size: 25px;
-}

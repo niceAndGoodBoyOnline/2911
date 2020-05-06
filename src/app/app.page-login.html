@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
     </head>
 
     <body>
-        <h1>Hackermans:Outbreak</h1>
-        <br>
-        
+        <img id="osImg" src="{{osImgPath}}">
 
-        <h2>Login</h2>
         <table>
             <tr>
                 <td>
-                    <p class="lable">Login name:</p> 
+                    <p class="label">Login name:</p> 
                 </td>
                 <td>
                     <!-- the [(ngModel)] attribute is basically which variable in the .ts file is correlated to this input box. -->
@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <td>
-                    <p class="lable">Password:</p>   
+                    <p class="label">Password:</p>   
                 </td>
                 <td>
                     <input class="boxes" type='password' [(ngModel)]='password'/>

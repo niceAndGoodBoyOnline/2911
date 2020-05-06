@@ -5,19 +5,19 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
-  templateUrl: './page-main.html',
-  styleUrls: ['./page-main.css']
+  templateUrl: './app.page-main.html',
+  styleUrls: ['./app.page-main.css']
 })
 export class PageMainComponent {
     // Hard-code credentials for convenience.
+ 
     message               = '';
     msgFromServer:string  = '';
     _apiService:ApiService;
     bitcoin: number
     totalPower: number
     audioArray = ['assets/sounds/sfx1.mp3', 'assets/sounds/sfx2.mp3', 'assets/sounds/sfx3.mp3']
-
-
+    sound: boolean
     public site='http://localhost:1337/';
 
     // Since we are using a provider above we can receive 
@@ -29,6 +29,7 @@ export class PageMainComponent {
         this.getBitcoin()
         this.getUserItemArray()
         this.startAutosave()
+        this.changeSound()
         sessionStorage.setItem('inshop', 'false')
     }
 
@@ -101,7 +102,6 @@ export class PageMainComponent {
                 // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
                 // If data is recieved from backend,
                 (data) => {
-
                     // for each item in the recieved data, put the item power in the array we just made.
                     for(let i=0;i<data.length;i++){
                         array.push(data[i].power)
@@ -129,14 +129,31 @@ export class PageMainComponent {
     increaseBitcoin() {
         // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
         this.bitcoin += 1 + this.totalPower
-        // Instantiate an audio player to play the clicking sounds.
-        let audio = new Audio()
-        // Randomly pick which sound to play from this.audioArray array
-        audio.src = this.audioArray[Math.floor(Math.random() * this.audioArray.length)]
-        // Once a sound is chosen, load it.
-        audio.load();
-        // Play it.
-        audio.play();
+        if (this.sound == true) {
+            // Instantiate an audio player to play the clicking sounds.
+            let audio = new Audio()
+            // Randomly pick which sound to play from this.audioArray array
+            audio.src = this.audioArray[Math.floor(Math.random() * this.audioArray.length)]
+            // Once a sound is chosen, load it.
+            audio.load();
+            // Play it.
+            audio.play();
+        }
+    }
+
+    changeSound() {
+        if (this.sound == true) {
+            this.sound = false
+            document.getElementById("sound").src = "assets/images/SoundOff.png"
+        }
+
+        else if (this.sound == false) {
+            this.sound = true
+            document.getElementById("sound").src = "assets/images/SoundOn.png"
+        }
+        else {
+            this.sound = true
+        }
     }
 
     // This function is called every time the user clicks on the shop button

@@ -19,7 +19,7 @@ export class PageLoginComponent {
 
     // for title screen animation
     osImgPath: string = "";
-    osImgArray = ["os0p1.gif", "os1p1.gif", "os2p1.gif", "os3p1.gif","os4p1.gif"]
+    osImgArray = ["os0p1.gif", "os1p1.gif", "os2p1.gif", "os3p1.gif", "os4p1.gif"]
 
     public site='';
 

@@ -18,7 +18,6 @@ export class PageMainComponent {
     totalPower: number
     audioArray = ['assets/sounds/sfx1.mp3', 'assets/sounds/sfx2.mp3', 'assets/sounds/sfx3.mp3']
     sound: boolean
-    public site='http://localhost:1337/';
 
     // Since we are using a provider above we can receive 
     // an instance through an constructor.
@@ -46,7 +45,7 @@ export class PageMainComponent {
     getBitcoin() {
         // Locate what appropriate controller to use in the backend.
         // (This path refers to a path in router.js)
-        let url = this.site + 'user/getBitcoin'
+        let url = 'user/getBitcoin'
         // Send a POST request with email data.
         // In UserController.js, this email data is recieved by "req.body.email".
         // This is how we get data from frontend(Angular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
@@ -67,7 +66,7 @@ export class PageMainComponent {
     async getUserItemArray(){
         // Locate what appropriate controller to use in the backend
         // (This path refers to a path in router.js)
-        let url = this.site + 'user/getItemArray'
+        let url = 'user/getItemArray'
         // Send a POST request with email data.
         // In UserController.js, this email data is recieved by "req.body.email"
         // This is how we get data from frontend(Andular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
@@ -92,7 +91,7 @@ export class PageMainComponent {
     getItems(userItemArray) {
         // Locate what appropriate controller to use in the backend
         // (This path refers to a path in router.js)
-        let url = this.site + 'Game/getItems'
+        let url = 'Game/getItems'
         // Send a GET request.
         // GET requests dont need to send any data from frontend to backend. GET is to just "get" stuff. Usually everything.
         this.http.get<any>(url)
@@ -174,7 +173,7 @@ export class PageMainComponent {
         console.log('Saving Progress..')
         // Locate what appropriate controller to use in the backend
         // (This path refers to a path in router.js)
-        let url = this.site + 'user/saveProgress'
+        let url = 'user/saveProgress'
         // Send a POST request with email and bitcoin data.
         // In UserController.js, this data is recieved by "req.body.[what data we want to grab]"
         // This is how we get data from frontend(Andular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
@@ -210,7 +209,7 @@ export class PageMainComponent {
                 }
                 // otherwise, save
                 console.log('Saving Progress..')
-                let url = this.site + 'user/saveProgress'
+                let url = 'user/saveProgress'
                 this.http.post<any>(url, {
                     email: sessionStorage.getItem("email"),
                     bitcoin: this.bitcoin

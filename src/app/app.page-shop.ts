@@ -19,12 +19,14 @@ export class PageShopComponent {
 
     itemArray:any
     bitcoin: number
+    
 
     // This constructor is basically "do these things when the page is being loaded"
     constructor(private http: HttpClient, private router:Router) {
         this._apiService = new ApiService(http, this);
         this.getItems()
         this.getBitcoin()
+        this.setSound()
     }
 
     // Get user's bitcoin from the database
@@ -127,5 +129,42 @@ export class PageShopComponent {
                 } )
     }
 
+    // This function is called when the using comes to the main page. Changes image and sound
+    // settings based on what they were the last time you entered the main page.
+    setSound() {
+        // If sound is turned on
+        if (sessionStorage.getItem('sound') == 'true'){
+            // Keep sound on and change the image accordingly
+            sessionStorage.setItem('sound', 'true')
+        }
+        // If sound is turned off
+        else if (sessionStorage.getItem('sound') == 'false'){
+            // Keep sound off and change the image accordingly
+            sessionStorage.setItem('sound', 'false')
+        }
+        // If sound has not been set this session
+        else {
+            // Turn sound on
+            sessionStorage.setItem('sound', 'true')
+        }
+    }
+
+    // This function is called every time the user clicks on the sound icon to turn on/off the sound
+    changeSound() {
+        // If the session variable "sound" is set to "true"
+        if (sessionStorage.getItem('sound') == 'true') {
+            //Set the session variable "sound" to false and change the image accordingly
+            sessionStorage.setItem('sound', 'false');
+            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOff.png"
+        }
+
+        // If the session variable "sound" is set to "false"
+        else if (sessionStorage.getItem('sound') == 'false') {
+            //Set the session variable "sound" to true and change the image accordingly
+            sessionStorage.setItem('sound', 'true');
+            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOn.png"
+        }
+    }
 
 }
+    

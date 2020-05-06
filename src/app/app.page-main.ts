@@ -141,14 +141,22 @@ export class PageMainComponent {
         }
     }
 
+    // This function is called when the using comes to the main page. Changes image and sound
+    // settings based on what they were the last time you entered the main page.
     setSound() {
+        // If sound is turned on
         if (sessionStorage.getItem('sound') == 'true'){
+            // Keep sound on and change the image accordingly
             sessionStorage.setItem('sound', 'true')
         }
+        // If sound is turned off
         else if (sessionStorage.getItem('sound') == 'false'){
+            // Keep sound off and change the image accordingly
             sessionStorage.setItem('sound', 'false')
         }
+        // If sound has not been set this session
         else {
+            // Turn sound on
             sessionStorage.setItem('sound', 'true')
         }
     }

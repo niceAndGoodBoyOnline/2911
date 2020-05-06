@@ -30,3 +30,14 @@ input:hover {
 input:active {
     background-color: greenyellow;
   }
+
+#sound {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:10%;
+    height:auto;
+    float:left;
+    position: fixed;
+    bottom:1%;
+}

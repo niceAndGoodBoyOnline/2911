@@ -21,7 +21,7 @@ export class PageLoginComponent {
     osImgPath: string = "";
     osImgArray = ["os0p1.gif", "os1p1.gif", "os2p1.gif", "os3p1.gif","os4p1.gif"]
 
-    public site='http://localhost:1337/';
+    public site='';
 
     // Since we are using a provider above we can receive 
     // an instance through an constructor.

@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
-  templateUrl: './page-main.html',
-  styleUrls: ['./page-main.css']
+  templateUrl: './app.page-main.html',
+  styleUrls: ['./app.page-main.css']
 })
 export class PageMainComponent {
     // Hard-code credentials for convenience.
+ 
     message               = '';
     msgFromServer:string  = '';
     _apiService:ApiService;
@@ -101,6 +102,7 @@ export class PageMainComponent {
                 (data) => {
                     // make a new array here
                     let array = []
+                    console.log(data)
                     // for each item in the recieved data, put the item power in the array we just made.
                     for(let i=0;i<data.length;i++){
                         array.push(data[i].power)

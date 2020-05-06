@@ -4,8 +4,8 @@ import { ApiService } from './ApiService';
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
-  templateUrl: './page-register.html',
-  styleUrls:['./page-register.css']
+  templateUrl: './app.page-register.html',
+  styleUrls:['./app.page-register.css']
 })
 export class PageRegisterComponent {
     // User's register credentials. These are filled when user submits their credentials.

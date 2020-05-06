@@ -6,7 +6,7 @@
 
         <h2>Hackermans: Outbreak</h2>
 
-        <img src='assets/images/firewall.jpg' (click)="increaseBitcoin()" class="firewall">
+        <img src='{{currentFirewall}}' (click)="increaseBitcoin()" class="firewall">
 
         <!-- Stuff that is in {{}} means to grab data from the .ts file and put it there. -->
         <!-- In this case, we grab bitcoin data from app.page-main.ts and put it here. -->
@@ -18,11 +18,13 @@
         <input type="button" value="Shop" (click)="openShop()">
         <input type="button" value="Prestige Shop" (click)="openPrestige()">
         <input type="button" value="Save Game" (click)="saveProgress()">
-        <img src='assets/images/SoundOn.png' (click)="changeSound(this)" id="sound">
+        <img src='{{soundImg}}' (click)="changeSound(this)" id="sound">
 
         <!-- Stuff that is in {{}} means to grab data from the .ts file and put it there. -->
         <!-- In this case, we grab message data from app.page-main.ts and put it here. -->
         <!-- You can find out what data is available to grab by looking at the variables below "export class PageMainComponent" in app.page-main.ts -->
         <p>{{message}}</p>
+
+ 
     </body>
 </html>

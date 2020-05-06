@@ -1,7 +1,10 @@
 import { Component  } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ApiService } from './ApiService';
+import { ApiService } from './services/ApiService';
 import { Router } from '@angular/router';
+import { pathService } from './services/path.service';
+
+
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
@@ -19,23 +22,41 @@ export class PageLoginComponent {
 
     // for title screen animation
     osImgPath: string = "";
-    osImgArray = ["os0p1.gif", "os1p1.gif", "os2p1.gif", "os3p1.gif","os4p1.gif"]
+    osImgArray = ["os0p1.gif", "os1p1.gif", "os2p1.gif", "os3p1.gif", "os4p1.gif"]
+    
+    // for title screen music
+    musicPlayer = new Audio();
+    musicBool: boolean = false;
 
-    public site='http://localhost:1337/';
-
+    site: string;
+    path: any;
     // Since we are using a provider above we can receive 
     // an instance through an constructor.
-    constructor(private http: HttpClient, private router:Router) {
+    constructor(private http: HttpClient, private router:Router, pathService: pathService) {
         // Pass in http module and pointer to AppComponent.
-        this._apiService = new ApiService(http, this);
+        this._apiService = new ApiService(http, this, pathService);
+        this.site = pathService.path;
+        this.musicPlayer.loop = true;
+        this.musicPlayer.volume = 0.5;
         this.titleShuffle()
+        this.themeSong()
+    }
+
+    themeSong(){
+        if (this.musicBool == false) {
+            this.musicBool = true;
+            this.musicPlayer.src = "assets/sounds/songs/theme.mp3";
+            this.musicPlayer.load();
+            this.musicPlayer.play();
+        }
+        else{
+            this.musicPlayer.pause()
+            this.musicBool = false;
+        }
     }
 
     titleShuffle() {
         let rollNum = Math.floor(Math.random() * (this.osImgArray.length) );
-
-        console.log("shuffle ON")
-        console.log(this.osImgArray[rollNum])
 
         this.osImgPath = "assets/images/title_animations/" + this.osImgArray[rollNum];
         setTimeout (() => {
@@ -67,8 +88,9 @@ export class PageLoginComponent {
                 sessionStorage.setItem('email', data['email']);
                 sessionStorage.setItem('save', 'false')
                 this.message = "The user has been logged in."
+                this.musicPlayer.pause()
                 // When logged in successfully, take user to main page
-                this.router.navigate([''])
+                this.router.navigate(['/page-main'])
 
 
             }    

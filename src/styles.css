@@ -3,7 +3,18 @@ body {
     background-color: black;
 }
 
+@media only screen and (orientation: portrait) {
+    
+    #top-nav{
+        font-size: 3vw;
+    }
 
-#top-nav{
-    font-size: 3vw;
+}
+
+@media only screen and (orientation: landscape) {
+    
+    #top-nav{
+        font-size: 3vh;
+    }
+
 }

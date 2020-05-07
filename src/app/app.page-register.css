@@ -53,3 +53,26 @@ table {
 .message {
     font-size: 25px;
 }
+
+#sound {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:7%;
+    height:auto;
+    float:left;
+    position: fixed;
+    bottom:1%;
+}
+
+#music {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:7%;
+    height:auto;
+    float:left;
+    position: fixed;
+    bottom:1%;
+    left: 8%;
+}

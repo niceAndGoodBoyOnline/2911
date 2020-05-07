@@ -35,7 +35,7 @@ input:active {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width:10%;
+    width:7%;
     height:auto;
     float:left;
     position: fixed;
@@ -45,10 +45,10 @@ input:active {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width:10%;
+    width:7%;
     height:auto;
     float:left;
     position: fixed;
     bottom:1%;
-    left: 10%;
+    left: 8%;
 }

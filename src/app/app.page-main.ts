@@ -206,26 +206,41 @@ export class PageMainComponent {
         }
     }
 
+    // This function is called when the using comes to the main page. Changes image and music
+    // settings based on what they were the last time you entered the main page.
     async setMusic() {
+        // If music is turned on
         if (sessionStorage.getItem('music') == 'true'){
+            // Keep music on
             sessionStorage.setItem('music', 'true')
+            // Change image accordingly
+            this.musicImg = "assets/images/musicOn.png"
+            // If music has already been playing, tell this in the console
             if (this.musicPlayer.duration > 0 && !this.musicPlayer.paused) {
                 console.log("Music already playing")
             }
+            // If music is not playing
             else {
+                // Start music
                 this.musicPlayer.src = this.currentSong;
                 this.musicPlayer.load();
                 this.musicPlayer.play();
-                this.musicImg = "assets/images/musicOn.png"
+                
             }
         }
 
+        // If music is turned off
         else if (sessionStorage.getItem('music') == 'false'){
+            // Keep music off
             sessionStorage.setItem('music', 'false');
+            // Pause music and change image accordingly
             this.musicPlayer.pause()
             this.musicImg = "assets/images/musicOff.png"
         }
+
+        // If music has not been set yet
         else {
+            // Turn music on, start playing music and change image accordingly
             sessionStorage.setItem('music', 'true')
             this.musicPlayer.src = this.currentSong;
             this.musicPlayer.load();
@@ -234,15 +249,20 @@ export class PageMainComponent {
         }
     }
 
+    // This function is called every time the user clicks on the music icon to turn on/off the music
     changeMusic() {
+        // If music is turned on
         if (sessionStorage.getItem('music') == 'true'){
+            // Turn off music, pause music, and change image accordingly
             sessionStorage.setItem('music', 'false');
             this.musicPlayer.pause()
             this.musicImg = "assets/images/musicOff.png"
             console.log("music off")
         }
 
+        // If music is turned off
         else if (sessionStorage.getItem('music') == 'false'){
+            // Turn on music, play music, and change image accordingly
             sessionStorage.setItem('music', 'true')
             this.musicPlayer.play();
             this.musicImg = "assets/images/musicOn.png"

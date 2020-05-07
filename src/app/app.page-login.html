@@ -36,5 +36,7 @@
         <!-- In this case, we grab message data from app.page-login.ts and put it here. -->
         <!-- You can find out what data is available to grab by looking at the variables below "export class PageLoginComponent" in app.page-login.ts -->
         <p class="message">{{message}}</p>
+        <img src='{{soundImg}}' (click)="changeSound(this)" id="sound">
+        <img src='{{musicImg}}' (click)="changeMusic(this)" id="music">
     </body>
 </html>

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './services/ApiService';
 import { Router } from '@angular/router';
 import { pathService } from './services/path.service';
+import { ConsoleReporter } from 'jasmine';
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
@@ -25,7 +26,7 @@ export class PageMainComponent {
     musicImg: string = "assets/images/musicOn.png";
     songList: ["assets/sounds/songs/theme.mp3"];
     currentSong: string = "assets/sounds/songs/theme.mp3";
-    musicPlayer = new Audio();
+    musicPlayer = <HTMLAudioElement>document.getElementById("musicPlayer")
 
 
     // firewall stuff
@@ -208,14 +209,19 @@ export class PageMainComponent {
     async setMusic() {
         if (sessionStorage.getItem('music') == 'true'){
             sessionStorage.setItem('music', 'true')
-            this.musicPlayer.src = this.currentSong;
-            this.musicPlayer.load();
-            this.musicPlayer.play();
-            this.musicImg = "assets/images/musicOn.png"
+            if (this.musicPlayer.duration > 0 && !this.musicPlayer.paused) {
+                console.log("Music already playing")
+            }
+            else {
+                this.musicPlayer.src = this.currentSong;
+                this.musicPlayer.load();
+                this.musicPlayer.play();
+                this.musicImg = "assets/images/musicOn.png"
+            }
         }
 
         else if (sessionStorage.getItem('music') == 'false'){
-            sessionStorage.setItem('sound', 'false');
+            sessionStorage.setItem('music', 'false');
             this.musicPlayer.pause()
             this.musicImg = "assets/images/musicOff.png"
         }
@@ -233,6 +239,7 @@ export class PageMainComponent {
             sessionStorage.setItem('music', 'false');
             this.musicPlayer.pause()
             this.musicImg = "assets/images/musicOff.png"
+            console.log("music off")
         }
 
         else if (sessionStorage.getItem('music') == 'false'){

@@ -21,6 +21,7 @@ export class PageShopComponent {
 
     itemArray:any
     bitcoin: number
+    soundImg: string = "assets/images/SoundOn.png";
     
 
     // This constructor is basically "do these things when the page is being loaded"
@@ -146,19 +147,19 @@ export class PageShopComponent {
         if (sessionStorage.getItem('sound') == 'true'){
             // Keep sound on and change the image accordingly
             sessionStorage.setItem('sound', 'true');
-            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOn.png"
+            this.soundImg = "assets/images/SoundOn.png"
         }
         // If sound is turned off
         else if (sessionStorage.getItem('sound') == 'false'){
             // Keep sound off and change the image accordingly
             sessionStorage.setItem('sound', 'false');
-            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOff.png"
+            this.soundImg = "assets/images/SoundOff.png"
         }
         // If sound has not been set this session
         else {
             // Turn sound on
             sessionStorage.setItem('sound', 'true');
-            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOn.png"
+            this.soundImg = "assets/images/SoundOn.png"
         }
     }
 
@@ -168,14 +169,14 @@ export class PageShopComponent {
         if (sessionStorage.getItem('sound') == 'true') {
             //Set the session variable "sound" to false and change the image accordingly
             sessionStorage.setItem('sound', 'false');
-            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOff.png"
+            this.soundImg = "assets/images/SoundOff.png"
         }
 
         // If the session variable "sound" is set to "false"
         else if (sessionStorage.getItem('sound') == 'false') {
             //Set the session variable "sound" to true and change the image accordingly
             sessionStorage.setItem('sound', 'true');
-            (<HTMLImageElement>document.getElementById("sound")).src = "assets/images/SoundOn.png"
+            this.soundImg = "assets/images/SoundOn.png"
         }
     }
 

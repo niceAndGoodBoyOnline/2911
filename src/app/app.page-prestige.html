@@ -55,6 +55,7 @@
         <!-- In this case, we grab message data from app.page-prestige.ts and put it here. -->
         <!-- You can find out what data is available to grab by looking at the variables below "export class PagePrestigeComponent" in app.page-shop.ts -->
         <p>{{message}}</p>
-        <img src='assets/images/SoundOn.png' (click)="changeSound(this)" id="sound">
+        <img src='{{soundImg}}' (click)="changeSound(this)" id="sound">
+        <img src='{{musicImg}}' (click)="changeMusic(this)" id="music">
     </body>
 </html>

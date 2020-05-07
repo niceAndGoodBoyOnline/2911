@@ -22,12 +22,18 @@ export class PageShopComponent {
     itemArray:any
     bitcoin: number
     soundImg: string = "assets/images/SoundOn.png";
+    musicImg: string = "assets/images/musicOn.png"
+    musicPlayer = <HTMLAudioElement>document.getElementById("musicPlayer")
+    currentSong: string = "assets/sounds/songs/theme.mp3";
+    
     
 
     // This constructor is basically "do these things when the page is being loaded"
     constructor(private http: HttpClient, private router:Router, pathService: pathService) {
         this._apiService = new ApiService(http, this,pathService);
         this.site = pathService.path;
+        this.musicPlayer.loop = true;
+        this.musicPlayer.volume = 0.5;
         this.setup()
     }
 
@@ -37,6 +43,7 @@ export class PageShopComponent {
         await this.getItems()
         await this.getBitcoin()
         await this.setSound()
+        await this.setMusic()
         console.log("Setup Complete!")
     }
 
@@ -177,6 +184,49 @@ export class PageShopComponent {
             //Set the session variable "sound" to true and change the image accordingly
             sessionStorage.setItem('sound', 'true');
             this.soundImg = "assets/images/SoundOn.png"
+        }
+    }
+
+    async setMusic() {
+        if (sessionStorage.getItem('music') == 'true'){
+            sessionStorage.setItem('music', 'true')
+            if (this.musicPlayer.duration > 0 && !this.musicPlayer.paused) {
+                console.log("Music already playing")
+            }
+            else {
+                this.musicPlayer.src = this.currentSong;
+                this.musicPlayer.load();
+                this.musicPlayer.play();
+                this.musicImg = "assets/images/musicOn.png"
+            }
+        }
+
+        else if (sessionStorage.getItem('music') == 'false'){
+            sessionStorage.setItem('music', 'false');
+            this.musicPlayer.pause()
+            this.musicImg = "assets/images/musicOff.png"
+        }
+        else {
+            sessionStorage.setItem('music', 'true')
+            this.musicPlayer.src = this.currentSong;
+            this.musicPlayer.load();
+            this.musicPlayer.play();
+            this.musicImg = "assets/images/musicOn.png"
+        }
+    }
+
+    changeMusic() {
+        if (sessionStorage.getItem('music') == 'true'){
+            sessionStorage.setItem('music', 'false');
+            this.musicPlayer.pause()
+            this.musicImg = "assets/images/musicOff.png"
+            console.log("music off")
+        }
+
+        else if (sessionStorage.getItem('music') == 'false'){
+            sessionStorage.setItem('music', 'true')
+            this.musicPlayer.play();
+            this.musicImg = "assets/images/musicOn.png"
         }
     }
 

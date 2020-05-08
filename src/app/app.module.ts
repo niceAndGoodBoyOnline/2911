@@ -9,6 +9,7 @@ import { PageLoginComponent } from './app.page-login';
 import { PageShopComponent } from './app.page-shop'
 import { PagePrestigeComponent } from './app.page-prestige'
 import { routing } from './app.routing';
+import { AngularDraggableModule } from 'angular2-draggable';
 import { pathService } from './services/path.service';
 
 @NgModule({
@@ -17,7 +18,7 @@ import { pathService } from './services/path.service';
     PageShopComponent, PagePrestigeComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, FormsModule, routing],
+    BrowserModule, HttpClientModule, FormsModule, routing, AngularDraggableModule],
   providers: [pathService],
   bootstrap: [AppComponent]
 })

@@ -3,14 +3,23 @@
     src: url(src/assets/text/font.ttf)
 }
 
-* {
+body{
     font-family: HackerFont;
     color: green;
     text-align: center;
+    overflow: hidden;
 }
 
-h2 {
-    font-size:30px;
+#osImg{
+    z-index: 3;
+}
+
+#terminal{
+    z-index: 5;
+    border-color: rgba(00,00,00,0);
+    border-bottom-color: green;
+    border-style: solid;
+    background-color: rgba(96, 160, 155, 0.3);
 }
 
 img {
@@ -19,41 +28,24 @@ img {
     margin-right: auto;
 }
 
-.firewall {
-    width:auto;
-    height:50vh;
-}
-
 #sound {
-    width:7%;
-    height:auto;
-    float:left;
+    float: left;
     position: fixed;
-    bottom:1%;
+    bottom: 1vh;
 }
 
 #music {
-    width:7%;
-    height:auto;
-    float:left;
+    float: left;
     position: fixed;
-    bottom:1%;
-    left: 8%;
+    bottom: 1vh;
 }
 
-.bitcoin {
-    font-size:25px;
-}
-
-input {
-    padding:10px;
-    font-size: 20px;
+.menuButton {
     border-color: green;
     border-style: solid;
     background-color: black;
     outline: none;
     cursor: pointer;
-    margin:10px;
 }
 
 input:hover {
@@ -63,3 +55,120 @@ input:hover {
 input:active {
     background-color: greenyellow;
   }
+
+
+  /*
+this @media rule applies when the width < height of browser.
+*/
+@media only screen and (orientation: portrait) {
+
+
+    body {
+        font-size: 4vw;
+        width: 100w;
+        height: auto;
+    }
+    
+    #osImg{
+        height: auto;
+        width: 10vw;
+        top: 10vh;
+        right: 5vw;
+    }
+
+    #terminal{
+        font-size: 3vw;
+        width:50vw;
+        height: 4vw;
+        right: 5vw;
+        bottom: 5vh;
+    }
+    
+    h2 {
+        font-size:5vw;
+    }
+    
+    .firewall {
+        width:auto;
+        height:50vh;
+    }
+    
+    #sound {
+        width:10vw;
+        height:auto;
+    }
+    
+    #music {
+        width:10vw;
+        height:auto;
+        left: 12vw;
+    }
+    
+    .bitcoin {
+        font-size:4vw;
+    }
+    
+    .menuButton {
+        padding:1vw;
+        font-size: 2vw;
+        margin:2vw;
+    }
+
+}
+
+@media only screen and (orientation: landscape) {
+
+
+    body {
+        font-size: 4vh;
+        width: auto;
+        height: 100vh;
+    }
+    
+
+    #osImg{
+        height: auto;
+        width: 10vh;
+        top: 10vh;
+        right: 5vw;
+    }
+
+    #terminal{
+        font-size: 3vh;
+        width:40vw;
+        height: 4vh;
+        right: 5vw;
+        bottom: 5vh;
+    }
+    
+    h2 {
+        font-size:4vh;
+    }
+    
+    .firewall {
+        width:auto;
+        height:50vh;
+    }
+    
+    #sound {
+        width:10vh;
+        height:auto;
+    }
+    
+    #music {
+        width:10vh;
+        height:auto;
+        left: 12vh;
+    }
+    
+    .bitcoin {
+        font-size:4vh;
+    }
+    
+    .menuButton {
+        padding:3vh;
+        font-size: 4vh;
+        margin:3vh;
+    }
+
+}

@@ -2,6 +2,7 @@ import { Component  } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './services/ApiService';
 import { Router } from '@angular/router';
+
 import { pathService } from './services/path.service';
 
 @Component({
@@ -25,11 +26,14 @@ export class PageMainComponent {
     soundImg: string = "assets/images/SoundOn.png";
     musicImg: string = "assets/images/musicOn.png";
     songList: ["assets/sounds/songs/theme.mp3"];
-    currentSong: string = "assets/sounds/songs/theme.mp3";
+    currentSong: string = "assets/sounds/songs/outbreak.mp3";
     musicPlayer = <HTMLAudioElement>document.getElementById("musicPlayer")
     hoverSoundFile = 'assets/sounds/HoverSound.mp3'
     clickSoundFile = 'assets/sounds/ClickSound.mp3'
     
+
+    // console stuff
+    osImg = 'assets/images/title_animations/os0p1.gif'
 
     // firewall stuff
     currentFirewall = "assets/images/firewalls/firewall25.gif"

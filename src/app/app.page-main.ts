@@ -32,12 +32,15 @@ export class PageMainComponent {
     clickSoundFile = 'assets/sounds/ClickSound.mp3'
     
 
-    // console stuff
+    // reUI stuff
     osImg = 'assets/images/title_animations/os0p1.gif'
 
     // firewall stuff
     currentFirewall = "assets/images/firewalls/firewall25.gif"
     
+    // mission stuff
+    currentMission;
+
     public site: string;
     path: any
 

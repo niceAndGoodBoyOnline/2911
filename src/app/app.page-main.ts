@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './services/ApiService';
 import { Router } from '@angular/router';
 import { pathService } from './services/path.service';
-import { ConsoleReporter } from 'jasmine';
+
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.

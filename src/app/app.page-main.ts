@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './services/ApiService';
 import { Router } from '@angular/router';
 import { pathService } from './services/path.service';
-import { ConsoleReporter } from 'jasmine';
+
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
@@ -27,7 +27,9 @@ export class PageMainComponent {
     songList: ["assets/sounds/songs/theme.mp3"];
     currentSong: string = "assets/sounds/songs/theme.mp3";
     musicPlayer = <HTMLAudioElement>document.getElementById("musicPlayer")
-
+    hoverSoundFile = 'assets/sounds/HoverSound.mp3'
+    clickSoundFile = 'assets/sounds/ClickSound.mp3'
+    
 
     // firewall stuff
     currentFirewall = "assets/images/firewalls/firewall25.gif"
@@ -268,6 +270,37 @@ export class PageMainComponent {
             this.musicImg = "assets/images/musicOn.png"
         }
     }
+
+    // This function plays a sound when the user hovers over a button.
+    hoverSound() {
+        // If sound is turned on
+        if (sessionStorage.getItem('sound') == 'true') {
+            // Create an audio instance to play the file
+            let audio = new Audio()
+            // Set the sound file to play
+            audio.src = this.hoverSoundFile
+            // Load the audio instance with the sound file
+            audio.load();
+            // Play it.
+            audio.play();
+        }
+    }
+
+    // This function plays a sound when the user clicks on a button.
+    clickSound() {
+        // If sound is turned on
+        if (sessionStorage.getItem('sound') == 'true') {
+            // Create an audio instance to play the file
+            let audio = new Audio()
+            // Set the sound file to play
+            audio.src = this.clickSoundFile
+            // Load the audio instance with the sound file
+            audio.load();
+            // Play it.
+            audio.play();
+        }
+    }
+
 
     // This function is called every time the user clicks on the shop button
     async openShop() {

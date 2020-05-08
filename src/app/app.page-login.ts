@@ -29,6 +29,8 @@ export class PageLoginComponent {
     musicImg: string = "assets/images/musicOn.png"
     musicPlayer = <HTMLAudioElement>document.getElementById("musicPlayer")
     currentSong: string = "assets/sounds/songs/theme.mp3";
+    hoverSoundFile = 'assets/sounds/HoverSound.mp3'
+    clickSoundFile = 'assets/sounds/ClickSound.mp3'
 
     site: string;
     path: any;
@@ -196,6 +198,36 @@ export class PageLoginComponent {
             sessionStorage.setItem('music', 'true')
             this.musicPlayer.play();
             this.musicImg = "assets/images/musicOn.png"
+        }
+    }
+
+    // This function plays a sound when the user hovers over a button.
+    hoverSound() {
+        // If sound is turned on
+        if (sessionStorage.getItem('sound') == 'true') {
+            // Create an audio instance to play the file
+            let audio = new Audio()
+            // Set the sound file to play
+            audio.src = this.hoverSoundFile
+            // Load the audio instance with the sound file
+            audio.load();
+            // Play it.
+            audio.play();
+        }
+    }
+
+    // This function plays a sound when the user clicks on a button.
+    clickSound() {
+        // If sound is turned on
+        if (sessionStorage.getItem('sound') == 'true') {
+            // Create an audio instance to play the file
+            let audio = new Audio()
+            // Set the sound file to play
+            audio.src = this.clickSoundFile
+            // Load the audio instance with the sound file
+            audio.load();
+            // Play it.
+            audio.play();
         }
     }
 

@@ -13,7 +13,7 @@
 
         <p>Prestige points require 10 bitcoins... but reset the game. <b>This is your only warning.</b></p>
         <p>Everything will be reset except your prestige points. These prestige items help hasten your game progress and bring special benefits.</p>
-        <input type="button" value="Buy Prestige Point" (click)="buyPrestigePoint()">
+        <input type="button" value="Buy Prestige Point" (click)="buyPrestigePoint();clickSound()" (mouseenter)="hoverSound()">
 
         <table>
             <tr>
@@ -45,7 +45,7 @@
                 <td>
                     <!-- The (click) attribute is basically: "execute this function when clicked on" -->
                     <!-- In this case, when the Buy... anonymously button is clicked, execute buy() in app.page-prestige.ts with parameters of item name and price in the for loop. -->
-                    <input type='button' value='Buy' (click)='buy(thing.item, thing.price)'/>
+                    <input type='button' value='Buy' (click)='buy(thing.item, thing.price);clickSound()' (mouseenter)="hoverSound()"/>
                 </td>
             </tr>
             

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './services/ApiService';
 import { Router } from '@angular/router';
 import { pathService } from './services/path.service';
-import { ConsoleReporter } from 'jasmine';
+// import { ConsoleReporter } from 'jasmine';
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
@@ -43,6 +43,8 @@ export class PageMainComponent {
         this.site = pathService.path;
         this.musicPlayer.loop = true;
         this.musicPlayer.volume = 0.5;
+        sessionStorage.setItem("email", "j")
+        sessionStorage.setItem("username", "j")
         this.setup()
         sessionStorage.setItem('inshop', 'false')
     }
@@ -50,7 +52,7 @@ export class PageMainComponent {
     // Used when page is loaded up. Loads each function one at a time in order to fix potential
     // issues with functions relying on other functions finishing to work.
     async setup(){
-        await this.checkLoggedIn()
+        // await this.checkLoggedIn()
         await this.getBitcoin()
         await this.getUserItemArray()
         await this.startAutosave()

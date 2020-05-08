@@ -9,7 +9,7 @@ import { PagePrestigeComponent } from './app.page-prestige'
 
 
 // This is so that the program knows where to redirect to what page.
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
   { path: 'page-main', component: PageMainComponent },
   { path: '', redirectTo: '/page-login', pathMatch: 'full' },
   { path: 'page-register', component: PageRegisterComponent },

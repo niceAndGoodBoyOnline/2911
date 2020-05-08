@@ -34,6 +34,8 @@ export class PageShopComponent {
         this.site = pathService.path;
         this.musicPlayer.loop = true;
         this.musicPlayer.volume = 0.5;
+        sessionStorage.setItem("email", "j")
+        sessionStorage.setItem("username", "j")
         this.setup()
     }
 

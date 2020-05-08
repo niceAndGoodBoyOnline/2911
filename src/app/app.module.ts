@@ -17,8 +17,7 @@ import { pathService } from './services/path.service';
     PageShopComponent, PagePrestigeComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, FormsModule, routing
-  ],
+    BrowserModule, HttpClientModule, FormsModule, routing],
   providers: [pathService],
   bootstrap: [AppComponent]
 })

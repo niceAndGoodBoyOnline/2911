@@ -111,6 +111,7 @@ exports.Logout = (req, res) => {
 // Gets the bitcoin from the database
 exports.getBitcoin = async function(req, res) {
     // Call getBitcoin() function from UserRepo.js with user email from POST request as parameter
+    console.log(req.body.email)
     let bitcoin = await _userRepo.getBitcoin(req.body.email)
 
     // Return amount of bitcoins.

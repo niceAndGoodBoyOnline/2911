@@ -2,13 +2,13 @@
 css styles that do not need to be responsive
 */
 
-@font-face {
+/* @font-face {
     font-family: HackerFont;
     src: url(assets/text/PressStart2P-Regular.ttf)
-}
+} */
 
 body{
-    font-family: HackerFont;
+    /* font-family: HackerFont; */
     color: green;
     text-align: center;
     overflow: hidden;

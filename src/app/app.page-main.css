@@ -1,10 +1,10 @@
-@font-face {
+/* @font-face {
     font-family: HackerFont;
     src: url(../assets/text/PressStart2P-Regular.ttf)
-}
+} */
 
 * {
-    font-family: HackerFont;
+    /* font-family: HackerFont; */
     color: green;
     text-align: center;
 }

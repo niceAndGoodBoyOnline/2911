@@ -1,38 +1,22 @@
-var cors = require('cors')
+require('dotenv').config();
 
-var express = require("express");
-var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
+var express       = require('express');
+var mongoose      = require('mongoose');
 var passport      = require('passport');
-var LocalStrategy = require('passport-local').Strategy
-let options       = { useNewUrlParser: true , useUnifiedTopology: true};
-var app = express();
-app.use(cors());
-app.use(bodyParser.json());
+var http          = require('http');
+var path          = require('path');
+var engine        = require('ejs-locals');
+var bodyParser    = require('body-parser');
+var LocalStrategy = require('passport-local').Strategy;
+var port          = process.env.PORT || 1337;
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/Outbreak');
 
-// Create link to Angular build directory
-var distDir = __dirname + "/dist/";
-app.use(express.static(distDir));
+var app           = express();
 
-// Connect to the database before starting the application server.
-mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Outbreak", function (err, client) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-
-  // Initialize the app.
-  var server = app.listen(process.env.PORT || 1337, function () {
-    var port = server.address().port;
-    console.log("App now running on port", port);
-  });
-});
-mongoose.set('useCreateIndex', true);
-
+// Parse URL-encoded bodies (as sent by HTML forms)
 app.use(express.urlencoded({ extended: true }));;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 app.use(require('express-session')({
     secret: 'keyboard cat',
     resave: false,
@@ -50,8 +34,30 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+ // Enable routing and use port 1337.
 require('./router')(app);
+app.set('port', port);
 
+ // Set up ejs templating.
+app.engine('ejs', engine);
+app.set('view engine', 'ejs');
+
+// Set view folder.
+app.set('views', path.join(__dirname, 'views'));
+
+// That line is to specify a directory where you could 
+// link to static files (images, CSS, etc.). 
+// So if you put a style.css file in that directory and you 
+// could link directly to it in your view <link href=”style.css” rel=”stylesheet”>
+app.use(express.static(path.join(__dirname, 'static')));
+ 
+http.createServer(app).listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+})
+
+var cors = require('cors')
+
+app.use(cors());
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");

@@ -27,7 +27,7 @@ export class PageLoginComponent {
     // for title screen music
     soundImg: string = "assets/images/SoundOn.png";
     musicImg: string = "assets/images/musicOn.png"
-    musicPlayer = <HTMLAudioElement>document.getElementById("musicPlayer")
+    musicPlayer;
     currentSong: string = "assets/sounds/songs/theme.mp3";
     hoverSoundFile = 'assets/sounds/HoverSound.mp3'
     clickSoundFile = 'assets/sounds/ClickSound.mp3'
@@ -40,16 +40,16 @@ export class PageLoginComponent {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this, pathService);
         this.site = pathService.path;
-        this.musicPlayer.loop = true;
-        this.musicPlayer.volume = 0.5;
         this.titleShuffle()
-        this.setup()
+        this.setupSound()
     }
 
-    async setup(){
+    async setupSound(){
+        this.musicPlayer = <HTMLAudioElement>document.getElementById("musicPlayer")
+        this.musicPlayer.loop = true;
+        this.musicPlayer.volume = 0.5;
         await this.setSound()
         await this.setMusic()
-        console.log("Setup Complete!")
     }
 
 

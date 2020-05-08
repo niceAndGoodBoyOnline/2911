@@ -11,11 +11,11 @@ body{
 }
 
 #osImg{
-    z-index: 3;
+    z-index: 5;
 }
 
 #terminal{
-    z-index: 5;
+    z-index: 10;
     border-color: rgba(00,00,00,0);
     border-bottom-color: green;
     border-style: solid;
@@ -64,7 +64,7 @@ this @media rule applies when the width < height of browser.
 
 
     body {
-        font-size: 4vw;
+        font-size: 5vw;
         width: 100w;
         height: auto;
     }

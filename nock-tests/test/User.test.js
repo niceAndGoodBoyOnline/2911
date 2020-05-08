@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const nock = require('nock')
 const User = require('../User')
-const email = 'j'
+const email = 'local@tests.nock'
 
 
 describe('User controller functions', () => {

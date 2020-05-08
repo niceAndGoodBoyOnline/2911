@@ -27,7 +27,7 @@ export class PageMainComponent {
     musicImg: string = "assets/images/musicOn.png";
     songList: ["assets/sounds/songs/theme.mp3"];
     currentSong: string = "assets/sounds/songs/outbreak.mp3";
-    musicPlayer = <HTMLAudioElement>document.getElementById("musicPlayer")
+    musicPlayer;
     hoverSoundFile = 'assets/sounds/HoverSound.mp3'
     clickSoundFile = 'assets/sounds/ClickSound.mp3'
     
@@ -47,8 +47,7 @@ export class PageMainComponent {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this, pathService);
         this.site = pathService.path;
-        this.musicPlayer.loop = true;
-        this.musicPlayer.volume = 0.5;
+
         this.setup()
         sessionStorage.setItem('inshop', 'false')
     }
@@ -56,6 +55,9 @@ export class PageMainComponent {
     // Used when page is loaded up. Loads each function one at a time in order to fix potential
     // issues with functions relying on other functions finishing to work.
     async setup(){
+        this.musicPlayer = <HTMLAudioElement>document.getElementById("musicPlayer");
+        this.musicPlayer.loop = true;
+        this.musicPlayer.volume = 0.5;
         await this.checkLoggedIn()
         await this.getBitcoin()
         await this.getUserItemArray()

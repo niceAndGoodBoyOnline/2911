@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "test": "mocha nock-tests/test/Main.test.js",
+    "test": "mocha nock-tests/test/*.test.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "heroku-postbuild": "ng build --output-path dist"
@@ -57,7 +57,7 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "mocha": "^3.5.3",
-    "nock": "^9.0.13",
+    "nock": "^9.6.1",
     "protractor": "~5.4.3",
     "ts-node": "~8.3.0",
     "tslint": "~5.18.0",

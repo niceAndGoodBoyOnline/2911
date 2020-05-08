@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "~9.0.0",
     "@angular/router": "~9.0.0",
     "angular2-draggable": "^2.3.2",
-    "axios": "^0.16.2",
+    "axios": "^0.19.2",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "dotenv": "~8.2.0",

@@ -4,7 +4,7 @@ css styles that do not need to be responsive
 
 @font-face {
     font-family: HackerFont;
-    src: url(assets/text/PressStart2P-Regular.ttf)
+    src: url(src/assets/text/font.ttf)
 }
 
 body{

@@ -4,7 +4,7 @@
     </head>
     <body>
 
-        <h2>Hackermans: Outbreak</h2>
+        <h2>outbreak:Source</h2>
 
         <img src='{{currentFirewall}}' (click)="increaseBitcoin()" class="firewall">
 
@@ -15,9 +15,13 @@
 
         <!-- The (click) attribute is basically: "execute this function when clicked on" -->
         <!-- In this case, when the shop button is clicked, execute openShop() in app.page-main.ts -->
-        <input type="button" value="Shop" (click)="openShop();clickSound()" (mouseenter)="hoverSound()">
-        <input type="button" value="Prestige Shop" (click)="openPrestige();clickSound()" (mouseenter)="hoverSound()">
-        <input type="button" value="Save Game" (click)="saveProgress();clickSound()" (mouseenter)="hoverSound()">
+        <input class='menuButton' type="button" value="Shop" (click)="openShop();clickSound()" (mouseenter)="hoverSound()">
+        <input class='menuButton' type="button" value="Prestige Shop" (click)="openPrestige();clickSound()" (mouseenter)="hoverSound()">
+        <input class='menuButton' type="button" value="Save Game" (click)="saveProgress();clickSound()" (mouseenter)="hoverSound()">
+        <div id='outbreakSource' ngDraggable><img id='osImg' src={{osImg}}></div>
+        <div id='console' ngDraggable><input id='terminal' type='text' value='$:' (click)='cli()'></div>
+        
+        
         <img src='{{soundImg}}' (click)="changeSound(this)" id="sound">
         <img src='{{musicImg}}' (click)="changeMusic(this)" id="music">
 

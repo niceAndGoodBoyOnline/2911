@@ -115,6 +115,40 @@ this @media rule applies when the width < height of browser.
     }
 
 }
+<<<<<<< HEAD
+@media only screen and (orientation: landscape) {   
+    th,td
+    {
+        font-size: 2vw;
+    }
+    h1,h2
+    {
+        font-size: 3vw;
+    }
+    p
+    {
+        font-size: 3vw;
+        
+    }
+
+}       
+@media only screen and (orientation: portrait) {   
+    th,td,input
+    {
+        font-size: 2.5vw;
+    }
+    h1,h2
+    {
+        font-size: 4vw;
+    }
+    p
+    {
+        font-size: 3vw;
+    }
+
+
+}       
+=======
 
 @media only screen and (orientation: landscape) {
 
@@ -172,3 +206,4 @@ this @media rule applies when the width < height of browser.
     }
 
 }
+>>>>>>> 8d490819920dfed12d80ba6561f89b41ef21e87d

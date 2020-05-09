@@ -56,6 +56,70 @@ input:active {
     background-color: greenyellow;
   }
 
+<<<<<<< HEAD
+@media only screen and (orientation: portrait) 
+{
+
+    input{
+        font-size: 4vw;
+        padding: 0.75rem;
+        margin: 0.6rem;
+    }
+    h2
+    {
+        font-size: 5vw;
+    }
+    .bitcoin
+    {
+        font-size: 5vw;
+    }
+    p
+    {
+        font-size: 3vw;
+    }
+    #sound
+    {
+        height: 5%;
+        width: 8%;
+    }
+    #music
+    {
+        height: 5%;
+        width: 8%;
+    }
+
+}
+@media only screen and (orientation: landscape) 
+{
+    
+
+    input{
+        /* display: inline-block; */
+        font-size: 1.75vw;
+        padding: 0.75rem;
+        margin: 0.6rem;
+    }
+    h2
+    {
+        font-size: 1.5vw;
+    }
+    .bitcoin
+    {
+        font-size: 1.5vw;
+    }
+    p
+    {
+        font-size: 1.5vw;
+    }
+    #sound
+    {
+        height: 6vw;
+    }
+    #music
+    {
+        height: 6vw;
+    }
+=======
 
   /*
 this @media rule applies when the width < height of browser.
@@ -171,4 +235,5 @@ this @media rule applies when the width < height of browser.
         margin:3vh;
     }
 
+>>>>>>> 8d490819920dfed12d80ba6561f89b41ef21e87d
 }

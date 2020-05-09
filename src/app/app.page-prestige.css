@@ -52,3 +52,44 @@ input:active {
     bottom:1%;
     left: 8%;
 }
+@media only screen and (orientation: landscape) {   
+    th,td
+    {
+        font-size: 1.5vw;
+    }
+    h1,h2
+    {
+        font-size: 2vw;
+    }
+    p
+    {
+        font-size: 1.5vw;
+    }
+    input
+    {
+        font-size: 2vw;
+    }
+    #sound
+    {
+        height: 6vw;
+    }
+    #music
+    {
+        height: 6vw;
+    }
+}       
+@media only screen and (orientation: portrait) {   
+    th,td
+    {
+        font-size: 3vw;
+    }
+    h1,h2
+    {
+        font-size: 5vw;
+    }
+    p
+    {
+        font-size: 4vw;
+    }
+
+}       

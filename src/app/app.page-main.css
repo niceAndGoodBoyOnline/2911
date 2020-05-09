@@ -57,68 +57,7 @@ input:active {
   }
 
 <<<<<<< HEAD
-@media only screen and (orientation: portrait) 
-{
 
-    input{
-        font-size: 4vw;
-        padding: 0.75rem;
-        margin: 0.6rem;
-    }
-    h2
-    {
-        font-size: 5vw;
-    }
-    .bitcoin
-    {
-        font-size: 5vw;
-    }
-    p
-    {
-        font-size: 3vw;
-    }
-    #sound
-    {
-        height: 5%;
-        width: 8%;
-    }
-    #music
-    {
-        height: 5%;
-        width: 8%;
-    }
-
-}
-@media only screen and (orientation: landscape) 
-{
-    
-
-    input{
-        /* display: inline-block; */
-        font-size: 1.75vw;
-        padding: 0.75rem;
-        margin: 0.6rem;
-    }
-    h2
-    {
-        font-size: 1.5vw;
-    }
-    .bitcoin
-    {
-        font-size: 1.5vw;
-    }
-    p
-    {
-        font-size: 1.5vw;
-    }
-    #sound
-    {
-        height: 6vw;
-    }
-    #music
-    {
-        height: 6vw;
-    }
 =======
 
   /*

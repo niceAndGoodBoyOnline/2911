@@ -205,3 +205,9 @@ exports.makePrestigeTransaction = async function(req, res){
 
     res.json(respond)
 }
+
+exports.getUserPrestigeItems = async function(req, res){
+    let prestigeItems = await _userRepo.getUserPrestigeItems(req.body.email)
+
+    res.json(prestigeItems)
+}

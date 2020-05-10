@@ -23,6 +23,7 @@ module.exports = function(app){
     app.post('/user/savePrestigeProgress', cors(), UserController.savePrestigeProgress)
     app.post('/user/resetGainPrestige', cors(), UserController.resetGainPrestige)
     app.post('/user/makePrestigeTransaction', cors(), UserController.makePrestigeTransaction)
+    app.post('/user/getUserPrestigeItems', cors(), UserController.getUserPrestigeItems)
     
     // Sign in
     app.post(

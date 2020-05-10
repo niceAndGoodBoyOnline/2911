@@ -12,13 +12,18 @@ import { pathService } from './services/path.service';
   styleUrls: ['./app.page-main.css']
 })
 export class PageMainComponent {
-    // Hard-code credentials for convenience.
  
+    // System stuff
     message               = '';
     msgFromServer:string  = '';
     _apiService:ApiService;
+
+    // User stuff for the game
     bitcoin: number
     totalPower: number
+    // userPrestigeItems: any;
+    // prestigeArray: any
+    hackMod: number
 
     //Sound stuff
     audioArray = ['assets/sounds/sfx1.mp3', 'assets/sounds/sfx2.mp3', 'assets/sounds/sfx3.mp3']
@@ -63,6 +68,7 @@ export class PageMainComponent {
         this.musicPlayer.volume = 0.5;
         await this.checkLoggedIn()
         await this.getBitcoin()
+        await this.getUserPrestigeItems()
         await this.getUserItemArray()
         await this.startAutosave()
         await this.setSound()
@@ -122,7 +128,6 @@ export class PageMainComponent {
                     // use that variable as parameter to getItems function
                     this.getItems(userItemArray)
                 } )
-
     }
 
     // Get all of the items in the database
@@ -148,6 +153,40 @@ export class PageMainComponent {
                 } )
     }
 
+    async getUserPrestigeItems(){
+        let url = this.site + 'user/getUserPrestigeItems'
+        this.http.post<any>(url, {
+            email: sessionStorage.getItem('email')
+        })
+            .subscribe(
+                (data) => {
+                    let userPrestigeItems = data
+                    this.getPrestigeItems(data)
+                }
+            )
+    }
+
+    // Get all the prestige items in the database
+    async getPrestigeItems(userPrestigeItems) {
+        // Locate which approrpiate controller function to use. In this case, we use getPrestigeItems function in GameController.js
+        // You can find this out in router.js
+        let url = this.site + 'Game/getPrestigeItems'
+        this.http.get<any>(url)
+            .subscribe(
+                // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                // If data is recieved,
+                (data) => {
+                    // console log the data (For debugging purposes).
+                    let prestigeArray = data
+                    this.calculateHackMod(userPrestigeItems, prestigeArray)
+                } )
+    }
+
+    async calculateHackMod(userPrestigeItems, prestigeArray) {
+        let hackMod = 0
+        hackMod = userPrestigeItems[0] * prestigeArray[0].power
+        this.hackMod = hackMod
+    }
 
     // Calculate total clicking power
     calculateTotalPower(itemArray, userItemArray) {
@@ -164,7 +203,10 @@ export class PageMainComponent {
     // This is how bitcoin is increased each click.
     increaseBitcoin() {
         // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
-        this.bitcoin += 1 + this.totalPower
+        if(this.hackMod == 0){
+            this.hackMod = 1
+        }
+        this.bitcoin += (1 + this.totalPower) * this.hackMod
         if (sessionStorage.getItem('sound') == 'true') {
             // Instantiate an audio player to play the clicking sounds.
             let audio = new Audio()

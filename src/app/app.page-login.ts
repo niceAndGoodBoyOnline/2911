@@ -95,7 +95,7 @@ export class PageLoginComponent {
         },
         // An error occurred. Data is not received. 
         error => {
-            alert(JSON.stringify(error));             
+            this.message = "Something went wrong. Wrong username or password maybe?";             
         });
     }
 

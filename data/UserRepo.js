@@ -53,13 +53,13 @@ class UserRepo {
 
     // Make the transaction happen.
     // Basically, increase the user's item quantity.
-    async makeTransaction(email, index) {
+    async makeTransaction(email, index, quantity) {
         // findOne() means to find the user with the matching information
         let user = await User.findOne({email:email});
         // Grab the user's item quantity
         let itemsArray = user.items
         // Increase appropriate quantity by one
-        itemsArray[index] = itemsArray[index] + 1
+        itemsArray[index] = itemsArray[index] + quantity
         console.log(itemsArray)
         //updateOne() means to update one user in the database
         let updated = await User.updateOne(

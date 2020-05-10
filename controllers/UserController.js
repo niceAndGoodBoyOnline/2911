@@ -136,7 +136,7 @@ exports.makeTransaction = async function(req, res){
     // This function returns the index.
     let index = await _itemRepo.getIndex(req.body.name)
     // Call makeTransaction() function from UserRepo.js with email from POST request and index as parameter
-    let response = await _userRepo.makeTransaction(req.body.email, index)
+    let response = await _userRepo.makeTransaction(req.body.email, index, req.body.quantity)
 
     // Return whatever is returned from makeTransaction() from UserRepo.js
     // This data is recieved by "(data) => " in whatever function in the frontend that called this function.

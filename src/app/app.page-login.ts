@@ -85,6 +85,7 @@ export class PageLoginComponent {
                 sessionStorage.setItem('username', data["username"]);
                 sessionStorage.setItem('email', data['email']);
                 sessionStorage.setItem('save', 'false')
+                sessionStorage.setItem('autoClick', 'false')
                 this.message = "The user has been logged in."
                 this.musicPlayer.pause()
                 // When logged in successfully, take user to main page

@@ -21,9 +21,8 @@ export class PageMainComponent {
     // User stuff for the game
     bitcoin: number
     totalPower: number
-    // userPrestigeItems: any;
-    // prestigeArray: any
     hackMod: number
+    autoClickPower: number
 
     //Sound stuff
     audioArray = ['assets/sounds/sfx1.mp3', 'assets/sounds/sfx2.mp3', 'assets/sounds/sfx3.mp3']
@@ -71,6 +70,7 @@ export class PageMainComponent {
         await this.getUserPrestigeItems()
         await this.getUserItemArray()
         await this.startAutosave()
+        await this.startAutoBitcoin()
         await this.setSound()
         await this.setMusic()
         console.log("Setup Complete!")
@@ -146,10 +146,10 @@ export class PageMainComponent {
                 (data) => {
                     // for each item in the recieved data, put the item power in the array we just made.
                     for(let i=0;i<data.length;i++){
-                        array.push(data[i].power)
+                        array.push(data[i])
                     }
                     // Calculate the total power with the array we made and the array we have that was passed from getUserItemArray.
-                    this.calculateTotalPower(array, userItemArray)
+                    this.calculatePowers(array, userItemArray)
                 } )
     }
 
@@ -188,15 +188,18 @@ export class PageMainComponent {
         this.hackMod = hackMod
     }
 
-    // Calculate total clicking power
-    calculateTotalPower(itemArray, userItemArray) {
-        // Make totalpower equal to zero (to make sure we dont re-add the power value)
+    // Calculate total clicking power and auto click power
+    calculatePowers(itemArray, userItemArray) {
+        // Make totalpower and autoclickpower equal to zero (to make sure we dont re-add the power value)
         this.totalPower = 0
+        this.autoClickPower = 0
         // for each item in userItemArray
         for(let i=0;i < userItemArray.length;i++){
-            // multiply the amount the user has of that item by the item's power, then add it to totalpower.
-            // Math Formula: Sigma of items bought multiplied by item power
-            this.totalPower += userItemArray[i] * itemArray[i]
+            if(itemArray[i].item.includes('(Auto)')){
+                this.autoClickPower += userItemArray[i] * itemArray[i].power
+            } else {
+                this.totalPower += userItemArray[i] * itemArray[i].power
+            }
         }
     }
 
@@ -396,8 +399,8 @@ export class PageMainComponent {
     // Autosave function that is called everytime the user is in the main page
     startAutosave() {
         // This "if" statement is so that it prevents multiple save instances when clicking "refresh" or going to the shop and back
-        if(sessionStorage.getItem('save') == 'false'){
-            sessionStorage.setItem('save', 'true')
+        // if(sessionStorage.getItem('save') == 'false'){
+        //     sessionStorage.setItem('save', 'true')
             // Set how often the below code is executed.
             // Code below is the same thing as saveProgress()
             let interval = setInterval(() => {
@@ -405,7 +408,7 @@ export class PageMainComponent {
                 if((sessionStorage.getItem('auth_token') == null) || ((sessionStorage.getItem('inshop') != 'false'))){
                     // Stop the autosave.
                     clearInterval(interval)
-                    //console.log('Autosave has been stopped.')
+                    console.log('Autosave has been stopped.')
                     sessionStorage.setItem('save', 'false')
                     return
                 }
@@ -422,10 +425,22 @@ export class PageMainComponent {
                            // console.log(data)
                         } )
             }, 3000)
-        } else {
-            // If there is an existing autosave instance, let em know in the console.
-            //console.log('Automated saving is not allowed to be (re)activated at this time.')
-        }
+        // } else {
+        //     // If there is an existing autosave instance, let em know in the console.
+        //     //console.log('Automated saving is not allowed to be (re)activated at this time.')
+        // }
     }
 
+    startAutoBitcoin() {
+            let autoClick = setInterval(() => {
+                if((sessionStorage.getItem('auth_token') == null) || ((sessionStorage.getItem('inshop') != 'false'))){
+                    clearInterval(autoClick)
+                    sessionStorage.setItem('autoClick', 'false')
+
+                    return
+                }
+                this.bitcoin += this.autoClickPower
+            }, 100)
+        }
+    
 }

@@ -92,7 +92,7 @@ this @media rule applies when the width < height of browser.
     }
 
     .message {
-        font-size: 5vw;
+        font-size: 2vw;
     }
 
 }
@@ -145,7 +145,7 @@ this @media rule applies when the height < width of browser.
     }
 
     .message {
-        font-size: 5vw;
+        font-size: 2vw;
     }
 
 }

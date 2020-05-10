@@ -21,6 +21,7 @@ export class PageShopComponent {
 
     itemArray:any
     bitcoin: number
+
     soundImg: string = "assets/images/SoundOn.png";
     musicImg: string = "assets/images/musicOn.png"
     musicPlayer = <HTMLAudioElement>document.getElementById("musicPlayer")
@@ -41,12 +42,42 @@ export class PageShopComponent {
     // Used when page is loaded up. Loads each function one at a time in order to fix potential
     // issues with functions relying on other functions finishing to work.
     async setup(){
-        await this.getItems()
+        await this.getUserPrestigeItems()
         await this.getBitcoin()
         await this.setSound()
         await this.setMusic()
         console.log("Setup Complete!")
     }
+
+    async getUserPrestigeItems(){
+        let url = this.site + 'user/getUserPrestigeItems'
+        return this.http.post<any>(url, {
+            email: sessionStorage.getItem('email')
+        })
+            .subscribe(
+                (data) => {
+                    let userPrestigeItems = data
+                    this.getPrestigeDiscount(userPrestigeItems)
+                }
+            )
+    }
+
+    async getPrestigeDiscount(userPrestigeItems) {
+        let url = this.site + 'Game/getPrestigeItems'
+        this.http.get<any>(url)
+            .subscribe(
+                (data) => {
+                    console.log(JSON.stringify(data))
+                    this.calculateDiscount(userPrestigeItems, data)
+                } )
+    }
+
+    async calculateDiscount(userPrestigeItems, prestigeItems) {
+        let discount = 0
+        discount = userPrestigeItems[1] * prestigeItems[1].power
+        this.getItems(discount)
+    }
+
 
     // Get user's bitcoin from the database
     getBitcoin() {
@@ -70,7 +101,7 @@ export class PageShopComponent {
     }
 
     // Get all the items in the database
-    getItems() {
+    async getItems(discount) {
         // Locate which approrpiate controller function to use. In this case, we use getItems function in GameController.js
         // You can find this out in router.js
         let url = this.site + 'Game/getItems'
@@ -81,8 +112,17 @@ export class PageShopComponent {
                 (data) => {
                     // console log the data (For debugging purposes).
                     console.log(JSON.stringify(data))
-                    this.itemArray = data
+                    this.applyDiscount(data, discount)
                 } )
+    }
+
+    async applyDiscount(itemArray, discount) {
+        console.log(itemArray)
+        console.log(discount)
+        for(let i=0;i<itemArray.length;i++){
+            itemArray[i].price -= (itemArray[i].price * discount)
+        }
+        this.itemArray = itemArray
     }
 
     // Buy. This function is called whenver user buys something. In the parameters, name is the item name and price is the item price.

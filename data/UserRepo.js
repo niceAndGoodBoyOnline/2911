@@ -180,6 +180,14 @@ class UserRepo {
         return "Thank you come again!"
     }
 
+    async getUserPrestigeItems(email) {
+        let user = await User.findOne({email:email})
+        let prestigeItems = user.prestige
+        console.log(prestigeItems)
+
+        return prestigeItems
+    }
+
 
 }
 module.exports = UserRepo;

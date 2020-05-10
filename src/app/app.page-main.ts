@@ -177,18 +177,14 @@ export class PageMainComponent {
                 // If data is recieved,
                 (data) => {
                     // console log the data (For debugging purposes).
-                    console.log(JSON.stringify(data))
                     let prestigeArray = data
                     this.calculateHackMod(userPrestigeItems, prestigeArray)
                 } )
     }
 
     async calculateHackMod(userPrestigeItems, prestigeArray) {
-        console.log(userPrestigeItems)
-        console.log(prestigeArray)
         let hackMod = 0
         hackMod = userPrestigeItems[0] * prestigeArray[0].power
-        console.log(hackMod)
         this.hackMod = hackMod
     }
 
@@ -207,7 +203,9 @@ export class PageMainComponent {
     // This is how bitcoin is increased each click.
     increaseBitcoin() {
         // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
-        console.log(this.hackMod)
+        if(this.hackMod == 0){
+            this.hackMod = 1
+        }
         this.bitcoin += (1 + this.totalPower) * this.hackMod
         if (sessionStorage.getItem('sound') == 'true') {
             // Instantiate an audio player to play the clicking sounds.

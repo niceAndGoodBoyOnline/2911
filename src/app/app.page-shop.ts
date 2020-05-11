@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './services/ApiService';
 import { Router } from '@angular/router';
 import { pathService } from './services/path.service';
+
 @Component({
   selector: 'app-root',
   // Assign which html page to this component.
@@ -157,7 +158,8 @@ export class PageShopComponent {
                 continue
             } else {
                 // let subtotal = (Math.pow(this.itemArray[i], this.userItemArray[i]))
-                let subtotal = Math.round(Math.round(itemArray[i].price * ((Math.pow(1.4, userItemArray[i]) * (Math.pow(1.4, 1) - 1))) / (1.4 - 1)))
+                // let subtotal = Math.round(Math.round(itemArray[i].price * ((Math.pow(1.1, userItemArray[i]) * (Math.pow(1.1, 1) - 1))) / (1.1 - 1)))
+                let subtotal = Math.round(itemArray[i].price * Math.pow(1.05, userItemArray[i]))
                 itemArray[i].price = subtotal - (subtotal * discount)
 
             }
@@ -183,19 +185,9 @@ export class PageShopComponent {
             this.make_transaction(name, quantity)
             // Save progress (This is so that bitcoins are officially deducted).
             this.saveProgress()
-            this.update_price(name, quantity)
         }
     }
 
-    update_price(name, quantity ) {
-        for(let i=0;i<this.itemArray.length;i++){
-            if(this.pricedItemArray[i].item == name){
-                // let subtotal = (this.itemArray[i] * quantity) * 5
-                let subtotal = Math.round(Math.round(this.pricedItemArray[i].price * ((Math.pow(1.4, quantity) * (Math.pow(1.4, 1) - 1))) / (1.4 - 1)))
-                this.pricedItemArray[i].price = subtotal - (subtotal * this.discount)
-            }
-        }
-    }
 
     // This function is to increase the user's quantity of the item
     make_transaction(name, quantity){
@@ -216,8 +208,23 @@ export class PageShopComponent {
                 (data) => {
                     // console log the data (for debugging purposes)
                     console.log(data)
+                    this.userItemArray = data
+                    this.update_price(name, data)
                 }
             )
+    }
+
+    
+    update_price(name, data) {
+        for(let i=0;i<this.itemArray.length;i++){
+            if(this.pricedItemArray[i].item == name){
+                // let subtotal = (this.itemArray[i] * quantity) * 5
+                // let subtotal = Math.round(Math.round(this.pricedItemArray[i].price * ((Math.pow(1.1, quantity) * (Math.pow(1.1, 1) - 1))) / (1.1 - 1)))
+                // let subtotal = Math.round(this.itemArray[i] * Math.pow(1.05, this.userItemArray[i]))
+                let subtotal = Math.round(this.itemArray[i] * Math.pow(1.05, data[i]))
+                this.pricedItemArray[i].price = subtotal - (subtotal * this.discount)
+            }
+        }
     }
 
     // Save progress

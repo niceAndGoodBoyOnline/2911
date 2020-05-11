@@ -70,7 +70,7 @@ class UserRepo {
             {$set: {items:itemsArray}}
         )
         //thank the user
-        return "Thank you come again!"
+        return itemsArray
     }
 
     // Get the user's item quantity

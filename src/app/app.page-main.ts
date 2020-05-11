@@ -479,14 +479,12 @@ export class PageMainComponent {
                 return
             }
             let number = Math.floor(Math.random() * 10)
-            console.log(number + 'random')
             if(number > 7){
                 let ram = document.getElementById('ram')
                 ram.style.display = "inline"    
                 ram.style.width = "200px"
                 ram.style.height = "200px"
                 ram.style.position = "absolute"
-                console.log(ram)
                 let myleft = (Math.random())*(window.innerWidth - 200);
                 let mytop = (Math.random())*(window.innerHeight - 200);
                 ram.style.left = myleft + "px";

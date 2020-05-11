@@ -187,8 +187,6 @@ export class PageShopComponent {
     }
 
     update_price(name, quantity ) {
-        console.log(this.itemArray)
-        console.log(this.pricedItemArray)
         for(let i=0;i<this.itemArray.length;i++){
             if(this.pricedItemArray[i].item == name){
                 let subtotal = (this.itemArray[i] * quantity) * 5

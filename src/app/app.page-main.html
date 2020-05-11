@@ -16,16 +16,20 @@
 
         <!-- The (click) attribute is basically: "execute this function when clicked on" -->
         <!-- In this case, when the shop button is clicked, execute openShop() in app.page-main.ts -->
+        <!--  Old UI
         <input class='menuButton' type="button" value="Shop" (click)="openShop();clickSound()" (mouseenter)="hoverSound()">
         <input class='menuButton' type="button" value="Prestige Shop" (click)="openPrestige();clickSound()" (mouseenter)="hoverSound()">
         <input class='menuButton' type="button" value="Save Game" (click)="saveProgress();clickSound()" (mouseenter)="hoverSound()">
+        -->
+        
         <div id='outbreakSource' ngDraggable (click)='toggleGUI()'>
-            <input id='minimize' type='button' value='-' (click)='toggleOS();clickSound()' (mouseenter)="hoverSound()">
-            <img id='osImg' src={{osImg}}>
-            <img id='shopGUI' (click)="openShop();clickSound()" >
-            <img id='prestigeGUI' (click)="openPrestige();clickSound()" >
-            <img id='multiGUI' (click)="openMulti();clickSound()" >
-
+            <input id='minimizeButton' type='button' value='-' (click)='toggleOS();clickSound()' (mouseenter)="hoverSound()">
+            <img id='osImg' src={{osImg}} (click)='toggleGUI();clickSound()' (mouseenter)="hoverSound()">
+            <div id='osContainer'>
+            <img id='shopGUI' class={{imgState}} src={{shopImg}} (click)="openShop();clickSound()" >
+            <img id='prestigeGUI' class={{imgState}} src={{prestigeImg}} (click)="openPrestige();clickSound()" >
+            <img id='multiGUI' class={{imgState}} src={{multiImg}} (click)="openMulti();clickSound()" >
+            </div>
         </div>
 
 
@@ -35,7 +39,7 @@
         <img src='{{soundImg}}' (click)="changeSound(this)" id="sound">
         <img src='{{musicImg}}' (click)="changeMusic(this)" id="music">
 
-        <img src='{{ramImg}}' (click)="increaseTempPower()" id="ram">
+        <img id="ram" src='{{ramImg}}' (click)="increaseTempPower()" id="ram">
 
         <!-- Stuff that is in {{}} means to grab data from the .ts file and put it there. -->
         <!-- In this case, we grab message data from app.page-main.ts and put it here. -->

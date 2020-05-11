@@ -41,8 +41,16 @@ export class PageMainComponent {
     ramImg: string = "assets/images/ram.png";
     
 
-    // reUI stuff
+    // expUI stuff
+    osState:boolean=false;
+    guiState:boolean=false;
+   
     osImg = 'assets/images/title_animations/os0p1.gif'
+    shopImg = "assets/images/gui/shop.png"
+    multiImg = "assets/images/gui/multi.png"
+    prestigeImg = "assets/images/gui/prestige.png"
+    imgState = "visible"
+   
 
     // firewall stuff
     currentFirewall = "assets/images/firewalls/firewall25.gif"
@@ -59,7 +67,7 @@ export class PageMainComponent {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this, pathService);
         this.site = pathService.path;
-
+        this.guiSetup()
         this.setup()
         sessionStorage.setItem('inshop', 'false')
     }
@@ -81,6 +89,30 @@ export class PageMainComponent {
         await this.moveRam()
         console.log("Setup Complete!")
     }
+    
+    guiSetup(){
+
+    }
+
+    toggleOS(){
+        console.log("stub, not implemented")
+    }
+
+    toggleGUI(){
+        console.log("toggled")
+        if (this.guiState == true){
+            console.log('true')
+            this.guiState = false
+            this.imgState = "hidden"
+        }
+        else{
+            console.log('false')
+
+            this.guiState = true
+           this.imgState = "visible"
+        }
+    }
+
 
     // Checks if user is logged in
     checkLoggedIn() {

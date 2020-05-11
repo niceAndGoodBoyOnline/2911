@@ -28,7 +28,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Outbreak"
   });
 });
 mongoose.set('useCreateIndex', true);
-console.log(mongoose.connection)
 
 app.use(express.urlencoded({ extended: true }));;
 app.use(express.json());

@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "test": "mocha nock-tests/test/*.test.js",
+    "test": "mocha test/*.test.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "heroku-postbuild": "ng build --output-path dist"

@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const nock = require('nock')
-const Game = require('../Game')
+const Game = require('./Game')
 
 
 describe('Game controller functions', () => {

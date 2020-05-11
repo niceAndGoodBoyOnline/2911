@@ -1,6 +1,6 @@
 const expect = require('chai').expect;
 const nock = require('nock')
-const User = require('../User')
+const User = require('./User')
 const email = 'local@tests.nock'
 
 

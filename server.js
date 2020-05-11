@@ -20,7 +20,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Outbreak"
     console.log(err);
     process.exit(1);
   }
-
+  
   // Initialize the app.
   var server = app.listen(process.env.PORT || 1337, function () {
     var port = server.address().port;
@@ -28,6 +28,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Outbreak"
   });
 });
 mongoose.set('useCreateIndex', true);
+console.log(mongoose.connection)
 
 app.use(express.urlencoded({ extended: true }));;
 app.use(express.json());

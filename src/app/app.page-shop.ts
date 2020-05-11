@@ -20,6 +20,9 @@ export class PageShopComponent {
     path: any
 
     itemArray:any
+    pricedItemArray:any
+    userItemArray:any
+    discount: number
     bitcoin: number
 
     soundImg: string = "assets/images/SoundOn.png";
@@ -75,6 +78,7 @@ export class PageShopComponent {
     async calculateDiscount(userPrestigeItems, prestigeItems) {
         let discount = 0
         discount = userPrestigeItems[1] * prestigeItems[1].power
+        this.discount = discount
         this.getItems(discount)
     }
 
@@ -102,6 +106,7 @@ export class PageShopComponent {
 
     // Get all the items in the database
     async getItems(discount) {
+        let itemPriceArray = []
         // Locate which approrpiate controller function to use. In this case, we use getItems function in GameController.js
         // You can find this out in router.js
         let url = this.site + 'Game/getItems'
@@ -112,17 +117,51 @@ export class PageShopComponent {
                 (data) => {
                     // console log the data (For debugging purposes).
                     console.log(JSON.stringify(data))
-                    this.applyDiscount(data, discount)
+                    for(let i=0;i<data.length;i++){
+                        itemPriceArray.push(data[i].price)
+                    }
+                    this.itemArray = itemPriceArray
+                    this.getUserItemArray(data, discount)
                 } )
     }
 
-    async applyDiscount(itemArray, discount) {
-        console.log(itemArray)
-        console.log(discount)
+    // Get the quantity of items the user bought from the database
+    async getUserItemArray(itemArray, discount){
+        // Locate what appropriate controller to use in the backend
+        // (This path refers to a path in router.js)
+        let url = this.site + 'user/getItemArray'
+        // Send a POST request with email data.
+        // In UserController.js, this email data is recieved by "req.body.email"
+        // This is how we get data from frontend(Andular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
+        this.http.post<any>(url, {
+            email: sessionStorage.getItem("email")
+        })
+            .subscribe(
+                // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                // If data is recieved from the backend,
+                (data) => {
+                    //console log the data (for debugging purposes)
+                    //console.log(data)
+                    // create a variable here and assign it to data
+                    let userItemArray = data
+                    this.userItemArray = data
+                    // use that variable as parameter to getItems function
+                    this.calculateFinalPrices(itemArray, discount, userItemArray)
+                } )
+    }
+
+    async calculateFinalPrices(itemArray, discount, userItemArray){
         for(let i=0;i<itemArray.length;i++){
-            itemArray[i].price -= (itemArray[i].price * discount)
+            if(userItemArray[i] == 0){
+                itemArray[i].price -= (itemArray[i].price * discount)
+                continue
+            } else {
+                let subtotal = ((itemArray[i].price * userItemArray[i]) * 5)
+                itemArray[i].price = subtotal - (subtotal * discount)
+
+            }
         }
-        this.itemArray = itemArray
+        this.pricedItemArray = itemArray
     }
 
     // Buy. This function is called whenver user buys something. In the parameters, name is the item name and price is the item price.
@@ -136,13 +175,25 @@ export class PageShopComponent {
         // If user DOES have enough bitcoin,
         else {
             // Deduct bitcoin from item price (Visually only).
-            this.bitcoin -= (price * quantity)
+            this.bitcoin -= (Math.round(price) * quantity)
             // Thank the user
             this.message = "Thank you come again!"
             // Call make_transaction function with the item name
             this.make_transaction(name, quantity)
             // Save progress (This is so that bitcoins are officially deducted).
             this.saveProgress()
+            this.update_price(name, quantity)
+        }
+    }
+
+    update_price(name, quantity ) {
+        console.log(this.itemArray)
+        console.log(this.pricedItemArray)
+        for(let i=0;i<this.itemArray.length;i++){
+            if(this.pricedItemArray[i].item == name){
+                let subtotal = (this.itemArray[i] * quantity) * 5
+                this.pricedItemArray[i].price += subtotal - (subtotal * this.discount)
+            }
         }
     }
 

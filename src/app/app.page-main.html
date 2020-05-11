@@ -19,7 +19,16 @@
         <input class='menuButton' type="button" value="Shop" (click)="openShop();clickSound()" (mouseenter)="hoverSound()">
         <input class='menuButton' type="button" value="Prestige Shop" (click)="openPrestige();clickSound()" (mouseenter)="hoverSound()">
         <input class='menuButton' type="button" value="Save Game" (click)="saveProgress();clickSound()" (mouseenter)="hoverSound()">
-        <div id='outbreakSource' ngDraggable><img id='osImg' src={{osImg}}></div>
+        <div id='outbreakSource' ngDraggable (click)='toggleGUI()'>
+            <input id='minimize' type='button' value='-' (click)='toggleOS();clickSound()' (mouseenter)="hoverSound()">
+            <img id='osImg' src={{osImg}}>
+            <img id='shopGUI' (click)="openShop();clickSound()" >
+            <img id='prestigeGUI' (click)="openPrestige();clickSound()" >
+            <img id='multiGUI' (click)="openMulti();clickSound()" >
+
+        </div>
+
+
         <div id='console' ngDraggable><input id='terminal' type='text' value='$:' (click)='cli()'></div>
         
         

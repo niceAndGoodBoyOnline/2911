@@ -156,7 +156,8 @@ export class PageShopComponent {
                 itemArray[i].price -= (itemArray[i].price * discount)
                 continue
             } else {
-                let subtotal = ((itemArray[i].price * userItemArray[i]) * 5)
+                // let subtotal = (Math.pow(this.itemArray[i], this.userItemArray[i]))
+                let subtotal = Math.round(Math.round(itemArray[i].price * ((Math.pow(1.4, userItemArray[i]) * (Math.pow(1.4, 1) - 1))) / (1.4 - 1)))
                 itemArray[i].price = subtotal - (subtotal * discount)
 
             }
@@ -189,8 +190,9 @@ export class PageShopComponent {
     update_price(name, quantity ) {
         for(let i=0;i<this.itemArray.length;i++){
             if(this.pricedItemArray[i].item == name){
-                let subtotal = (this.itemArray[i] * quantity) * 5
-                this.pricedItemArray[i].price += subtotal - (subtotal * this.discount)
+                // let subtotal = (this.itemArray[i] * quantity) * 5
+                let subtotal = Math.round(Math.round(this.pricedItemArray[i].price * ((Math.pow(1.4, quantity) * (Math.pow(1.4, 1) - 1))) / (1.4 - 1)))
+                this.pricedItemArray[i].price = subtotal - (subtotal * this.discount)
             }
         }
     }

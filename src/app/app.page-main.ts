@@ -22,7 +22,9 @@ export class PageMainComponent {
     bitcoin: number
     totalPower: number
     hackMod: number
+    tempPowerIncrease: number = 1
     autoClickPower: number
+    totalClickPower: number
 
     //Sound stuff
     audioArray = ['assets/sounds/sfx1.mp3', 'assets/sounds/sfx2.mp3', 'assets/sounds/sfx3.mp3']
@@ -34,6 +36,9 @@ export class PageMainComponent {
     musicPlayer;
     hoverSoundFile = 'assets/sounds/HoverSound.mp3'
     clickSoundFile = 'assets/sounds/ClickSound.mp3'
+
+    // Clickable stuff
+    ramImg: string = "assets/images/ram.png";
     
 
     // reUI stuff
@@ -73,6 +78,7 @@ export class PageMainComponent {
         await this.startAutoBitcoin()
         await this.setSound()
         await this.setMusic()
+        await this.moveRam()
         console.log("Setup Complete!")
     }
 
@@ -193,6 +199,8 @@ export class PageMainComponent {
         // Make totalpower and autoclickpower equal to zero (to make sure we dont re-add the power value)
         this.totalPower = 0
         this.autoClickPower = 0
+        this.tempPowerIncrease = 1
+        this.hackMod = 1
         // for each item in userItemArray
         for(let i=0;i < userItemArray.length;i++){
             if(itemArray[i].item.includes('(Auto)')){
@@ -201,6 +209,7 @@ export class PageMainComponent {
                 this.totalPower += userItemArray[i] * itemArray[i].power
             }
         }
+        this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
     }
 
     // This is how bitcoin is increased each click.
@@ -209,7 +218,8 @@ export class PageMainComponent {
         if(this.hackMod == 0){
             this.hackMod = 1
         }
-        this.bitcoin += (1 + this.totalPower) * this.hackMod
+        this.bitcoin += ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
+        this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
         if (sessionStorage.getItem('sound') == 'true') {
             // Instantiate an audio player to play the clicking sounds.
             let audio = new Audio()
@@ -424,7 +434,7 @@ export class PageMainComponent {
                         (data) => {
                            // console.log(data)
                         } )
-            }, 3000)
+            }, 1000)
         // } else {
         //     // If there is an existing autosave instance, let em know in the console.
         //     //console.log('Automated saving is not allowed to be (re)activated at this time.')
@@ -436,11 +446,54 @@ export class PageMainComponent {
                 if((sessionStorage.getItem('auth_token') == null) || ((sessionStorage.getItem('inshop') != 'false'))){
                     clearInterval(autoClick)
                     sessionStorage.setItem('autoClick', 'false')
-
                     return
                 }
                 this.bitcoin += this.autoClickPower
             }, 100)
         }
+
     
+
+    increaseTempPower() {
+        let ram = document.getElementById('ram')
+        ram.style.display = 'none'
+        this.tempPowerIncrease += 1
+        this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
+        setTimeout(() => {
+            this.tempPowerIncrease -= 1
+            this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
+        }, 10000)
+    }
+
+    moveRam(){
+        if(sessionStorage.getItem('ramTimer') == 'true'){
+            console.log('Ram already running. If you refreshed, please log out and log in.')
+            return
+        }
+        sessionStorage.setItem('ramTimer', 'true')
+        let ramInterval = setInterval(() => {
+            if((sessionStorage.getItem('auth_token') == null) || ((sessionStorage.getItem('inshop') != 'false'))){
+                clearInterval(ramInterval)
+                console.log('ramInterval has been stopped')
+                sessionStorage.setItem('ramTimer', 'false')
+                return
+            }
+            let number = Math.floor(Math.random() * 10)
+            console.log(number + 'random')
+            if(number > 7){
+                let ram = document.getElementById('ram')
+                ram.style.display = "inline"    
+                ram.style.width = "200px"
+                ram.style.height = "200px"
+                ram.style.position = "absolute"
+                console.log(ram)
+                let myleft = (Math.random())*(window.innerWidth - 200);
+                let mytop = (Math.random())*(window.innerHeight - 200);
+                ram.style.left = myleft + "px";
+                ram.style.top = mytop + "px";
+            }
+        }, 1000)
+
+    }
+
 }

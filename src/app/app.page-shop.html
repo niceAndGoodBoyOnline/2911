@@ -45,9 +45,14 @@
                 <td>
                     <!-- The (click) attribute is basically: "execute this function when clicked on" -->
                     <!-- In this case, when the Buy button is clicked, execute buy() in app.page-register.ts with parameters of item name and price in the for loop. -->
-                    <input type='button' value='Buy 1' (click)='buy(thing.item, thing.price, 1);clickSound()' (mouseenter)='hoverSound()'/>
-                    <input type='button' value='Buy 5' (click)='buy(thing.item, thing.price, 5);clickSound()' (mouseenter)='hoverSound()'/>
-                    <input type='button' value='Buy 10' (click)='buy(thing.item, thing.price, 10);clickSound()' (mouseenter)='hoverSound()'/>
+                    <input type='button' value='Buy' (click)='buy(thing.item, thing.price, 1);clickSound()' (mouseenter)='hoverSound()'/>
+
+
+                    <!-- These buy 5 and buy 10 buttons are commented because they dont fit with the current price scaling formula. -->
+                    <!-- In other words, they're a way to buy more items for a cheaper price. -->
+                    <!--                                                                                                            -->
+                    <!-- <input type='button' value='Buy 5' (click)='buy(thing.item, thing.price, 5);clickSound()' (mouseenter)='hoverSound()'/>
+                    <input type='button' value='Buy 10' (click)='buy(thing.item, thing.price, 10);clickSound()' (mouseenter)='hoverSound()'/> -->
                 </td>
             </tr>
             

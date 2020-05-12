@@ -49,9 +49,9 @@
                 <hr class="horizontalLine">
                 <div class="soundSettings">
                     <p>Sound Volume</p>
-                    <input id="Minus" class="menuButton" type="button" value="-" (click)="lowerSoundVolume()">
+                    <input id="Minus" class="menuButton" type="button" value="-" (click)="lowerSoundVolume();clickSound()" (mouseenter)="hoverSound()">
                     <img src="{{soundVolumeImg}}" id="Volume">
-                    <input id="Plus" class="menuButton" type="button" value="+" (click)="raiseSoundVolume()">
+                    <input id="Plus" class="menuButton" type="button" value="+" (click)="raiseSoundVolume();clickSound()" (mouseenter)="hoverSound()">
                 </div>
                 <hr class="horizontalLine">
                 <div class="musicSettings">

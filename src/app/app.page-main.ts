@@ -230,6 +230,8 @@ export class PageMainComponent {
             let audio = new Audio()
             // Randomly pick which sound to play from this.audioArray array
             audio.src = this.audioArray[Math.floor(Math.random() * this.audioArray.length)]
+            // Set the volume of the sound
+            audio.volume = parseFloat(sessionStorage.getItem('soundVolume'))
             // Once a sound is chosen, load it.
             audio.load();
             // Play it.
@@ -348,6 +350,8 @@ export class PageMainComponent {
             let audio = new Audio()
             // Set the sound file to play
             audio.src = this.hoverSoundFile
+            // Set the volume of the sound
+            audio.volume = parseFloat(sessionStorage.getItem('soundVolume'))
             // Load the audio instance with the sound file
             audio.load();
             // Play it.
@@ -363,6 +367,8 @@ export class PageMainComponent {
             let audio = new Audio()
             // Set the sound file to play
             audio.src = this.clickSoundFile
+            // Set the volume of the sound
+            audio.volume = parseFloat(sessionStorage.getItem('soundVolume'))
             // Load the audio instance with the sound file
             audio.load();
             // Play it.

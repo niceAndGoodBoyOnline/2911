@@ -39,8 +39,8 @@ export class PageMainComponent {
     clickSoundFile = 'assets/sounds/ClickSound.mp3'
 
     // Volume Settings Stuff
-    soundVolumeImg = 'assets/images/VolumeSettings0.6.png'
-    musicVolumeImg = 'assets/images/VolumeSettings0.6.png'
+    soundVolumeImg: string = 'assets/images/VolumeSettings0.6.png'
+    musicVolumeImg: string = 'assets/images/VolumeSettings0.6.png'
 
     // Clickable stuff
     ramImg: string = "assets/images/ram.png";
@@ -533,43 +533,62 @@ export class PageMainComponent {
         }, 1000)
 
     }
-
+    // Function to open settings modal
     openSettings(){
-        // Get the modal
+        // Get the modal through the id
         var modal = document.getElementById("settingsBox");
+        // Change css of modal to display it
         modal.style.display = "block"
         }
 
+    // Function to close settings modal
     closeSettings(){
-        // Get the modal
+        // Get the modal through the id
         var modal = document.getElementById("settingsBox");
+        // Change css of modal to be unable to see it
         modal.style.display = "none"
         }
 
+    // Function to set the sound volume when entering the page
     async setSoundVolume(){
+        // If the sound volume has been set
         if (sessionStorage.getItem('soundVolume') != null){
+            // Get the current sound volume
             let volume = sessionStorage.getItem('soundVolume')
+            // Change the sound volume image in the settings based on the current sound volume
             this.soundVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
-            console.log(sessionStorage.getItem('soundVolume'))
         }
+        // If the sound volume has not been set
         else {
+            // Set the sound volume to the value 0.6 (around mid-range volume)
             sessionStorage.setItem('soundVolume', '0.6')
+            // Get the newly set sound volume
             let volume = sessionStorage.getItem('soundVolume')
+            // Change the sound volume image in the settings based on the new sound volume
             this.soundVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
-            console.log(sessionStorage.getItem('soundVolume'))
         }
     }
 
+    // Function to set the music volume when entering the page
     async setMusicVolume() {
+        // If the music volume has been set
         if (sessionStorage.getItem('musicVolume') != null){
+            // Get the current music volume
             let volume = sessionStorage.getItem('musicVolume')
+            // Change the music volume image in the settings based on the current music volume
             this.musicVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            // Change the volume of the music to the current music volume
             this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
         }
+        // If the music volume has not been set
         else {
+            // Set the music volume to the value 0.6 (around mid-range volume)
             sessionStorage.setItem('musicVolume', '0.6')
+            // Get the newly set music volume
             let volume = sessionStorage.getItem('musicVolume')
+            // Change the music volume image in the settings based on the new music volume
             this.musicVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            // Change the volume of the music to the current music volume
             this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
         }
     }

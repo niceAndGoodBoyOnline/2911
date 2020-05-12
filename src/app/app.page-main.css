@@ -3,6 +3,11 @@
     src: url(src/assets/text/font.ttf)
 }
 
+html{
+    position: fixed;
+    overflow:hidden;
+}
+
 body{
     font-family: HackerFont;
     color: green;
@@ -11,70 +16,81 @@ body{
 }
 
 #ram{
-
     width: 10vw;
     height: auto;
     z-index: 10;
 }
 
-.hidden{
-    visibility: hidden;
+#hackTarget{
+    position: absolute;
+    float:left;
 }
 
-.visible{
-    visibility: visible;
+#osGUI{
+    position: absolute;
+    top:0;
+    left:0;
 }
+
+.hidden{
+    opacity:0;
+    animation: fadeOut .5s;
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;} 
+ } 
+
+.visible{
+   animation: fadeIn .5s;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;} 
+ } 
+
 
 #osImg{
     z-index: 5;
     float:left;
+    overflow:hidden;
 }
 
 #minimizeButton{
     background-color: rgba(22,22,22,0.3);
     border-color: rgba(00,00,00,0);
     border-bottom-color: green;
-    font-size: 2vw;
     position:relative;
-    top: 0;
-    left: 3vw;
-    float: left;
 }
 
 #shopGUI{
-    position: relative;
-    top: -5vw;
-    left: 3vw;
-    float: left;
+    position: absolute;
     z-index: 6;
-    width: 10vw;
-    height: auto;
+    overflow:hidden;
 }
 
 #multiGUI{
-    position: relative;
-    top: 0vw;
-    left: 3vw;
+    position: absolute;
     z-index: 6;
-    height: auto;
-    width: 10vw;
+    overflow:hidden;
 }
 
 #prestigeGUI{
-    position: relative;
-    top: 5vw;
-    left: 3vw;
+    position: absolute;
     z-index: 6;
-    height: auto;
-    width: 10vw;
+    overflow:hidden;
 }
 
 #terminal{
+    position: absolute;
     z-index: 10;
     border-color: rgba(00,00,00,0);
     border-bottom-color: green;
     border-style: solid;
     background-color: rgba(96, 160, 155, 0.3);
+    float:right;
 }
 
 img {
@@ -93,6 +109,10 @@ img {
     float: left;
     position: fixed;
     bottom: 1vh;
+}
+
+.firewall{
+    border-radius: 35%;
 }
 
 .menuButton {
@@ -121,7 +141,19 @@ this @media rule applies when the width < height of browser.
     body {
         font-size: 5vw;
         width: 100vw;
+        height: 95vh;
+    }
+
+
+    #osGUI{
+        width: auto;
         height: auto;
+        top: 66vh;
+        left: 5vw;
+    }
+
+    #hackText{
+        font-size: 3vw;
     }
     
     #osImg{
@@ -131,18 +163,43 @@ this @media rule applies when the width < height of browser.
         right: 5vw;
     }
 
+    #shopGUI{
+        top: 0vh;
+        left: 20vw;
+        width: 10vw;
+        height: auto;
+    }
+    
+    #multiGUI{
+        top: 5vh;
+        left: 20vw;
+        height: auto;
+        width: 10vw;
+    }
+    
+    #prestigeGUI{
+        top:10vh;
+        left: 20vw;
+        height: auto;
+        width: 10vw;
+    }
+
     #terminal{
         font-size: 3vw;
         width:50vw;
         height: 4vw;
         right: 5vw;
-        bottom: 5vh;
+        top: 66vh;
     }
     
     h2 {
         font-size:5vw;
     }
     
+    .stats{
+        font-size: 3vw;
+    }
+
     .firewall {
         width:auto;
         height:50vh;
@@ -160,7 +217,7 @@ this @media rule applies when the width < height of browser.
     }
     
     .bitcoin {
-        font-size:4vw;
+        font-size:3vw;
     }
     
     .menuButton {
@@ -176,24 +233,60 @@ this @media rule applies when the width < height of browser.
 
     body {
         font-size: 4vh;
-        width: auto;
-        height: 100vh;
+        width: 100vw;
+        height: 95vh;
+    }
+
+
+    #osGUI{
+        width: 23vw;
+        height: 30vh;
+        top: 33vh;
+        left: 5vw;
     }
     
 
     #osImg{
         height: auto;
-        width: 10vh;
-        top: 10vh;
-        right: 5vw;
+        width: 30vh;
+    }
+
+    #hackTarget{
+        left: 30vw;
+    }
+
+    #hackText{
+        font-size: 3vh;
+    }
+
+    
+    #shopGUI{
+        top: 0;
+        left: 15vw;
+        width: 15vh;
+        height: auto;
+    }
+    
+    #multiGUI{
+        top: 15vh;
+        left: 15vw;
+        height: auto;
+        width: 15vh;
+    }
+    
+    #prestigeGUI{
+        top: 30vh;
+        left: 15vw;
+        height: auto;
+        width: 15vh;
     }
 
     #terminal{
         font-size: 3vh;
-        width:40vw;
+        width:30vw;
         height: 4vh;
         right: 5vw;
-        bottom: 5vh;
+        top: 66vh;
     }
     
     h2 {
@@ -215,9 +308,13 @@ this @media rule applies when the width < height of browser.
         height:auto;
         left: 12vh;
     }
+
+    .stats{
+        font-size: 3vh;
+    }
     
     .bitcoin {
-        font-size:4vh;
+        font-size:3vh;
     }
     
     .menuButton {

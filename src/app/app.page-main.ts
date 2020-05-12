@@ -44,16 +44,16 @@ export class PageMainComponent {
     // expUI stuff
     osState:boolean=false;
     guiState:boolean=false;
-   
     osImg = 'assets/images/title_animations/os0p1.gif'
     shopImg = "assets/images/gui/shop.png"
     multiImg = "assets/images/gui/multi.png"
     prestigeImg = "assets/images/gui/prestige.png"
-    imgState = "visible"
+    imgState = "hidden"
    
 
     // firewall stuff
     currentFirewall = "assets/images/firewalls/firewall25.gif"
+    currentName = "r3dGate"
     
     // mission stuff
     currentMission;
@@ -91,7 +91,6 @@ export class PageMainComponent {
     }
     
     guiSetup(){
-
     }
 
     toggleOS(){
@@ -99,17 +98,13 @@ export class PageMainComponent {
     }
 
     toggleGUI(){
-        console.log("toggled")
-        if (this.guiState == true){
-            console.log('true')
+        if (this.guiState === true){
             this.guiState = false
             this.imgState = "hidden"
         }
-        else{
-            console.log('false')
-
+        else if (this.guiState == false){
             this.guiState = true
-           this.imgState = "visible"
+            this.imgState = "visible"
         }
     }
 

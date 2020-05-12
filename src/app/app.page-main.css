@@ -70,8 +70,6 @@ input:active {
     height: 100%;
     overflow: auto;
     text-align: center;
-    top: 15%;
-    left: 10%;
   }
   
   .modal-content {
@@ -80,8 +78,6 @@ input:active {
     padding: 20px;
     overflow: auto;
     border: 1px solid green;
-    width: 80%;
-    height:70%;
   }
   
   .close {
@@ -108,8 +104,6 @@ input:active {
   }
   .Volume {
       display:inline-block;
-      width: auto;
-      height: 2%;
   }
   .Plus {
     display:inline;
@@ -180,6 +174,19 @@ this @media rule applies when the width < height of browser.
         margin:2vw;
     }
 
+    .modal {
+        top: 5vw;
+        left: 20vw;
+      }
+    .modal-content {
+        width: 180vw;
+        height:90vw;
+      }
+    .Volume {
+        width: 70vw;
+        height: 40vw;
+      }
+
 }
 
 @media only screen and (orientation: landscape) {
@@ -242,5 +249,16 @@ this @media rule applies when the width < height of browser.
         font-size: 4vh;
         margin:3vh;
     }
-
+    .modal {
+        top: 5vh;
+        left: 20vh;
+      }
+    .modal-content {
+        width: 180vh;
+        height:90vh;
+      }
+    .Volume {
+        width: 70vh;
+        height: 40vh;
+      }
 }

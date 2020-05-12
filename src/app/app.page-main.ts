@@ -38,6 +38,9 @@ export class PageMainComponent {
     hoverSoundFile = 'assets/sounds/HoverSound.mp3'
     clickSoundFile = 'assets/sounds/ClickSound.mp3'
 
+    // Volume Settings Stuff
+    soundVolumeImg = 'assets/images/VolumeSettings0.6.png'
+
     // Clickable stuff
     ramImg: string = "assets/images/ram.png";
     
@@ -80,6 +83,7 @@ export class PageMainComponent {
         await this.setSound()
         await this.setMusic()
         await this.moveRam()
+        await this.setSoundVolume()
         console.log("Setup Complete!")
     }
 
@@ -506,4 +510,44 @@ export class PageMainComponent {
         var modal = document.getElementById("settingsBox");
         modal.style.display = "none";
         }
+
+    async setSoundVolume(){
+        if (sessionStorage.getItem('soundVolume') != null){
+            let volume = sessionStorage.getItem('soundVolume')
+            this.soundVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            console.log(sessionStorage.getItem('soundVolume'))
+        }
+        else {
+            sessionStorage.setItem('soundVolume', '0.6')
+            let volume = sessionStorage.getItem('soundVolume')
+            this.soundVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            console.log(sessionStorage.getItem('soundVolume'))
+            console.log('sound')
+        }
+    }
+
+    lowerSoundVolume(){
+        console.log("Start")
+        let volume = parseFloat(sessionStorage.getItem('soundVolume'))
+        console.log(volume)
+        if (volume > 0){
+            volume -= 0.2
+            let changedVolume =  volume.toFixed(1).toString()
+            console.log(changedVolume)
+            sessionStorage.setItem('soundVolume', changedVolume)
+            this.soundVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
+        }
+    }
+    raiseSoundVolume(){
+        console.log("Start")
+        let volume = parseFloat(sessionStorage.getItem('soundVolume'))
+        console.log(volume)
+        if (volume < 1.0){
+            volume += 0.2
+            let changedVolume =  volume.toFixed(1).toString()
+            console.log(changedVolume)
+            sessionStorage.setItem('soundVolume', changedVolume)
+            this.soundVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
+        }
+    }
 }

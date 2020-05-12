@@ -78,6 +78,7 @@ input:active {
     background-color:black;
     text-align: center;
     padding: 20px;
+    overflow: auto;
     border: 1px solid green;
     width: 80%;
     height:70%;
@@ -107,6 +108,8 @@ input:active {
   }
   #Volume {
       display:inline-block;
+      width: auto;
+      height: 2%;
   }
   #Plus {
     display:inline;

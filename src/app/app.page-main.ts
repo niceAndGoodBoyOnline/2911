@@ -510,13 +510,13 @@ export class PageMainComponent {
     openSettings(){
         // Get the modal
         var modal = document.getElementById("settingsBox");
-        modal.style.display = "block";
+        modal.style.display = "block"
         }
 
     closeSettings(){
         // Get the modal
         var modal = document.getElementById("settingsBox");
-        modal.style.display = "none";
+        modal.style.display = "none"
         }
 
     async setSoundVolume(){

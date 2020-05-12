@@ -32,6 +32,10 @@ export class PageRegisterComponent {
     hoverSoundFile = 'assets/sounds/HoverSound.mp3'
     clickSoundFile = 'assets/sounds/ClickSound.mp3'
 
+    // Volume Settings Stuff
+    soundVolumeImg: string = 'assets/images/VolumeSettings0.6.png'
+    musicVolumeImg: string = 'assets/images/VolumeSettings0.6.png'
+
     // Since we are using a provider above we can receive 
     // an instance through an constructor.
     constructor(private http: HttpClient, pathService: pathService, private router: Router) {
@@ -44,6 +48,8 @@ export class PageRegisterComponent {
     async setup() {
         await this.setSound()
         await this.setMusic()
+        await this.setSoundVolume()
+        await this.setMusicVolume()
         console.log("Setup Complete!")
     }
 
@@ -212,6 +218,50 @@ export class PageRegisterComponent {
             audio.load();
             // Play it.
             audio.play();
+        }
+    }
+
+    // Function to set the sound volume when entering the page
+    async setSoundVolume(){
+        // If the sound volume has been set
+        if (sessionStorage.getItem('soundVolume') != null){
+            // Get the current sound volume
+            let volume = sessionStorage.getItem('soundVolume')
+            // Change the sound volume image in the settings based on the current sound volume
+            this.soundVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+        }
+        // If the sound volume has not been set
+        else {
+            // Set the sound volume to the value 0.6 (around mid-range volume)
+            sessionStorage.setItem('soundVolume', '0.6')
+            // Get the newly set sound volume
+            let volume = sessionStorage.getItem('soundVolume')
+            // Change the sound volume image in the settings based on the new sound volume
+            this.soundVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+        }
+    }
+    
+    // Function to set the music volume when entering the page
+    async setMusicVolume() {
+        // If the music volume has been set
+        if (sessionStorage.getItem('musicVolume') != null){
+            // Get the current music volume
+            let volume = sessionStorage.getItem('musicVolume')
+            // Change the music volume image in the settings based on the current music volume
+            this.musicVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            // Change the volume of the music to the current music volume
+            this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        }
+        // If the music volume has not been set
+        else {
+            // Set the music volume to the value 0.6 (around mid-range volume)
+            sessionStorage.setItem('musicVolume', '0.6')
+            // Get the newly set music volume
+            let volume = sessionStorage.getItem('musicVolume')
+            // Change the music volume image in the settings based on the new music volume
+            this.musicVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            // Change the volume of the music to the current music volume
+            this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
         }
     }
 }

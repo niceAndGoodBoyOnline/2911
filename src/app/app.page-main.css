@@ -40,6 +40,12 @@ img {
     bottom: 1vh;
 }
 
+#settings {
+    float: left;
+    position: fixed;
+    bottom: 1vh;
+}
+
 .menuButton {
     border-color: green;
     border-style: solid;
@@ -54,6 +60,42 @@ input:hover {
 
 input:active {
     background-color: greenyellow;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    text-align: center;
+    top: 15%;
+    left: 10%;
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color:black;
+    text-align: center;
+    padding: 20px;
+    border: 1px solid green;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: green;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: green;
+    text-decoration: none;
+    cursor: pointer;
   }
 
 
@@ -102,6 +144,12 @@ this @media rule applies when the width < height of browser.
         width:10vw;
         height:auto;
         left: 12vw;
+    }
+
+    #settings {
+        width:10vw;
+        height:auto;
+        left: 208vw;
     }
     
     .bitcoin {
@@ -159,6 +207,12 @@ this @media rule applies when the width < height of browser.
         width:10vh;
         height:auto;
         left: 12vh;
+    }
+
+    #settings {
+        width:10vh;
+        height: auto;
+        left: 208vh;
     }
     
     .bitcoin {

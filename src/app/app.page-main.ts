@@ -31,6 +31,7 @@ export class PageMainComponent {
     sound: boolean = false;
     soundImg: string = "assets/images/SoundOn.png";
     musicImg: string = "assets/images/musicOn.png";
+    settingsImg: string = "assets/images/Settings.png";
     songList: ["assets/sounds/songs/theme.mp3"];
     currentSong: string = "assets/sounds/songs/outbreak.mp3";
     musicPlayer;
@@ -494,4 +495,15 @@ export class PageMainComponent {
 
     }
 
+    openSettings(){
+        // Get the modal
+        var modal = document.getElementById("settingsBox");
+        modal.style.display = "block";
+        }
+
+    closeSettings(){
+        // Get the modal
+        var modal = document.getElementById("settingsBox");
+        modal.style.display = "none";
+        }
 }

@@ -102,16 +102,16 @@ input:active {
       border: 2px solid green;
   }
 
-  #Minus {
+  .Minus {
       display:inline;
       position: static;
   }
-  #Volume {
+  .Volume {
       display:inline-block;
       width: auto;
       height: 2%;
   }
-  #Plus {
+  .Plus {
     display:inline;
     position: static;
   }

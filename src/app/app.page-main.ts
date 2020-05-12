@@ -40,6 +40,7 @@ export class PageMainComponent {
 
     // Volume Settings Stuff
     soundVolumeImg = 'assets/images/VolumeSettings0.6.png'
+    musicVolumeImg = 'assets/images/VolumeSettings0.6.png'
 
     // Clickable stuff
     ramImg: string = "assets/images/ram.png";
@@ -84,6 +85,7 @@ export class PageMainComponent {
         await this.setMusic()
         await this.moveRam()
         await this.setSoundVolume()
+        await this.setMusicVolume()
         console.log("Setup Complete!")
     }
 
@@ -528,14 +530,25 @@ export class PageMainComponent {
             let volume = sessionStorage.getItem('soundVolume')
             this.soundVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
             console.log(sessionStorage.getItem('soundVolume'))
-            console.log('sound')
+        }
+    }
+
+    async setMusicVolume() {
+        if (sessionStorage.getItem('musicVolume') != null){
+            let volume = sessionStorage.getItem('musicVolume')
+            this.musicVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        }
+        else {
+            sessionStorage.setItem('musicVolume', '0.6')
+            let volume = sessionStorage.getItem('musicVolume')
+            this.musicVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
         }
     }
 
     lowerSoundVolume(){
-        console.log("Start")
         let volume = parseFloat(sessionStorage.getItem('soundVolume'))
-        console.log(volume)
         if (volume > 0){
             volume -= 0.2
             let changedVolume =  volume.toFixed(1).toString()
@@ -545,15 +558,35 @@ export class PageMainComponent {
         }
     }
     raiseSoundVolume(){
-        console.log("Start")
         let volume = parseFloat(sessionStorage.getItem('soundVolume'))
-        console.log(volume)
         if (volume < 1.0){
             volume += 0.2
             let changedVolume =  volume.toFixed(1).toString()
             console.log(changedVolume)
             sessionStorage.setItem('soundVolume', changedVolume)
             this.soundVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
+        }
+    }
+    lowerMusicVolume(){
+        let volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        if (volume > 0){
+            volume -= 0.2
+            let changedVolume =  volume.toFixed(1).toString()
+            console.log(changedVolume)
+            sessionStorage.setItem('musicVolume', changedVolume)
+            this.musicVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
+            this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        }
+    }
+    raiseMusicVolume(){
+        let volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        if (volume < 1.0){
+            volume += 0.2
+            let changedVolume =  volume.toFixed(1).toString()
+            console.log(changedVolume)
+            sessionStorage.setItem('musicVolume', changedVolume)
+            this.musicVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
+            this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
         }
     }
 }

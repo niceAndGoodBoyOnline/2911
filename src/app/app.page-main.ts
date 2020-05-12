@@ -31,11 +31,16 @@ export class PageMainComponent {
     sound: boolean = false;
     soundImg: string = "assets/images/SoundOn.png";
     musicImg: string = "assets/images/musicOn.png";
+    settingsImg: string = "assets/images/Settings.png";
     songList: ["assets/sounds/songs/theme.mp3"];
     currentSong: string = "assets/sounds/songs/outbreak.mp3";
     musicPlayer;
     hoverSoundFile = 'assets/sounds/HoverSound.mp3'
     clickSoundFile = 'assets/sounds/ClickSound.mp3'
+
+    // Volume Settings Stuff
+    soundVolumeImg = 'assets/images/VolumeSettings0.6.png'
+    musicVolumeImg = 'assets/images/VolumeSettings0.6.png'
 
     // Clickable stuff
     ramImg: string = "assets/images/ram.png";
@@ -87,6 +92,8 @@ export class PageMainComponent {
         await this.setSound()
         await this.setMusic()
         await this.moveRam()
+        await this.setSoundVolume()
+        await this.setMusicVolume()
         console.log("Setup Complete!")
     }
     
@@ -252,6 +259,8 @@ export class PageMainComponent {
             let audio = new Audio()
             // Randomly pick which sound to play from this.audioArray array
             audio.src = this.audioArray[Math.floor(Math.random() * this.audioArray.length)]
+            // Set the volume of the sound
+            audio.volume = parseFloat(sessionStorage.getItem('soundVolume'))
             // Once a sound is chosen, load it.
             audio.load();
             // Play it.
@@ -370,6 +379,8 @@ export class PageMainComponent {
             let audio = new Audio()
             // Set the sound file to play
             audio.src = this.hoverSoundFile
+            // Set the volume of the sound
+            audio.volume = parseFloat(sessionStorage.getItem('soundVolume'))
             // Load the audio instance with the sound file
             audio.load();
             // Play it.
@@ -385,6 +396,8 @@ export class PageMainComponent {
             let audio = new Audio()
             // Set the sound file to play
             audio.src = this.clickSoundFile
+            // Set the volume of the sound
+            audio.volume = parseFloat(sessionStorage.getItem('soundVolume'))
             // Load the audio instance with the sound file
             audio.load();
             // Play it.
@@ -521,4 +534,86 @@ export class PageMainComponent {
 
     }
 
+    openSettings(){
+        // Get the modal
+        var modal = document.getElementById("settingsBox");
+        modal.style.display = "block"
+        }
+
+    closeSettings(){
+        // Get the modal
+        var modal = document.getElementById("settingsBox");
+        modal.style.display = "none"
+        }
+
+    async setSoundVolume(){
+        if (sessionStorage.getItem('soundVolume') != null){
+            let volume = sessionStorage.getItem('soundVolume')
+            this.soundVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            console.log(sessionStorage.getItem('soundVolume'))
+        }
+        else {
+            sessionStorage.setItem('soundVolume', '0.6')
+            let volume = sessionStorage.getItem('soundVolume')
+            this.soundVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            console.log(sessionStorage.getItem('soundVolume'))
+        }
+    }
+
+    async setMusicVolume() {
+        if (sessionStorage.getItem('musicVolume') != null){
+            let volume = sessionStorage.getItem('musicVolume')
+            this.musicVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        }
+        else {
+            sessionStorage.setItem('musicVolume', '0.6')
+            let volume = sessionStorage.getItem('musicVolume')
+            this.musicVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        }
+    }
+
+    lowerSoundVolume(){
+        let volume = parseFloat(sessionStorage.getItem('soundVolume'))
+        if (volume > 0){
+            volume -= 0.2
+            let changedVolume =  volume.toFixed(1).toString()
+            console.log(changedVolume)
+            sessionStorage.setItem('soundVolume', changedVolume)
+            this.soundVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
+        }
+    }
+    raiseSoundVolume(){
+        let volume = parseFloat(sessionStorage.getItem('soundVolume'))
+        if (volume < 1.0){
+            volume += 0.2
+            let changedVolume =  volume.toFixed(1).toString()
+            console.log(changedVolume)
+            sessionStorage.setItem('soundVolume', changedVolume)
+            this.soundVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
+        }
+    }
+    lowerMusicVolume(){
+        let volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        if (volume > 0){
+            volume -= 0.2
+            let changedVolume =  volume.toFixed(1).toString()
+            console.log(changedVolume)
+            sessionStorage.setItem('musicVolume', changedVolume)
+            this.musicVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
+            this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        }
+    }
+    raiseMusicVolume(){
+        let volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        if (volume < 1.0){
+            volume += 0.2
+            let changedVolume =  volume.toFixed(1).toString()
+            console.log(changedVolume)
+            sessionStorage.setItem('musicVolume', changedVolume)
+            this.musicVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
+            this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        }
+    }
 }

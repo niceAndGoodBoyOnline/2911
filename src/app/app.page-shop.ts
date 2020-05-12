@@ -359,6 +359,8 @@ export class PageShopComponent {
             let audio = new Audio()
             // Set the sound file to play
             audio.src = this.hoverSoundFile
+            // Set the volume of the sound
+            audio.volume = parseFloat(sessionStorage.getItem('soundVolume'))
             // Load the audio instance with the sound file
             audio.load();
             // Play it.
@@ -374,6 +376,8 @@ export class PageShopComponent {
             let audio = new Audio()
             // Set the sound file to play
             audio.src = this.clickSoundFile
+            // Set the volume of the sound
+            audio.volume = parseFloat(sessionStorage.getItem('soundVolume'))
             // Load the audio instance with the sound file
             audio.load();
             // Play it.

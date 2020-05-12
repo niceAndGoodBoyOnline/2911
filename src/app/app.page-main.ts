@@ -72,7 +72,6 @@ export class PageMainComponent {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this, pathService);
         this.site = pathService.path;
-        this.guiSetup()
         this.setup()
         sessionStorage.setItem('inshop', 'false')
     }
@@ -94,14 +93,7 @@ export class PageMainComponent {
         await this.moveRam()
         await this.setSoundVolume()
         await this.setMusicVolume()
-        console.log("Setup Complete!")
-    }
-    
-    guiSetup(){
-    }
-
-    toggleOS(){
-        console.log("stub, not implemented")
+        //console.log("Setup Complete!")
     }
 
     toggleGUI(){

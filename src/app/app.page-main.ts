@@ -2,7 +2,6 @@ import { Component  } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from './services/ApiService';
 import { Router } from '@angular/router';
-
 import { pathService } from './services/path.service';
 
 @Component({
@@ -56,9 +55,19 @@ export class PageMainComponent {
     imgState = "hidden"
    
 
+    // networkmenu stuff
+    networkSelectMenuState: boolean=false;
+    networkSelectMenu = "netClose"
+    networkStatus = 'assets/images/gui/networks.gif'
+    firewallArray;
+
     // firewall stuff
     currentFirewall = "assets/images/firewalls/firewall25.gif"
     currentName = "r3dGate"
+    currentFirewallStats;
+    currentSecurity: Number = 1;
+
+
     
     // mission stuff
     currentMission;
@@ -93,6 +102,7 @@ export class PageMainComponent {
         await this.moveRam()
         await this.setSoundVolume()
         await this.setMusicVolume()
+        await this.getFirewallArray()
         //console.log("Setup Complete!")
     }
 
@@ -105,6 +115,22 @@ export class PageMainComponent {
             this.guiState = true
             this.imgState = "visible"
         }
+    }
+
+    toggleNetworkMenu(){
+        if (this.networkSelectMenuState == true){
+            this.networkSelectMenuState = false;
+            this.networkSelectMenu = "netClose"
+        }
+        else if (this.networkSelectMenuState == false){
+            this.networkSelectMenuState = true;
+            this.networkSelectMenu = "netOpen"
+        }
+    }
+
+    setFirewallStats(i){
+        this.currentFirewallStats = [i, this.firewallArray[i].securityMod, this.firewallArray[i].reward]
+        this.currentSecurity = this.currentFirewallStats[1] * 8
     }
 
 
@@ -185,6 +211,22 @@ export class PageMainComponent {
                 } )
     }
 
+
+    // get list of firewalls from database
+    async getFirewallArray(){
+        let url = this.site + 'Game/getFirewalls'
+        this.http.get<any>(url)
+            .subscribe(
+
+                (data) => {
+                    this.firewallArray = data
+                    this.setFirewallStats(0)
+                }
+            )
+        
+    }
+
+
     async getUserPrestigeItems(){
         let url = this.site + 'user/getUserPrestigeItems'
         this.http.post<any>(url, {
@@ -192,7 +234,6 @@ export class PageMainComponent {
         })
             .subscribe(
                 (data) => {
-                    let userPrestigeItems = data
                     this.getPrestigeItems(data)
                 }
             )
@@ -209,8 +250,7 @@ export class PageMainComponent {
                 // If data is recieved,
                 (data) => {
                     // console log the data (For debugging purposes).
-                    let prestigeArray = data
-                    this.calculateHackMod(userPrestigeItems, prestigeArray)
+                    this.calculateHackMod(userPrestigeItems, data)
                 } )
     }
 
@@ -238,13 +278,24 @@ export class PageMainComponent {
         this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
     }
 
-    // This is how bitcoin is increased each click.
-    increaseBitcoin() {
+    hackFirewall(){
         // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
-        if(this.hackMod == 0){
+        if(this.hackMod < 1 || NaN){
             this.hackMod = 1
         }
-        this.bitcoin += ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
+
+        this.currentSecurity = this.currentSecurity - this.totalClickPower
+
+        if (this.currentSecurity < 1){
+            this.increaseBitcoin()
+        }
+
+    }
+
+    // This is how bitcoin is increased each click.
+    increaseBitcoin() {
+
+        this.bitcoin += Math.floor( ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease * this.currentFirewallStats[2]   )
         this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
         if (sessionStorage.getItem('sound') == 'true') {
             // Instantiate an audio player to play the clicking sounds.
@@ -258,6 +309,7 @@ export class PageMainComponent {
             // Play it.
             audio.play();
         }
+        this.setFirewallStats(this.currentFirewallStats[0])
     }
            
     // This function is called when the using comes to the main page. Changes image and sound
@@ -513,10 +565,7 @@ export class PageMainComponent {
             let number = Math.floor(Math.random() * 10)
             if(number > 7){
                 let ram = document.getElementById('ram')
-                ram.style.display = "inline"    
-                ram.style.width = "200px"
-                ram.style.height = "200px"
-                ram.style.position = "absolute"
+                ram.classList.add('ram')
                 let myleft = (Math.random())*(window.innerWidth - 200);
                 let mytop = (Math.random())*(window.innerHeight - 200);
                 ram.style.left = myleft + "px";
@@ -539,7 +588,7 @@ export class PageMainComponent {
         var modal = document.getElementById("settingsBox");
         // Change css of modal to be unable to see it
         modal.style.display = "none"
-        }
+        }1
 
     // Function to set the sound volume when entering the page
     async setSoundVolume(){

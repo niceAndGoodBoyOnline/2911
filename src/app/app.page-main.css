@@ -15,10 +15,38 @@ body{
     overflow: hidden;
 }
 
-#ram{
+#networkSelect{
+    background-color: rgba(00,00,00,.7);
+    border-bottom-color:green;
+    width: 90vw;
+    margin: 5vw;
+    height: 80vh;
+    font-size: 3vw;
+}
+
+.networkButton{
+    background-color: rgba(00,00,00,.5);
+    border-color: rgba(00,00,00,0);
+    border-bottom-color: green;
+    border-right-color: green;
+    padding: 1vh;
+    margin: 1vh;    
+}
+
+#networkList{
+    list-style-type: none;
+}
+
+.ram{
     width: 10vw;
     height: auto;
+    position: absolute;
     z-index: 10;
+}
+
+#networksButton{
+    z-index:7;
+    position:absolute;
 }
 
 #hackTarget{
@@ -30,6 +58,18 @@ body{
     position: absolute;
     top:0;
     left:0;
+}
+
+.netOpen{
+    position: absolute;
+    width: 60vw;
+    height: 60vh;
+    z-index: 20;
+    display: block;
+}
+
+.netClose{
+    display: none;
 }
 
 .hidden{
@@ -227,6 +267,25 @@ this @media rule applies when the width < height of browser.
     #hackText{
         font-size: 3vw;
     }
+
+    #networkSelect{
+        width: 90vw;
+        margin: 5vw;
+        height: 80vh;
+        font-size: 3vw;
+    }
+
+    .networkButton{
+        font-size: 2.5vw;
+        width: 80vw;
+        height: 6vh;
+    }
+
+
+    #networksButton{
+        width: 20vw;
+    }
+
     
     #osImg{
         height: auto;
@@ -348,6 +407,25 @@ this @media rule applies when the width < height of browser.
     #osImg{
         height: auto;
         width: 30vh;
+    }
+
+
+    #networkSelect{
+        width: 50vw;
+        margin: 5vw;
+        height: 80vh;
+        font-size: 3vh;
+    }
+
+    .networkButton{
+        font-size: 2.5vh;
+        width: 40vw;
+        height: 6vh;
+    }
+
+
+    #networksButton{
+        height: 20vh;
     }
 
     #hackTarget{

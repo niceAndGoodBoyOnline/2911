@@ -32,7 +32,6 @@ export class PageMainComponent {
     soundImg: string = "assets/images/SoundOn.png";
     musicImg: string = "assets/images/musicOn.png";
     settingsImg: string = "assets/images/Settings.png";
-    songList: ["assets/sounds/songs/theme.mp3"];
     currentSong: string = "assets/sounds/songs/outbreak.mp3";
     musicPlayer;
     hoverSoundFile = 'assets/sounds/HoverSound.mp3'
@@ -639,6 +638,37 @@ export class PageMainComponent {
             this.musicVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
             // Changes the music volume to the new, raised volume
             this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        }
+    }
+
+    musicSelection(){
+        let songSelect = <HTMLSelectElement>document.getElementById("musicSelection")
+        let selectedSong = songSelect.options[songSelect.selectedIndex].value
+        if (selectedSong == "Theme"){
+            if (this.currentSong == "assets/sounds/songs/theme.mp3"){
+                console.log("Song already playing")
+            }
+            else {
+                this.currentSong = "assets/sounds/songs/theme.mp3"
+                this.musicPlayer.src = this.currentSong
+                this.musicPlayer.load()
+                this.musicPlayer.play()
+            }
+        }
+
+        else if (selectedSong == "Outbreak"){
+            if (this.currentSong == "assets/sounds/songs/uutbreak.mp3"){
+                console.log("Song already playing")
+            }
+            else {
+                this.currentSong = "assets/sounds/songs/outbreak.mp3"
+                this.musicPlayer.src = this.currentSong
+                this.musicPlayer.load()
+                this.musicPlayer.play()
+            }
+        }
+        else {
+            console.log("Error")
         }
     }
 }

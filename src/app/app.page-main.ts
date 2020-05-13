@@ -8,7 +8,7 @@ import { pathService } from './services/path.service';
   selector: 'app-root',
   // Assign which html page to this component.
   templateUrl: './app.page-main.html',
-  styleUrls: ['./app.page-main.css']
+  styleUrls: ['./app.page-main.css', './app.page-main.settings.css']
 })
 export class PageMainComponent {
  
@@ -126,10 +126,11 @@ export class PageMainComponent {
     }
 
     setFirewallStats(i){
-        this.currentFirewallStats = [i, this.firewallArray[i].securityMod, this.firewallArray[i].reward]
+        this.currentFirewallStats = [i, this.firewallArray[i].securityMod, this.firewallArray[i].rewardMod]
         this.currentSecurity = this.currentFirewallStats[1] * 8;
         this.currentFirewallName = this.firewallArray[i].name;
         this.currentFirewallImg = "assets/images/firewalls/" + this.firewallArray[i].image;
+        console.log(this.currentFirewallStats)
     }
 
 

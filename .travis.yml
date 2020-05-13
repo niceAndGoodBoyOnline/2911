@@ -7,7 +7,7 @@ before-script:
   - sleep 2
   - node server.js &
   - sleep 15
-  - mongo Outbreak --eval 'db.prestiges.insert([{item:"resHostRoot",price:1,power:3.0,desc:"Common residential devices you've compromised. +Hacking Power."},{item:"gamerHostRoot",price:6,power:2.5,desc:"Gamer Rig you've compromised. Generates bitcoin automatically."},{item:"eduHostRoot",price:34,power:8.0,desc:"Post secondary network you compromised. +++Hacking Power."},{item:"retNetRoot",price:12,power:2,desc:"Retail backend systems you compromised. Lowers cost of hardware."},{item:"deepCred",price:100000,power:2,desc:"Reputation on the Deep. Unlocks new scripts, new mission, and maybe more."}]);'
+  - mongo Outbreak --eval 'db.prestiges.insert([{item:"resHostRoot",price:1,power:3.0,desc:"Common residential devices you've compromised. Some Hacking Power."},{item:"gamerHostRoot",price:6,power:2.5,desc:"Gamer Rig you've compromised. Generates bitcoin automatically."},{item:"eduHostRoot",price:34,power:8.0,desc:"Post secondary network you compromised. Lots of Hacking Power."},{item:"retNetRoot",price:12,power:2,desc:"Retail backend systems you compromised. Lowers cost of hardware."},{item:"deepCred",price:100000,power:2,desc:"Reputation on the Deep. Unlocks new scripts, new mission, and maybe more."}]);'
   - sleep 2
   - mongo Outbreak --eval 'db.items.insert([{item:"omegaPing.sh",price:1,power:1.0,desc:"ping to end all pings"},{item:"staxxx",price:5,power:1.5,desc:"the winter orb"},{item:"blackIce.py",price:12,power:2,desc:"Careful where you step"}]);'
   - sleep 2

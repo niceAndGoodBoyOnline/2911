@@ -4,6 +4,12 @@ node_js:
 service:
   - mongodb
 before-script: 
-  - sleep 3
+  - sleep 2
   - node server.js &
   - sleep 15
+  - mongo Outbreak --eval 'db.prestiges.insert([{item:"resHostRoot",price:1,power:3.0,desc:"Common residential devices you've compromised. +Hacking Power."},{item:"gamerHostRoot",price:6,power:2.5,desc:"Gamer Rig you've compromised. Generates bitcoin automatically."},{item:"eduHostRoot",price:34,power:8.0,desc:"Post secondary network you compromised. +++Hacking Power."},{item:"retNetRoot",price:12,power:2,desc:"Retail backend systems you compromised. Lowers cost of hardware."},{item:"deepCred",price:100000,power:2,desc:"Reputation on the Deep. Unlocks new scripts, new mission, and maybe more."}]);'
+  - sleep 2
+  - mongo Outbreak --eval 'db.items.insert([{item:"omegaPing.sh",price:1,power:1.0,desc:"ping to end all pings"},{item:"staxxx",price:5,power:1.5,desc:"the winter orb"},{item:"blackIce.py",price:12,power:2,desc:"Careful where you step"}]);'
+  - sleep 2
+  - mongo Outbreak --eval 'db.firewalls.insert([{rank:1,securityMod:2,rewardMod:1,name:"Deep R3E",image:"firewall1.gif",desc:"level 1 firewall"},{ rank:2,securityMod:12,rewardMod:1.5,name:"UP1000", image:"firewall2.gif", desc:"level 2 firewall"}, {rank:3, securityMod:47, rewardMod:2,  name:"bkSEAv11.00.2", image:"firewall3.gif", desc:"level 3 firewall"} ])'
+  - sleep 2

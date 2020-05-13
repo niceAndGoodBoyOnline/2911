@@ -99,17 +99,20 @@ input:active {
   }
 
   .close {
-    color: green;
+    color: #deffdf;
     float: right;
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 40px;
+    text-decoration: none;
   }
   
   .close:hover,
   .close:focus {
-    color: green;
+    color: greenyellow;
     text-decoration: none;
     cursor: pointer;
+    background-color: green;
+    box-shadow: -2px -2px 5px 10px green;
+    border-radius: 25px;
   }
 
   .horizontalLine{
@@ -127,6 +130,34 @@ input:active {
     display:inline;
     position: static;
   }
+
+#musicSelection {
+      background-color: black;
+      border: 1px solid green;
+      padding: 20px;
+      outline: none;
+      cursor: pointer;
+  }
+
+#musicSelection:hover {
+    background-color: greenyellow;
+}
+
+#musicSelection:active {
+    background-color: greenyellow;
+}
+
+.options{
+    background-color: black;
+    border: 1px solid green;
+    outline:none;
+}
+
+.options:hover {
+    background-color: greenyellow;
+    outline:none;
+    cursor: pointer;
+}
 
 
   /*

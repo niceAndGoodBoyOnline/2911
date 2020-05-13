@@ -62,10 +62,10 @@ export class PageMainComponent {
     firewallArray;
 
     // firewall stuff
-    currentFirewall = "assets/images/firewalls/firewall25.gif"
-    currentName = "r3dGate"
+    currentFirewallImg;
+    currentFirewallName;
     currentFirewallStats;
-    currentSecurity: Number = 1;
+    currentSecurity: number = 1;
 
 
     
@@ -130,7 +130,9 @@ export class PageMainComponent {
 
     setFirewallStats(i){
         this.currentFirewallStats = [i, this.firewallArray[i].securityMod, this.firewallArray[i].reward]
-        this.currentSecurity = this.currentFirewallStats[1] * 8
+        this.currentSecurity = this.currentFirewallStats[1] * 8;
+        this.currentFirewallName = this.firewallArray[i].name;
+        this.currentFirewallImg = "assets/images/firewalls/" + this.firewallArray[i].image;
     }
 
 
@@ -220,6 +222,7 @@ export class PageMainComponent {
 
                 (data) => {
                     this.firewallArray = data
+                    console.log(data)
                     this.setFirewallStats(0)
                 }
             )
@@ -260,6 +263,21 @@ export class PageMainComponent {
         this.hackMod = hackMod
     }
 
+
+    hackFirewall(){
+        // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
+        if(this.hackMod < 1 || NaN){
+            this.hackMod = 1
+        }
+
+        this.currentSecurity = this.currentSecurity - this.totalClickPower
+
+        if (this.currentSecurity < 1){
+            this.increaseBitcoin()
+        }
+
+    }
+
     // Calculate total clicking power and auto click power
     calculatePowers(itemArray, userItemArray) {
         // Make totalpower and autoclickpower equal to zero (to make sure we dont re-add the power value)
@@ -278,19 +296,7 @@ export class PageMainComponent {
         this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
     }
 
-    hackFirewall(){
-        // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
-        if(this.hackMod < 1 || NaN){
-            this.hackMod = 1
-        }
 
-        this.currentSecurity = this.currentSecurity - this.totalClickPower
-
-        if (this.currentSecurity < 1){
-            this.increaseBitcoin()
-        }
-
-    }
 
     // This is how bitcoin is increased each click.
     increaseBitcoin() {

@@ -7,8 +7,8 @@
     <h2>outbreak:Source</h2>
     <div id='gameContainer'>
         <div id="hackTarget" ngDraggable>
-            <span id="hackText">Current target: {{currentName}}</span>
-            <img src='{{currentFirewall}}' (click)="hackFirewall()" class="firewall">
+            <span id="hackText">Current target: {{currentFirewallName}}</span>
+            <img src='{{currentFirewallImg}}' (click)="hackFirewall()" class="firewall">
             <div id='hackStat' class="stats">Hack Power: {{totalClickPower}} VS Security:{{currentSecurity}} <br> Bitcoin: {{bitcoin}}</div>
         </div>
 

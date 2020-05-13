@@ -335,6 +335,10 @@ this @media rule applies when the width < height of browser.
         width:auto;
         height:50vh;
     }
+
+    .ram{
+        width: 10vw;
+    }
     
     #sound {
         width:10vw;
@@ -415,6 +419,8 @@ this @media rule applies when the width < height of browser.
         margin: 5vw;
         height: 80vh;
         font-size: 3vh;
+        top:80vh;
+        right:20vw;
     }
 
     .networkButton{
@@ -442,6 +448,10 @@ this @media rule applies when the width < height of browser.
         left: 15vw;
         width: 15vh;
         height: auto;
+    }
+
+    .ram{
+        width: 10vh;
     }
     
     #multiGUI{

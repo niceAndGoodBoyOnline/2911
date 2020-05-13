@@ -1,4 +1,7 @@
 language: node_js
 node_js:
   - "stable"
-before-script: node server.js &
+before-script: 
+  - sleep 3
+  - node server.js &
+  - sleep 3

@@ -1,0 +1,112 @@
+#networkSelect{
+    background-color: rgba(00,00,00,.7);
+    border-bottom-color:green;
+    position: absolute;
+    z-index: 20;
+}
+
+.networkButton{
+    background-color: rgba(00,00,00,.5);
+    border-color: rgba(00,00,00,0);
+    border-bottom-color: green;
+    border-right-color: green;
+    padding: 1vh;
+    margin: 1vh;    
+}
+
+#networkList{
+    list-style-type: none;
+}
+
+#networksButton{
+    z-index:7;
+    position:absolute;
+}
+
+#hackTarget{
+    position: absolute;
+    float:left;
+}
+
+.netOpen{
+    display: block;
+}
+
+.netClose{
+    display: none;
+}
+
+.firewall{
+    border-radius: 35%;
+}
+
+/*
+this @media rule applies when the width < height of browser.
+*/
+@media only screen and (orientation: portrait) {
+
+    #hackText{
+        font-size: 3vw;
+    }
+
+    #networkSelect{
+        width: 90vw;
+        margin: 5vw;
+        height: 80vh;
+        font-size: 3vw;
+    }
+
+    .networkButton{
+        font-size: 2.5vw;
+        width: 80vw;
+        height: 6vh;
+    }
+
+
+    #networksButton{
+        width: 20vw;
+    }
+
+    .firewall {
+        width:auto;
+        height:33vh;
+    }
+
+}
+
+@media only screen and (orientation: landscape) {
+
+    #networkSelect{
+        width: 90vw;
+        margin: 5vw;
+        height: 80vh;
+        font-size: 3vw;
+        top:0;
+        right:0;
+    }
+
+    .networkButton{
+        font-size: 2.5vh;
+        width: 40vw;
+        height: 6vh;
+    }
+
+
+    #networksButton{
+        height: 20vh;
+    }
+
+    #hackTarget{
+        left: 30vw;
+    }
+
+    #hackText{
+        font-size: 3vh;
+    }
+    
+    .firewall {
+        width:auto;
+        height:50vh;
+    }
+    
+}

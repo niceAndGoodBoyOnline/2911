@@ -8,7 +8,7 @@ import { pathService } from './services/path.service';
   selector: 'app-root',
   // Assign which html page to this component.
   templateUrl: './app.page-main.html',
-  styleUrls: ['./app.page-main.css', './app.page-main.settings.css']
+  styleUrls: ['./app.page-main.css', './app.page-main.settings.css', './app.page-main.firewalls.css', './app.page-main.osGUI.css']
 })
 export class PageMainComponent {
  
@@ -96,7 +96,7 @@ export class PageMainComponent {
         await this.startAutoBitcoin()
         await this.setSound()
         await this.setMusic()
-        await this.moveRam()
+        //await this.moveRam()
         await this.setSoundVolume()
         await this.setMusicVolume()
         await this.getFirewallArray()

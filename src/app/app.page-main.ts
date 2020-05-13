@@ -81,6 +81,7 @@ export class PageMainComponent {
         await this.startAutosave()
         await this.startAutoBitcoin()
         await this.setSound()
+        await this.setCurrentMusic()
         await this.setMusic()
         await this.moveRam()
         await this.setSoundVolume()
@@ -641,34 +642,86 @@ export class PageMainComponent {
         }
     }
 
+    // Function to change music when a different song in the settings is selected
     musicSelection(){
+        // Finds the selected song in the html
         let songSelect = <HTMLSelectElement>document.getElementById("musicSelection")
+        // Gets the value of the selected song
         let selectedSong = songSelect.options[songSelect.selectedIndex].value
+        // If the player picked the Main Theme
         if (selectedSong == "Theme"){
+            // If the Main Theme is already playing
             if (this.currentSong == "assets/sounds/songs/theme.mp3"){
+                // Say in the console that it's already playing
                 console.log("Song already playing")
             }
+            // If the Main Theme is not playing
             else {
+                // Set the currentSong in storage to "Theme" 
+                sessionStorage.setItem("currentSong", "Theme")
+                // Change the current song
                 this.currentSong = "assets/sounds/songs/theme.mp3"
+                // Change the current song in the music player to the main theme
                 this.musicPlayer.src = this.currentSong
+                // Load the music player
                 this.musicPlayer.load()
+                // Play the song in the music player
                 this.musicPlayer.play()
             }
         }
-
+        // If the player picked "Outbreak" as the song
         else if (selectedSong == "Outbreak"){
-            if (this.currentSong == "assets/sounds/songs/uutbreak.mp3"){
+            // If "Outbreak" is already playing
+            if (this.currentSong == "assets/sounds/songs/outbreak.mp3"){
+                // Say in console that it's already playing
                 console.log("Song already playing")
             }
+            // If "Outbreak" is not playing
             else {
+                // Set the currentSong in storage to "Outbreak"
+                sessionStorage.setItem("currentSong", "Outbreak")
+                // Change the current song
                 this.currentSong = "assets/sounds/songs/outbreak.mp3"
+                // Change the current song in the music player to the "Outbreak" song
                 this.musicPlayer.src = this.currentSong
+                // Load the music player
                 this.musicPlayer.load()
+                // Play the song in the music player
                 this.musicPlayer.play()
             }
         }
+        // If the selected song is something else for an unknown reason
         else {
-            console.log("Error")
+            // Say that there was an error in the console
+            console.log("Error. This was not supposed to be selected")
+        }
+    }
+
+    // Function to set the current music of the game to whatever the player set it to in the settings 
+    async setCurrentMusic(){
+        // If the song in the settings was changed
+        if (sessionStorage.getItem("currentSong") != null){
+            // If the Main Theme was selected
+            if (sessionStorage.getItem("currentSong") == "Theme"){
+                // Change the current song to the Main Theme
+                this.currentSong = "assets/sounds/songs/theme.mp3"
+            }
+            // If the song "Outbreak" was selected
+            else if (sessionStorage.getItem("currentSong") == "Outbreak"){
+                // Change the current song to the Outbreak song
+                this.currentSong = "assets/sounds/songs/outbreak.mp3"
+            }
+            // Find the option for the song in the html
+            let option = <HTMLOptionElement>document.getElementById(sessionStorage.getItem("currentSong"))
+            // Change the current selected song in the settings to the current song playing
+            option.selected = true
+        }
+        // If the song in the settings was not changed
+        else {
+            // Set the currentSong in storage to "Outbreak"
+            sessionStorage.setItem("currentSong", "Outbreak")
+            // Change the current song
+            this.currentSong = "assets/sounds/songs/outbreak.mp3"
         }
     }
 }

@@ -21,7 +21,7 @@ export class PageMainComponent {
     // User stuff for the game
     bitcoin: number
     totalPower: number
-    hackMod: number
+    hackMod: number = 1
     tempPowerIncrease: number = 1
     autoClickPower: number
     totalClickPower: number
@@ -207,7 +207,6 @@ export class PageMainComponent {
         this.totalPower = 0
         this.autoClickPower = 0
         this.tempPowerIncrease = 1
-        this.hackMod = 1
         // for each item in userItemArray
         for(let i=0;i < userItemArray.length;i++){
             if(itemArray[i].item.includes('(Auto)')){
@@ -222,9 +221,6 @@ export class PageMainComponent {
     // This is how bitcoin is increased each click.
     increaseBitcoin() {
         // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
-        if(this.hackMod == 0){
-            this.hackMod = 1
-        }
         this.bitcoin += ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
         this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
         if (sessionStorage.getItem('sound') == 'true') {

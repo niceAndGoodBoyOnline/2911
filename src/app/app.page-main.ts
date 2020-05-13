@@ -255,8 +255,11 @@ export class PageMainComponent {
     }
 
     async calculateHackMod(userPrestigeItems, prestigeArray) {
-        let hackMod = 0
+        let hackMod = 1
         hackMod = userPrestigeItems[0] * prestigeArray[0].power
+        if(hackMod == 0){
+            hackMod = 1
+        }
         this.hackMod = hackMod
     }
 
@@ -290,6 +293,7 @@ export class PageMainComponent {
             }
         }
         this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
+        console.log(this.totalPower, this.hackMod, this.tempPowerIncrease)
     }
 
 

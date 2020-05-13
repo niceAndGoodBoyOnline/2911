@@ -634,45 +634,78 @@ export class PageMainComponent {
         }
     }
 
+    // Function to lower sound volume when the minus sound volume button in the settings is clicked
     lowerSoundVolume(){
+        // Gets the current sound volume
         let volume = parseFloat(sessionStorage.getItem('soundVolume'))
+        // If the sound volume is not already at the minimum volume
         if (volume > 0){
+            // Lowers the sound volume by 0.2
             volume -= 0.2
+            // Attaches the new volume to the variable "changedVolume". Also fixes volume forma
+            // To fit our needs.
             let changedVolume =  volume.toFixed(1).toString()
-            console.log(changedVolume)
+            // Sets the sound volume to the new, lowered volume
             sessionStorage.setItem('soundVolume', changedVolume)
+            // Changes the sound volume image in the settings based on the new sound volume
             this.soundVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
         }
     }
+
+    // Function to raise sound volume when the plus sound volume button in the settings is clicked
     raiseSoundVolume(){
+        // Gets the current sound volume
         let volume = parseFloat(sessionStorage.getItem('soundVolume'))
+        // If the sound volume is not already at the maximum volume
         if (volume < 1.0){
+            // Raises the sound volume by 0.2
             volume += 0.2
+            // Attaches the new volume to the variable "changedVolume". Also fixes volume forma
+            // To fit our needs.
             let changedVolume =  volume.toFixed(1).toString()
-            console.log(changedVolume)
+            // Sets the sound volume to the new, raised volume
             sessionStorage.setItem('soundVolume', changedVolume)
+            // Changes the sound volume image in the settings based on the new sound volume
             this.soundVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
         }
     }
+
+    // Function to lower music volume when the minus music volume button in the settings is clicked
     lowerMusicVolume(){
+        // Gets the current music volume
         let volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        // If the music volume is not already at the minimum volume
         if (volume > 0){
+            // Lowers the music volume by 0.2
             volume -= 0.2
+            // Attaches the new volume to the variable "changedVolume". Also fixes volume forma
+            // To fit our needs. 
             let changedVolume =  volume.toFixed(1).toString()
-            console.log(changedVolume)
+            // Sets the music volume to the new, lowered volume 
             sessionStorage.setItem('musicVolume', changedVolume)
+            // Changes the music volume image in the settings based on the new music volume
             this.musicVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
+            // Changes the music volume to the new, lowered volume
             this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
         }
     }
+
+    // Function to lower music volume when the minus music volume button in the settings is clicked
     raiseMusicVolume(){
+        // Gets the current music volume
         let volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        // If the music volume is not already at the maximum volume
         if (volume < 1.0){
+            // Raises the music volume by 0.2
             volume += 0.2
+            // Attaches the new volume to the variable "changedVolume". Also fixes volume forma
+            // To fit our needs. 
             let changedVolume =  volume.toFixed(1).toString()
-            console.log(changedVolume)
+            // Sets the music volume to the new, raised volume 
             sessionStorage.setItem('musicVolume', changedVolume)
+            // Changes the music volume image in the settings based on the new music volume
             this.musicVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
+            // Changes the music volume to the new, raised volume
             this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
         }
     }

@@ -296,13 +296,8 @@ export class PageMainComponent {
 
     // This is how bitcoin is increased each click.
     increaseBitcoin() {
-<<<<<<< HEAD
 
         this.bitcoin += Math.floor( ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease * this.currentFirewallStats[2]   )
-=======
-        // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
-        this.bitcoin += ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
->>>>>>> master
         this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
         if (sessionStorage.getItem('sound') == 'true') {
             // Instantiate an audio player to play the clicking sounds.

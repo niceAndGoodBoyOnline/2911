@@ -15,14 +15,14 @@ var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
 // Connect to the database before starting the application server.
-mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Outbreak", function (err, client) {
+mongoose.connect(process.env.MONGODB_URI, function (err, client) {
   if (err) {
     console.log(err);
     process.exit(1);
   }
   
   // Initialize the app.
-  var server = app.listen(process.env.PORT || 1337, function () {
+  var server = app.listen(process.env.PORT, function () {
     var port = server.address().port;
     console.log("App now running on port", port);
   });

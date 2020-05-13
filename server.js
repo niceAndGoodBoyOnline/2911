@@ -22,7 +22,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/Outbreak"
   }
   
   // Initialize the app.
-  var server = app.listen(process.env.PORT || 1337, function () {
+  var server = app.listen(process.env.PORT || 3000, function () {
     var port = server.address().port;
     console.log("App now running on port", port);
   });

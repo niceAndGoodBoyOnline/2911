@@ -62,8 +62,6 @@ body{
 
 .netOpen{
     position: absolute;
-    width: 60vw;
-    height: 60vh;
     z-index: 20;
     display: block;
 }
@@ -286,6 +284,12 @@ this @media rule applies when the width < height of browser.
         width: 20vw;
     }
 
+    .netOpen{
+        width: 60vw;
+        height: 60vh;
+        top: 20vw;
+    }
+
     
     #osImg{
         height: auto;
@@ -427,6 +431,12 @@ this @media rule applies when the width < height of browser.
         font-size: 2.5vh;
         width: 40vw;
         height: 6vh;
+    }
+
+    .netOpen{
+        top: 10vh;
+        width: 60vw;
+        height: 60vh;
     }
 
 

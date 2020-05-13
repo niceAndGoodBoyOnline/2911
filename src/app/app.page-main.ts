@@ -54,7 +54,6 @@ export class PageMainComponent {
     prestigeImg = "assets/images/gui/prestige.png"
     imgState = "hidden"
    
-
     // networkmenu stuff
     networkSelectMenuState: boolean=false;
     networkSelectMenu = "netClose"
@@ -67,8 +66,6 @@ export class PageMainComponent {
     currentFirewallStats;
     currentSecurity: number = 1;
 
-
-    
     // mission stuff
     currentMission;
 

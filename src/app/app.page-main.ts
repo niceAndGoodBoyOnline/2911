@@ -20,7 +20,7 @@ export class PageMainComponent {
     // User stuff for the game
     bitcoin: number
     totalPower: number
-    hackMod: number
+    hackMod: number = 1
     tempPowerIncrease: number = 1
     autoClickPower: number
     totalClickPower: number
@@ -31,7 +31,6 @@ export class PageMainComponent {
     soundImg: string = "assets/images/SoundOn.png";
     musicImg: string = "assets/images/musicOn.png";
     settingsImg: string = "assets/images/Settings.png";
-    songList: ["assets/sounds/songs/theme.mp3"];
     currentSong: string = "assets/sounds/songs/outbreak.mp3";
     musicPlayer;
     hoverSoundFile = 'assets/sounds/HoverSound.mp3'
@@ -282,7 +281,6 @@ export class PageMainComponent {
         this.totalPower = 0
         this.autoClickPower = 0
         this.tempPowerIncrease = 1
-        this.hackMod = 1
         // for each item in userItemArray
         for(let i=0;i < userItemArray.length;i++){
             if(itemArray[i].item.includes('(Auto)')){
@@ -298,8 +296,13 @@ export class PageMainComponent {
 
     // This is how bitcoin is increased each click.
     increaseBitcoin() {
+<<<<<<< HEAD
 
         this.bitcoin += Math.floor( ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease * this.currentFirewallStats[2]   )
+=======
+        // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
+        this.bitcoin += ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
+>>>>>>> master
         this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
         if (sessionStorage.getItem('sound') == 'true') {
             // Instantiate an audio player to play the clicking sounds.
@@ -711,6 +714,37 @@ export class PageMainComponent {
             this.musicVolumeImg = "assets/images/VolumeSettings" + changedVolume + ".png";
             // Changes the music volume to the new, raised volume
             this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
+        }
+    }
+
+    musicSelection(){
+        let songSelect = <HTMLSelectElement>document.getElementById("musicSelection")
+        let selectedSong = songSelect.options[songSelect.selectedIndex].value
+        if (selectedSong == "Theme"){
+            if (this.currentSong == "assets/sounds/songs/theme.mp3"){
+                console.log("Song already playing")
+            }
+            else {
+                this.currentSong = "assets/sounds/songs/theme.mp3"
+                this.musicPlayer.src = this.currentSong
+                this.musicPlayer.load()
+                this.musicPlayer.play()
+            }
+        }
+
+        else if (selectedSong == "Outbreak"){
+            if (this.currentSong == "assets/sounds/songs/uutbreak.mp3"){
+                console.log("Song already playing")
+            }
+            else {
+                this.currentSong = "assets/sounds/songs/outbreak.mp3"
+                this.musicPlayer.src = this.currentSong
+                this.musicPlayer.load()
+                this.musicPlayer.play()
+            }
+        }
+        else {
+            console.log("Error")
         }
     }
 }

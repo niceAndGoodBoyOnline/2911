@@ -13,7 +13,7 @@ var userSchema = mongoose.Schema({
   email: {
     type: String
   },
-  prestige: {type: Array, default: [0, 0]},
+  prestige: {type: Array, default: [0, 0, 0, 0, 0, 0]},
   items : {type: Array, default: [0, 0, 0]},
   bitcoin: {type: Number, default: 0},
   prestigePoints: {type: Number, default: 0}

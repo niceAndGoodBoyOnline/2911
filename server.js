@@ -20,9 +20,13 @@ mongoose.connect(process.env.MONGODB_URI, function (err, client) {
     console.log(err);
     process.exit(1);
   }
-  
+  console.log(mongoose.connection)
   // Initialize the app.
+<<<<<<< HEAD
   var server = app.listen(process.env.PORT, function () {
+=======
+  var server = app.listen(process.env.PORT || 3000, function () {
+>>>>>>> master
     var port = server.address().port;
     console.log("App now running on port", port);
   });

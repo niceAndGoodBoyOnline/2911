@@ -1,6 +1,14 @@
 const axios = require('axios');
 
 module.exports = {
+
+  makeUser(email){
+    return axios
+    .post('http://localhost:1337/user/RegisterUser', {email:email, username:'test', password:'$Slider23', passwordConfirm:'$Slider23'})
+    .then(res => res.data)
+    .catch(error => console.log(error));
+  },
+
   getBitcoin(email) {
     return axios
       .post("http://localhost:3000/user/getBitcoin", {email:email})

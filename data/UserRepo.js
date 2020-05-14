@@ -142,7 +142,7 @@ class UserRepo {
     }
 
     async resetGainPrestige(email){
-        let items = [0,0,0]
+        let items = [0,0,0,0,0,0]
         let bitcoin = 0
         let updated = await User.updateOne(
             {email:email},

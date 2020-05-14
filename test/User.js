@@ -2,9 +2,37 @@ const axios = require('axios');
 
 module.exports = {
 
+  checkPasswordValidation(email){
+    return axios
+    .post('http://localhost:3000/user/RegisterUser', {email:'55', username:'55', password:'$Slider23', passwordConfirm:'$Slider233'})
+    .then(res => res.data)
+    .catch(error => console.log(error));
+  },
+
+  checkPasswordStrengthValidation(email){
+    return axios
+    .post('http://localhost:3000/user/RegisterUser', {email:'55', username:'55', password:'k', passwordConfirm:'k'})
+    .then(res => res.data)
+    .catch(error => console.log(error));
+  },
+
+  checkExistingEmail(email){
+    return axios
+    .post('http://localhost:3000/user/RegisterUser', {email:email, username:'testfail', password:'$Slider23', passwordConfirm:'$Slider23'})
+    .then(res => res.data)
+    .catch(error => console.log(error));
+  },
+
   makeUser(email){
     return axios
     .post('http://localhost:3000/user/RegisterUser', {email:email, username:'test', password:'$Slider69', passwordConfirm:'$Slider69'})
+    .then(res => res.data)
+    .catch(error => console.log(error));
+  },
+
+  checkExistingUser(email){
+    return axios
+    .post('http://localhost:3000/user/RegisterUser', {email:'123', username:'test', password:'$Slider69', passwordConfirm:'$Slider69'})
     .then(res => res.data)
     .catch(error => console.log(error));
   },
@@ -64,5 +92,12 @@ module.exports = {
       .then(res => res.data)
       .catch(error => console.log(error));
   },
+
+  getUserPrestigeItems(email) {
+    return axios
+    .post("http://localhost:3000/user/getUserPrestigeItems", {email:email})
+    .then(res => res.data)
+    .catch(error => console.log(error))
+  }
 
 };

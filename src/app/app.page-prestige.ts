@@ -117,26 +117,36 @@ export class PagePrestigeComponent {
                 } )
     }
 
+    // Calculates how many prestige points you can buy with your current bitcoin
+    // * This is all visual. The actual calculations are in the user repo.
     calculatePrestigePoints() {
-        let prestigeCost = 100000
+        // Set the variable for the initial cost for a prestige point
+        let prestigeCost = 10000
+        // Set the variable for how many prestige points you can buy
         this.purchaseablePrestige = 0
-        console.log(this.bitcoin)
+        // If you have more bitcoins than the prestige cost
         if (prestigeCost <= this.bitcoin){
+            // Start a while loop while you have more bitcoins than the prestige cost
             while (prestigeCost <= this.bitcoin) {
+                // Be able to buy an additional prestige point
                 this.purchaseablePrestige += 1
+                // Formula for calculating the next cost of a prestige point
                 prestigeCost = Math.pow(prestigeCost, 1.1)
+                // Have a flat cost for clarity
                 prestigeCost = Math.floor(prestigeCost)
             }
         }
+        // If the user cannot afford any prestige points
         else {
+            // Say in the console that they cannot buy any
             console.log("Can't afford any prestige points :(")
         }
+        // Set the cost for the next prestige point (for html)
         this.nextPrestige = prestigeCost
-        console.log(this.purchaseablePrestige)
     }
 
     buyPrestigePoint(){
-        if(this.bitcoin < 10){
+        if(this.bitcoin < 10000){
             this.message = "You don't have enough bitcoin!"
         } else {
             this.bitcoin = 0

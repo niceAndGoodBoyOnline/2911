@@ -141,32 +141,50 @@ class UserRepo {
         return "Prestige points has been saved."
     }
 
+    // Resets the user's bitcoins and items in exchance for prestige points
     async resetGainPrestige(email, prestige){
+        // Set a variable for the items the user will have (aka nothing)
         let items = [0,0,0]
+        // Set a variable for the bitcoin the user will have (aka 0)
         let bitcoin = 0
+        // Update the user's prestige points
         let updated = await User.updateOne(
+            // Find the user through their email
             {email:email},
+            // Increase the user's prestige points by how many they bought
             {$inc: {prestigePoints:prestige}}
         )
 
+        // Update the user's items and bitcoins
         let updated2 = await User.updateOne(
+            // Find the user through their email
             {email:email},
+            // Set the items and bitcoins to the above variables (aka nothing)
             {$set: {items:items, bitcoin:bitcoin}}
         )
-
+        // Return the updates to the function in the prestige.ts file
         return updated, updated2
     }
 
+    // Calculates the amount of prestige points the user will get on reset
     async calculatePrestige(email) {
+        // Get the user through their email
         var user = await User.findOne({email: email});
-        let bitcoin = user.bitcoin
-        let prestigeCost = 100000
-        let prestige = 0
-        while (prestigeCost <= bitcoin) {
-            prestige += 1
+        // Set the variable for the initial cost for a prestige point
+        let prestigeCost = 10000
+        // Set the variable for how many prestige points you can buy
+        this.purchaseablePrestige = 0
+        // Start a while loop while you have more bitcoins than the prestige cost
+        while (prestigeCost <= this.bitcoin) {
+            // Be able to buy an additional prestige point
+            this.purchaseablePrestige += 1
+            // Formula for calculating the next cost of a prestige point
             prestigeCost = Math.pow(prestigeCost, 1.1)
+            // Have a flat cost for clarity
             prestigeCost = Math.floor(prestigeCost)
         }
+        // Return the prestige points the user will get
+        // This will be used in the function resetGainPrestige()
         return prestige
     }
 

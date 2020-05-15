@@ -7,25 +7,12 @@ body{
     font-family: HackerFont;
     color: green;
     text-align: center;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
-#osImg{
-    z-index: 5;
-}
-
-#terminal{
-    z-index: 10;
-    border-color: rgba(00,00,00,0);
-    border-bottom-color: green;
-    border-style: solid;
-    background-color: rgba(96, 160, 155, 0.3);
-}
-
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+#shopContainer{
+    width: 90vw;
+    margin: 5vw;
 }
 
 #sound {
@@ -38,6 +25,10 @@ img {
     float: left;
     position: fixed;
     bottom: 1vh;
+}
+
+#coins{
+    position:sticky;
 }
 
 .menuButton {
@@ -68,6 +59,10 @@ this @media rule applies when the width < height of browser.
         width: 100w;
         height: auto;
     }
+
+    #shopContainer{
+       font-size: 2vw;
+    }
     
     #osImg{
         height: auto;
@@ -83,9 +78,13 @@ this @media rule applies when the width < height of browser.
         right: 5vw;
         bottom: 5vh;
     }
+
+    h1{
+        font-size: 5vw
+    }
     
     h2 {
-        font-size:5vw;
+        font-size:3vw;
     }
     
     .firewall {
@@ -124,6 +123,11 @@ this @media rule applies when the width < height of browser.
         width: auto;
         height: 100vh;
     }
+
+
+    #shopContainer{
+        font-size: 4vh;
+     }
     
 
     #osImg{

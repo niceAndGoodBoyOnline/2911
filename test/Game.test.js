@@ -23,4 +23,11 @@ describe('Game controller functions', () => {
         expect(typeof response).to.equal('object')
       })
   })
+
+  it('Get all firewalls', () => {
+    return Game.getFirewalls()
+      .then(response => {
+        expect(typeof response).to.equal('object')
+      })
+  })
 });

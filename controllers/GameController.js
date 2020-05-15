@@ -7,6 +7,10 @@ const Prestige       = require('../models/Prestige');
 const PrestigeRepo   = require('../data/PrestigeRepo')
 const _prestigeRepo  = new PrestigeRepo();
 
+const Firewalls       = require('../models/Firewall');
+const FirewallRepo   = require('../data/FirewallRepo')
+const _firewallRepo  = new FirewallRepo();
+
 //Get all the items from the database
 exports.getItems = async function(req, res){
     //Call getItems() in ItemRepo.js and assign returned value to items
@@ -25,3 +29,8 @@ exports.getPrestigeItems = async function(req, res){
     res.json(prestigeItems)
 }
 
+exports.getFirewalls = async function(req,res){
+    let firewallList = await _firewallRepo.getFirewalls();
+
+    res.json(firewallList)
+}

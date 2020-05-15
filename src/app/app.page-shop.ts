@@ -84,6 +84,9 @@ export class PageShopComponent {
     async calculateDiscount(userPrestigeItems, prestigeItems) {
         let discount = 0
         discount = userPrestigeItems[1] * prestigeItems[1].power
+        if(discount >= 0.9){
+            discount = 0.9
+        }
         this.discount = discount
         this.getItems(discount)
     }

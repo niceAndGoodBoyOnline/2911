@@ -1,0 +1,140 @@
+
+
+#osGUI{
+    position: absolute;
+    top:0;
+    left:0;
+}
+
+.hidden{
+    opacity:0;
+    animation: fadeOut .5s;
+}
+
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;} 
+ } 
+
+.visible{
+   animation: fadeIn .5s;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;} 
+ } 
+
+
+#osImg{
+    z-index: 5;
+    float:left;
+    overflow:hidden;
+}
+
+
+#shopGUI{
+    position: absolute;
+    z-index: 6;
+    overflow:hidden;
+}
+
+#multiGUI{
+    position: absolute;
+    z-index: 6;
+    overflow:hidden;
+}
+
+#prestigeGUI{
+    position: absolute;
+    z-index: 6;
+    overflow:hidden;
+}
+
+
+
+
+  /*
+this @media rule applies when the width < height of browser.
+*/
+@media only screen and (orientation: portrait) {
+
+
+
+    #osGUI{
+        width: auto;
+        height: auto;
+        top: 66vh;
+        left: 5vw;
+    }
+
+    
+    #osImg{
+        height: auto;
+        width: 20vw;
+        top: 10vh;
+        right: 5vw;
+    }
+
+    #shopGUI{
+        top: 0vh;
+        left: 20vw;
+        width: 10vw;
+        height: auto;
+    }
+    
+    #multiGUI{
+        top: 5vh;
+        left: 20vw;
+        height: auto;
+        width: 10vw;
+    }
+    
+    #prestigeGUI{
+        top:10vh;
+        left: 20vw;
+        height: auto;
+        width: 10vw;
+    }
+
+
+}
+
+@media only screen and (orientation: landscape) {
+
+
+    #osGUI{
+        width: 23vw;
+        height: 30vh;
+        top: 33vh;
+        left: 5vw;
+    }
+    
+
+    #osImg{
+        height: auto;
+        width: 30vh;
+    }
+    
+    #shopGUI{
+        top: 0;
+        left: 15vw;
+        width: 15vh;
+        height: auto;
+    }
+    
+    #multiGUI{
+        top: 15vh;
+        left: 15vw;
+        height: auto;
+        width: 15vh;
+    }
+    
+    #prestigeGUI{
+        top: 30vh;
+        left: 15vw;
+        height: auto;
+        width: 15vh;
+    }
+
+}

@@ -141,16 +141,11 @@ class UserRepo {
         return "Prestige points has been saved."
     }
 
-<<<<<<< HEAD
-    async resetGainPrestige(email){
-        let items = [0,0,0,0,0,0]
-=======
     // Resets the user's bitcoins and items in exchance for prestige points
     async resetGainPrestige(email, prestige){
         // Set a variable for the items the user will have (aka nothing)
         let items = [0,0,0]
         // Set a variable for the bitcoin the user will have (aka 0)
->>>>>>> master
         let bitcoin = 0
         // Update the user's prestige points
         let updated = await User.updateOne(

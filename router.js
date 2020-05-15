@@ -9,8 +9,9 @@ module.exports = function(app){
     // Main Routes
 
     app.get('/user/autoBitcoin', cors(), UserController.autoBitcoin)
-
+    
     app.get('/Game/getItems', cors(), GameController.getItems)
+    app.get('/Game/getFirewalls', cors(), GameController.getFirewalls)
     app.get('/Game/getPrestigeItems', cors(), GameController.getPrestigeItems)
 
     app.post('/user/RegisterUser', cors(), UserController.RegisterUser);

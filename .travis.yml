@@ -1,6 +1,9 @@
 language: node_js
 node_js:
   - "stable"
+<<<<<<< HEAD
+script: npm start
+=======
 service:
   - mongodb
 before-script: 
@@ -11,3 +14,4 @@ before-script:
   - sleep 2
   - mongo Outbreak --eval 'db.items.insert([{item:"omegaPing.sh",price:1,power:1.0,desc:"ping to end all pings"},{item:"staxxx",price:5,power:1.5,desc:"the winter orb"},{item:"blackIce.py",price:12,power:2,desc:"Careful where you step"}]);'
   - sleep 2
+>>>>>>> master

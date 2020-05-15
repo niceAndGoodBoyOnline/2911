@@ -36,6 +36,7 @@ exports.RegisterUser  = async function(req, res){
         // Return the following message.
         // This data is recieved by "(data)" in whatever function in the frontend that called this function.
         res.json({message:'Password must have 1 lowercase and uppercase, 1 number, 1 special character, and at least 8 characters long.'})
+        return
     }
 
     // Call checkUser() function in UserRepo.js and assigned whatever returned to checkUser variable.
@@ -45,6 +46,7 @@ exports.RegisterUser  = async function(req, res){
         // Return the following message
         // This data is recieved by "(data) => " in whatever function in the frontend that called this function.
         res.json({message: checkUser})
+        return
     }
 
     // If password is the same as the password confirmation,

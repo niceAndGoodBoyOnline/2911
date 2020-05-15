@@ -14,6 +14,7 @@ describe('User controller functions', () => {
     return User.makeUser(email)
     .then(response => {
       expect(typeof response).to.equal('object')
+      console.log(response)
     })
   }).timeout(5000);
 
@@ -23,6 +24,15 @@ describe('User controller functions', () => {
         expect(typeof response).to.equal('object');
       });
   }).timeout(5000);
+
+
+  it('Get user prestige items', () => {
+    return User.getUserPrestigeItems(email)
+      .then(response => {
+        expect(typeof response).to.equal('object');
+      });
+  }).timeout(5000);
+
 
   it('Get user bitcoins', () => {
     return User.getBitcoin(email)
@@ -72,4 +82,48 @@ describe('User controller functions', () => {
         expect(typeof response).to.equal('object');
       });
     });
+});
+
+
+describe('User creation testing', () => {
+
+  afterEach(() => {
+    nock.cleanAll()
+  })
+
+  it('Checking password validation', () => {
+    return User.checkPasswordValidation(email)
+    .then(response => {
+     console.log(response)
+     expect(response.errorMessage).to.equal('Passwords do not match')
+    })
+  }).timeout(5000);
+
+  it('Checking password strength validation', () => {
+    return User.checkPasswordStrengthValidation(email)
+    .then(response => {
+     console.log(response)
+     expect(response.message).to.equal('Password must have 1 lowercase and uppercase, 1 number, 1 special character, and at least 8 characters long.')
+    })
+  }).timeout(5000);
+  
+
+
+  it('Checking if existing username', () => {
+    return User.checkExistingUser(email)
+    .then(response => {
+     console.log(response)
+     expect(response.message).to.equal('User already exists with that username.')
+    })
+  }).timeout(5000);
+
+  it('Checking if existing email', () => {
+    return User.checkExistingEmail(email)
+    .then(response => {
+     console.log(response)
+     expect(response.message).to.equal('User already exists with that email.')
+
+    })
+  }).timeout(5000);
+
 });

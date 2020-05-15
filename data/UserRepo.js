@@ -170,14 +170,16 @@ class UserRepo {
     async calculatePrestige(email) {
         // Get the user through their email
         var user = await User.findOne({email: email});
+        // Get the user's bitcoin for the calculation
+        let bitcoin = user.bitcoin
         // Set the variable for the initial cost for a prestige point
         let prestigeCost = 10000
         // Set the variable for how many prestige points you can buy
-        this.purchaseablePrestige = 0
+        let prestige = 0
         // Start a while loop while you have more bitcoins than the prestige cost
-        while (prestigeCost <= this.bitcoin) {
+        while (prestigeCost <= bitcoin) {
             // Be able to buy an additional prestige point
-            this.purchaseablePrestige += 1
+            prestige += 1
             // Formula for calculating the next cost of a prestige point
             prestigeCost = Math.pow(prestigeCost, 1.1)
             // Have a flat cost for clarity

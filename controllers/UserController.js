@@ -196,7 +196,8 @@ exports.savePrestigeProgress = async function(req, res){
 }
 
 exports.resetGainPrestige = async function(req, res){
-    let respond = await _userRepo.resetGainPrestige(req.body.email)
+    let prestige = await _userRepo.calculatePrestige(req.body.email)
+    let respond = await _userRepo.resetGainPrestige(req.body.email, prestige)
 
     res.json(respond)
 }

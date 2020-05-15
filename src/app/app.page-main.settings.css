@@ -4,100 +4,137 @@
     bottom: 1vh;
 }
 
+
 #sound {
-    float: left;
-    position: fixed;
-    bottom: 1vh;
+  float: left;
+  position: fixed;
+  bottom: 1vh;
 }
 
 #music {
-    float: left;
-    position: fixed;
-    bottom: 1vh;
+  float: left;
+  position: fixed;
+  bottom: 1vh;
+}
+
+#settings {
+  float: left;
+  position: fixed;
+  bottom: 1vh;
 }
 
 .menuButton {
-    border-color: green;
-    border-style: solid;
+  border-color: green;
+  border-style: solid;
+  background-color: black;
+  outline: none;
+  cursor: pointer;
+}
+
+input:hover {
+  background-color: greenyellow;
+}
+
+input:active {
+  background-color: greenyellow;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background-color: rgba(0,0,0,0.6);
+  -webkit-animation-name: fadeIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
+}
+
+.modal-content {
+  background-color:black;
+  text-align: center;
+  padding: 20px;
+  overflow: auto;
+  border: 1px solid green;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s; 
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+.close {
+  color: #deffdf;
+  float: right;
+  font-size: 40px;
+  text-decoration: none;
+}
+
+.close:hover,
+.close:focus {
+  color: greenyellow;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: green;
+  box-shadow: -2px -2px 5px 10px green;
+  border-radius: 25px;
+}
+
+.horizontalLine{
+    border: 2px solid green;
+}
+
+.Minus {
+    display:inline;
+    position: static;
+}
+.Volume {
+    display:inline-block;
+}
+.Plus {
+  display:inline;
+  position: static;
+}
+
+#musicSelection {
     background-color: black;
+    border: 1px solid green;
+    padding: 20px;
     outline: none;
     cursor: pointer;
 }
 
-input:hover {
-    background-color: greenyellow;
+#musicSelection:hover {
+  background-color: greenyellow;
 }
 
-input:active {
-    background-color: greenyellow;
+#musicSelection:active {
+  background-color: greenyellow;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 100;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    background-color: rgba(0,0,0,0.6);
-    -webkit-animation-name: fadeIn;
-    -webkit-animation-duration: 0.4s;
-    animation-name: fadeIn;
-    animation-duration: 0.4s
-  }
-  
-  .modal-content {
-    background-color:black;
-    text-align: center;
-    padding: 20px;
-    overflow: auto;
-    border: 1px solid green;
-    -webkit-animation-name: slideIn;
-    -webkit-animation-duration: 0.4s;
-    animation-name: slideIn;
-    animation-duration: 0.4s; 
-  }
-
-  @-webkit-keyframes fadeIn {
-    from {opacity: 0} 
-    to {opacity: 1}
-  }
-  
-  @keyframes fadeIn {
-    from {opacity: 0} 
-    to {opacity: 1}
-  }
-
-  .closeSettings {
-    position:sticky;
-    color: green;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
-    color: green;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  .horizontalLine{
-      border: 2px solid green;
-  }
-
-  .Volume {
-    display:inline-block;
+.options{
+  background-color: black;
+  border: 1px solid green;
+  outline:none;
 }
 
-  .Minus {
-      display:inline;
-  }
-
-  .Plus {
-    display:inline;
-  }
+.options:hover {
+  background-color: greenyellow;
+  outline:none;
+  cursor: pointer;
+}
 
 
   /*

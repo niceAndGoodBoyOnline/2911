@@ -141,12 +141,12 @@ class UserRepo {
         return "Prestige points has been saved."
     }
 
-    async resetGainPrestige(email){
+    async resetGainPrestige(email, prestige){
         let items = [0,0,0]
         let bitcoin = 0
         let updated = await User.updateOne(
             {email:email},
-            {$inc: {prestigePoints:1}}
+            {$inc: {prestigePoints:prestige}}
         )
 
         let updated2 = await User.updateOne(
@@ -157,6 +157,18 @@ class UserRepo {
         return updated, updated2
     }
 
+    async calculatePrestige(email) {
+        var user = await User.findOne({email: email});
+        let bitcoin = user.bitcoin
+        let prestigeCost = 100000
+        let prestige = 0
+        while (prestigeCost <= bitcoin) {
+            prestige += 1
+            prestigeCost = Math.pow(prestigeCost, 1.1)
+            prestigeCost = Math.floor(prestigeCost)
+        }
+        return prestige
+    }
 
     // Make the prestige transaction happen.
     // Basically, increase the user's prestige quantity.

@@ -11,8 +11,10 @@
         <h2>Your bitcoins: {{bitcoin}}</h2>
 
 
-        <p>Prestige points require 10 bitcoins... but reset the game. <b>This is your only warning.</b></p>
+        <p>Prestige points require bitcoins... but reset the game. <b>This is your only warning.</b></p>
         <p>Everything will be reset except your prestige points. These prestige items help hasten your game progress and bring special benefits.</p>
+        <p>You can currently buy {{purchaseablePrestige}} prestige points</p>
+        <p>Next Prestige Point at {{nextPrestige}} Bitcoins</p>
         <input type="button" value="Buy Prestige Point" (click)="buyPrestigePoint();clickSound()" (mouseenter)="hoverSound()">
 
         <table>

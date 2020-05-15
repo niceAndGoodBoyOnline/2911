@@ -22,6 +22,9 @@ export class PagePrestigeComponent {
     bitcoin: number
     prestigePoints: number
 
+    purchaseablePrestige: number = 0
+    nextPrestige: number = 0
+
     soundImg: string = "assets/images/SoundOn.png";
     musicImg: string = "assets/images/musicOn.png"
     musicPlayer = <HTMLAudioElement>document.getElementById("musicPlayer")
@@ -73,6 +76,7 @@ export class PagePrestigeComponent {
                 // If data is recieved,
                 (data) => {
                     this.bitcoin = data
+                    this.calculatePrestigePoints()
                 } )
     }
 
@@ -113,11 +117,31 @@ export class PagePrestigeComponent {
                 } )
     }
 
+    calculatePrestigePoints() {
+        let prestigeCost = 100000
+        this.purchaseablePrestige = 0
+        console.log(this.bitcoin)
+        if (prestigeCost <= this.bitcoin){
+            while (prestigeCost <= this.bitcoin) {
+                this.purchaseablePrestige += 1
+                prestigeCost = Math.pow(prestigeCost, 1.1)
+                prestigeCost = Math.floor(prestigeCost)
+            }
+        }
+        else {
+            console.log("Can't afford any prestige points :(")
+        }
+        this.nextPrestige = prestigeCost
+        console.log(this.purchaseablePrestige)
+    }
+
     buyPrestigePoint(){
         if(this.bitcoin < 10){
             this.message = "You don't have enough bitcoin!"
         } else {
             this.bitcoin = 0
+            this.purchaseablePrestige = 0
+            this.nextPrestige = 0
             let url = this.site + "user/resetGainPrestige"
             this.http.post<any>(url, {
                 email: sessionStorage.getItem("email")

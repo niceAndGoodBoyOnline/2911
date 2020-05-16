@@ -184,6 +184,7 @@ export class PageMainComponent {
                     // create a variable here and assign it to data
                     let userItemArray = data
                     // use that variable as parameter to getItems function
+                    console.log('useritemarray: ', userItemArray)
                     this.getItems(userItemArray)
                 } )
     }
@@ -207,6 +208,7 @@ export class PageMainComponent {
                         array.push(data[i])
                     }
                     // Calculate the total power with the array we made and the array we have that was passed from getUserItemArray.
+                    console.log('full item array: ', array)
                     this.calculatePowers(array, userItemArray)
                 } )
     }
@@ -220,7 +222,7 @@ export class PageMainComponent {
 
                 (data) => {
                     this.firewallArray = data
-                    console.log(data)
+                    console.log('firewall array: ', data)
                     this.setFirewallStats(0)
                 }
             )
@@ -235,6 +237,7 @@ export class PageMainComponent {
         })
             .subscribe(
                 (data) => {
+                    console.log('userprestigeitems: ', data)
                     this.getPrestigeItems(data)
                 }
             )
@@ -250,6 +253,7 @@ export class PageMainComponent {
                 // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
                 // If data is recieved,
                 (data) => {
+                    console.log('full prestige items: ', data)
                     // console log the data (For debugging purposes).
                     this.calculateHackMod(userPrestigeItems, data)
                 } )
@@ -261,6 +265,7 @@ export class PageMainComponent {
         if(hackMod == 0){
             hackMod = 1
         }
+        console.log('calculatehackmod function: ', hackMod)
         this.hackMod = hackMod
     }
 
@@ -270,7 +275,7 @@ export class PageMainComponent {
         if(this.hackMod < 1 || NaN){
             this.hackMod = 1
         }
-
+        console.log('hackfirewall function~~~~', 'this.currentSecurity: ', this.currentSecurity, 'this.totalClickPower: ', this.totalClickPower)
         this.currentSecurity = this.currentSecurity - this.totalClickPower
 
         if (this.currentSecurity < 1){
@@ -294,7 +299,7 @@ export class PageMainComponent {
             }
         }
         this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
-        console.log(this.totalPower, this.hackMod, this.tempPowerIncrease)
+        console.log('totalpower: ', this.totalPower, 'hackmod: ', this.hackMod, 'tempowerincrease: ', this.tempPowerIncrease)
     }
 
 
@@ -316,7 +321,9 @@ export class PageMainComponent {
             // Play it.
             audio.play();
         }
+        console.log('totalpower: ', this.totalPower, 'hackmod: ', this.hackMod, 'tempowerincrease: ', this.tempPowerIncrease, 'currentfirewalstats[2]: ', this.currentFirewallStats[2])
         this.setFirewallStats(this.currentFirewallStats[0])
+        console.log('firewall stats: ', this.currentFirewallStats)
     }
            
     // This function is called when the using comes to the main page. Changes image and sound

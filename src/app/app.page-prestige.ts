@@ -55,7 +55,7 @@ export class PagePrestigeComponent {
         await this.setMusic()
         await this.setSoundVolume()
         await this.setMusicVolume()
-        console.log("Setup Complete!")
+        console.log("-----------------------------------PRESTIGE PAGE SETUP -----------------------------------------")
     }
 
     // Get user's bitcoin from the database
@@ -76,6 +76,7 @@ export class PagePrestigeComponent {
                 // If data is recieved,
                 (data) => {
                     this.bitcoin = data
+                    console.log('bitcoin: ', data)
                     this.calculatePrestigePoints()
                 } )
     }
@@ -97,6 +98,7 @@ export class PagePrestigeComponent {
                 // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
                 // If data is recieved,
                 (data) => {
+                    console.log('prestige points: ', data)
                     this.prestigePoints = data
                 } )
     }
@@ -112,7 +114,7 @@ export class PagePrestigeComponent {
                 // If data is recieved,
                 (data) => {
                     // console log the data (For debugging purposes).
-                    console.log(JSON.stringify(data))
+                    console.log('all prestige items: ', data)
                     this.prestigeArray = data
                 } )
     }
@@ -143,6 +145,8 @@ export class PagePrestigeComponent {
         }
         // Set the cost for the next prestige point (for html)
         this.nextPrestige = prestigeCost
+        console.log('cost of next prestige: ', prestigeCost)
+        console.log('purchasable prestige: ', this.purchaseablePrestige)
     }
 
     buyPrestigePoint(){

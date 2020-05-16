@@ -55,7 +55,7 @@ export class PageShopComponent {
         await this.setMusic()
         await this.setSoundVolume()
         await this.setMusicVolume()
-        console.log("Setup Complete!")
+        console.log("-----------------------------------SHOP PAGE SETUP -----------------------------------------")
     }
 
     async getUserPrestigeItems(){
@@ -66,6 +66,7 @@ export class PageShopComponent {
             .subscribe(
                 (data) => {
                     let userPrestigeItems = data
+                    console.log('userPrestigeItems: ', data)
                     this.getPrestigeDiscount(userPrestigeItems)
                 }
             )
@@ -76,7 +77,7 @@ export class PageShopComponent {
         this.http.get<any>(url)
             .subscribe(
                 (data) => {
-                    console.log(JSON.stringify(data))
+                    console.log('all prestige items: ', data)
                     this.calculateDiscount(userPrestigeItems, data)
                 } )
     }
@@ -88,6 +89,7 @@ export class PageShopComponent {
             discount = 0.9
         }
         this.discount = discount
+        console.log('discount: ', discount)
         this.getItems(discount)
     }
 
@@ -110,6 +112,7 @@ export class PageShopComponent {
                 // If data is recieved,
                 (data) => {
                     this.bitcoin = data
+                    console.log('bitcoin: ', data)
                 } )
     }
 
@@ -125,7 +128,7 @@ export class PageShopComponent {
                 // If data is recieved,
                 (data) => {
                     // console log the data (For debugging purposes).
-                    console.log(JSON.stringify(data))
+                    console.log('all items: ', data)
                     for(let i=0;i<data.length;i++){
                         itemPriceArray.push(data[i].price)
                     }
@@ -154,6 +157,7 @@ export class PageShopComponent {
                     // create a variable here and assign it to data
                     let userItemArray = data
                     this.userItemArray = data
+                    console.log('userItemArray: ', data)
                     // use that variable as parameter to getItems function
                     this.calculateFinalPrices(itemArray, discount, userItemArray)
                 } )
@@ -173,6 +177,7 @@ export class PageShopComponent {
             }
         }
         this.pricedItemArray = itemArray
+        console.log('pricedItemArray: ', itemArray)
     }
 
     // Buy. This function is called whenver user buys something. In the parameters, name is the item name and price is the item price.
@@ -231,6 +236,7 @@ export class PageShopComponent {
                 // let subtotal = Math.round(this.itemArray[i] * Math.pow(1.05, this.userItemArray[i]))
                 let subtotal = Math.round(this.itemArray[i] * Math.pow(1.05, data[i]))
                 this.pricedItemArray[i].price = subtotal - (subtotal * this.discount)
+                console.log('new price: ', this.pricedItemArray[i].price)
             }
         }
     }

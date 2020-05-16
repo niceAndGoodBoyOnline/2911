@@ -101,6 +101,7 @@ export class PageMainComponent {
         await this.setMusicVolume()
         await this.getFirewallArray()
         //console.log("Setup Complete!")
+        console.log("-----------------------------------MAIN PAGE SETUP -----------------------------------------")
     }
 
     toggleGUI(){
@@ -130,7 +131,7 @@ export class PageMainComponent {
         this.currentSecurity = this.currentFirewallStats[1] * 8;
         this.currentFirewallName = this.firewallArray[i].name;
         this.currentFirewallImg = "assets/images/firewalls/" + this.firewallArray[i].image;
-        console.log(this.currentFirewallStats)
+        console.log('currentFirewall: ', i, 'securityMod: ', this.firewallArray[i].securityMod, 'rewardMod: ', this.firewallArray[i].rewardMod)
     }
 
 
@@ -275,7 +276,7 @@ export class PageMainComponent {
         if(this.hackMod < 1 || NaN){
             this.hackMod = 1
         }
-        console.log('hackfirewall function~~~~', 'this.currentSecurity: ', this.currentSecurity, 'this.totalClickPower: ', this.totalClickPower)
+        // console.log('hackfirewall function~~~~', 'this.currentSecurity: ', this.currentSecurity, 'this.totalClickPower: ', this.totalClickPower)
         this.currentSecurity = this.currentSecurity - this.totalClickPower
 
         if (this.currentSecurity < 1){
@@ -321,7 +322,9 @@ export class PageMainComponent {
             // Play it.
             audio.play();
         }
-        console.log('totalpower: ', this.totalPower, 'hackmod: ', this.hackMod, 'tempowerincrease: ', this.tempPowerIncrease, 'currentfirewalstats[2]: ', this.currentFirewallStats[2])
+        console.log('--------------INCREASE BITCOIN FUNCTION----------------------')
+        console.log('totalitempower: ', this.totalPower, 'hackmod: ', this.hackMod, 'tempowerincrease: ', this.tempPowerIncrease, 'currentfirewalstats[2]: ', this.currentFirewallStats[2])
+        console.log('totalClickPower: ', this.totalClickPower)
         this.setFirewallStats(this.currentFirewallStats[0])
         console.log('firewall stats: ', this.currentFirewallStats)
     }

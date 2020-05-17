@@ -20,6 +20,7 @@ export class PageMainComponent {
     // User stuff for the game
     bitcoin: number
     totalPower: number
+    prestigeMultiplier: number = 1
     hackMod: number = 1
     tempPowerIncrease: number = 1
     autoClickPower: number
@@ -89,7 +90,7 @@ export class PageMainComponent {
         this.musicPlayer.volume = 0.5;
         await this.checkLoggedIn()
         await this.getBitcoin()
-        await this.getUserPrestigeItems()
+        // await this.getUserPrestigeItems()
         await this.getUserItemArray()
         await this.startAutosave()
         await this.startAutoBitcoin()
@@ -99,7 +100,7 @@ export class PageMainComponent {
         //await this.moveRam()
         await this.setSoundVolume()
         await this.setMusicVolume()
-        await this.getFirewallArray()
+        // await this.getFirewallArray()
         //console.log("Setup Complete!")
         console.log("-----------------------------------MAIN PAGE SETUP -----------------------------------------")
     }
@@ -222,13 +223,14 @@ export class PageMainComponent {
                     }
                     // Calculate the total power with the array we made and the array we have that was passed from getUserItemArray.
                     console.log('full item array: ', array)
-                    this.calculatePowers(array, userItemArray)
+                    this.getFirewallArray(array, userItemArray)
+                    // this.calculatePowers(array, userItemArray)
                 } )
     }
 
 
     // get list of firewalls from database
-    async getFirewallArray(){
+    async getFirewallArray(itemArray, userItemArray){
         let url = this.site + 'Game/getFirewalls'
         this.http.get<any>(url)
             .subscribe(
@@ -237,13 +239,14 @@ export class PageMainComponent {
                     this.firewallArray = data
                     console.log('firewall array: ', data)
                     this.setFirewallStats(0)
+                    this.getUserPrestigeItems(itemArray, userItemArray, data)
                 }
             )
         
     }
 
 
-    async getUserPrestigeItems(){
+    async getUserPrestigeItems(itemArray, userItemArray, firewallArray){
         let url = this.site + 'user/getUserPrestigeItems'
         this.http.post<any>(url, {
             email: sessionStorage.getItem('email')
@@ -251,13 +254,13 @@ export class PageMainComponent {
             .subscribe(
                 (data) => {
                     console.log('userprestigeitems: ', data)
-                    this.getPrestigeItems(data)
+                    this.getPrestigeItems(itemArray, userItemArray, firewallArray, data)
                 }
             )
     }
 
     // Get all the prestige items in the database
-    async getPrestigeItems(userPrestigeItems) {
+    async getPrestigeItems(itemArray, userItemArray, firewallArray, userPrestigeItems) {
         // Locate which approrpiate controller function to use. In this case, we use getPrestigeItems function in GameController.js
         // You can find this out in router.js
         let url = this.site + 'Game/getPrestigeItems'
@@ -268,25 +271,40 @@ export class PageMainComponent {
                 (data) => {
                     console.log('full prestige items: ', data)
                     // console log the data (For debugging purposes).
-                    this.calculateHackMod(userPrestigeItems, data)
+                    this.calculatePrestigeMultiplier(itemArray, userItemArray, firewallArray, userPrestigeItems, data)
                 } )
     }
 
-    async calculateHackMod(userPrestigeItems, prestigeArray) {
+    async calculatePrestigeMultiplier(itemArray, userItemArray, firewallArray, userPrestigeItems, prestigeArray) {
+        let prestigeMultiplier = 1
+        for(let i=0;i<prestigeArray.length;i++){
+            if((prestigeArray[i].item == 'resHostRoot') || (prestigeArray[i].item == 'eduHostRoot')){
+                prestigeMultiplier += userPrestigeItems[i] * prestigeArray[i].power
+            }
+        }
+        if(prestigeMultiplier == 0){
+            prestigeMultiplier = 1
+        }
+        console.log('calculatePrestigeMultiplier function: ', prestigeMultiplier)
+        this.prestigeMultiplier = prestigeMultiplier
+        this.calculateHackMod(itemArray, userItemArray, firewallArray, userPrestigeItems, prestigeArray)
+    }
+
+    async calculateHackMod(itemArray, userItemArray, firewallArray, userPrestigeItems, prestigeArray){
         let hackMod = 1
         hackMod = userPrestigeItems[0] * prestigeArray[0].power
         if(hackMod == 0){
             hackMod = 1
         }
-        console.log('calculatehackmod function: ', hackMod)
         this.hackMod = hackMod
+        this.calculatePowers(itemArray, userItemArray, firewallArray, userPrestigeItems, prestigeArray)
     }
 
 
     hackFirewall(){
         // Default value is 1 bitcoin per click. Items increase total clicking power which also increases bitcoin gain.
-        if(this.hackMod < 1 || NaN){
-            this.hackMod = 1
+        if(this.prestigeMultiplier < 1 || NaN){
+            this.prestigeMultiplier = 1
         }
         // console.log('hackfirewall function~~~~', 'this.currentSecurity: ', this.currentSecurity, 'this.totalClickPower: ', this.totalClickPower)
         this.currentSecurity = this.currentSecurity - this.totalClickPower
@@ -298,7 +316,7 @@ export class PageMainComponent {
     }
 
     // Calculate total clicking power and auto click power
-    calculatePowers(itemArray, userItemArray) {
+    calculatePowers(itemArray, userItemArray, firewallArray, userPrestigeItems, prestigeArray) {
         // Make totalpower and autoclickpower equal to zero (to make sure we dont re-add the power value)
         this.totalPower = 0
         this.autoClickPower = 0
@@ -311,8 +329,8 @@ export class PageMainComponent {
                 this.totalPower += userItemArray[i] * itemArray[i].power
             }
         }
-        this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
-        console.log('totalpower: ', this.totalPower, 'hackmod: ', this.hackMod, 'tempowerincrease: ', this.tempPowerIncrease)
+        this.totalClickPower = ((1 + this.totalPower) * this.prestigeMultiplier) * this.tempPowerIncrease
+        console.log('totalpower: ', this.totalPower, 'Prestige Multiplier: ', this.prestigeMultiplier, 'tempowerincrease: ', this.tempPowerIncrease, 'hackMod(bitcoin): ', this.hackMod)
     }
 
 
@@ -320,8 +338,8 @@ export class PageMainComponent {
     // This is how bitcoin is increased each click.
     increaseBitcoin() {
 
-        this.bitcoin += Math.floor( ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease * this.currentFirewallStats[2]   )
-        this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
+        this.bitcoin += Math.floor( ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease * this.currentFirewallStats[2])
+        this.totalClickPower = ((1 + this.totalPower) * this.prestigeMultiplier) * this.tempPowerIncrease
         if (sessionStorage.getItem('sound') == 'true') {
             // Instantiate an audio player to play the clicking sounds.
             let audio = new Audio()
@@ -336,7 +354,9 @@ export class PageMainComponent {
         }
         console.log('--------------INCREASE BITCOIN FUNCTION----------------------')
         console.log('totalitempower: ', this.totalPower, 'hackmod: ', this.hackMod, 'tempowerincrease: ', this.tempPowerIncrease, 'currentfirewalstats[2]: ', this.currentFirewallStats[2])
-        console.log('totalClickPower: ', this.totalClickPower)
+        console.log('totalClickPower: ', this.totalClickPower, 'prestigeMultiplier: ', this.prestigeMultiplier)
+        console.log('--You should be dealing: ', ((1 + this.totalPower) * this.prestigeMultiplier) * this.tempPowerIncrease, 'damage.--')
+        console.log('--You should be gaining: ', Math.floor( ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease * this.currentFirewallStats[2]), 'bitcoins.--')
         this.setFirewallStats(this.currentFirewallStats[0])
         console.log('firewall stats: ', this.currentFirewallStats)
     }
@@ -571,10 +591,10 @@ export class PageMainComponent {
         let ram = document.getElementById('ram')
         ram.style.display = 'none'
         this.tempPowerIncrease += 1
-        this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
+        this.totalClickPower = ((1 + this.totalPower) * this.prestigeMultiplier) * this.tempPowerIncrease
         setTimeout(() => {
             this.tempPowerIncrease -= 1
-            this.totalClickPower = ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease
+            this.totalClickPower = ((1 + this.totalPower) * this.prestigeMultiplier) * this.tempPowerIncrease
         }, 10000)
     }
 

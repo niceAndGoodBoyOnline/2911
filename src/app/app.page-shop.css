@@ -7,7 +7,7 @@ body{
     font-family: HackerFont;
     color: green;
     text-align: center;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 #shopContainer{
@@ -16,15 +16,21 @@ body{
 }
 
 #sound {
-    float: left;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    float:left;
     position: fixed;
-    bottom: 1vh;
+    bottom:1vh;
 }
 
 #music {
-    float: left;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    float:left;
     position: fixed;
-    bottom: 1vh;
+    bottom:1vh;
 }
 
 #coins{
@@ -46,6 +52,84 @@ input:hover {
 input:active {
     background-color: greenyellow;
   }
+
+/*Area that the shop elements are in (aka everything except the top nav 
+and sound & music buttons).*/
+#shopScreen{
+    animation-name: unfoldIn;
+    animation-duration: 0.8s;
+    border-top: 1px solid green;
+    border-bottom: 1px solid green;
+    height: 84vh;
+    overflow: auto;
+    z-index: 3;
+}
+
+/*Keyframes for shop screen animation*/
+@keyframes unfoldIn {
+    0% {
+      transform:scaleY(.005) scaleX(0);
+    }
+    50% {
+      transform:scaleY(.005) scaleX(1);
+    }
+    100% {
+      transform:scaleY(1) scaleX(1);
+    }
+  }
+/*Animation on top of the shop screen*/
+#shopOverlay {
+    opacity: 0.45;
+    width: 100%;
+    position:absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    z-index:2;
+    float:left;
+    pointer-events: none;
+}
+
+/*Scrollbar styling*/
+::-webkit-scrollbar {
+    width: 15px;
+}
+  
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: green;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: greenyellow
+}
+
+/* The Modal (background) */
+#purchaseModal{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    pointer-events: none;
+  }
+  
+  /* Modal Content */
+  .modal-content {
+    background-color: rgb(10,10,10,0.2);
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: fit-content;
+  }
+
 
 
   /*
@@ -113,6 +197,10 @@ this @media rule applies when the width < height of browser.
         margin:2vw;
     }
 
+    #shopOverlay {
+        height: 84vw;
+    }
+
 }
 
 @media only screen and (orientation: landscape) {
@@ -173,6 +261,10 @@ this @media rule applies when the width < height of browser.
         padding:3vh;
         font-size: 4vh;
         margin:3vh;
+    }
+
+    #shopOverlay {
+        height: 84vh;
     }
 
 }

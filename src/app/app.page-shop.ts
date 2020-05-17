@@ -437,5 +437,15 @@ export class PageShopComponent {
         }
     }
 
+    // Opens a modal for message when you attempt to purchase something from the shop
+    openTempModal(){
+        let modal = document.getElementById("purchaseModal")
+        modal.style.display="block"
+        let timeOutFunction = setTimeout(function(){
+            modal.style.display="none"
+            sessionStorage.setItem("modalOpen", "false")
+        }, 2000)
+    }
+
 }
     

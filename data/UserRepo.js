@@ -178,7 +178,7 @@ class UserRepo {
         let prestige = 0
         // Start a while loop while you have more bitcoins than the prestige cost
         while (prestigeCost <= bitcoin) {
-            // Be able to buy an additional prestige point
+            // Get an additional prestige point
             prestige += 1
             // Formula for calculating the next cost of a prestige point
             prestigeCost = Math.pow(prestigeCost, 1.1)

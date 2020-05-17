@@ -44,7 +44,6 @@ export class PageLoginComponent {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this, pathService);
         this.site = pathService.path;
-        console.log(this.site)
         this.titleShuffle()
         this.setupSound()
     }

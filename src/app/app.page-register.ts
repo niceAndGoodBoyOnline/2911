@@ -32,6 +32,11 @@ export class PageRegisterComponent {
     hoverSoundFile = 'assets/sounds/HoverSound.mp3'
     clickSoundFile = 'assets/sounds/ClickSound.mp3'
 
+    
+    // for osImg animation
+    osImgPath: string = "";
+    osImgArray = ["os0p1.gif", "os1p1.gif", "os2p1.gif", "os3p1.gif", "os4p1.gif"]
+   
     // Volume Settings Stuff
     soundVolumeImg: string = 'assets/images/VolumeSettings0.6.png'
     musicVolumeImg: string = 'assets/images/VolumeSettings0.6.png'
@@ -42,6 +47,7 @@ export class PageRegisterComponent {
         // Pass in http module and pointer to AppComponent.
         this._apiService = new ApiService(http, this, pathService);
         this.site = pathService.path;
+        this.titleShuffle()
         this.setup()
     }
 
@@ -51,6 +57,15 @@ export class PageRegisterComponent {
         await this.setSoundVolume()
         await this.setMusicVolume()
         console.log("Setup Complete!")
+    }
+
+    titleShuffle() {
+        let rollNum = Math.floor(Math.random() * (this.osImgArray.length) );
+
+        this.osImgPath = "assets/images/title_animations/" + this.osImgArray[rollNum];
+        setTimeout (() => {
+            this.titleShuffle();
+         }, 6000);
     }
 
     register() {

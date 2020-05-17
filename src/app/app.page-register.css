@@ -1,78 +1,236 @@
+/*
+css styles that do not need to be responsive
+*/
+
 @font-face {
     font-family: HackerFont;
     src: url(src/assets/text/font.ttf)
 }
 
-* {
+body{
     font-family: HackerFont;
     color: green;
+    overflow: hidden;
+    z-index:1;
+}
+
+#register{
     text-align: center;
+    width:100vw;
+    padding: 1vh;
+    z-index:10;
 }
 
-h2 {
-    font-size: 30px;
+.lable{
+    color: green;
+    margin: 2vw;
 }
 
-table {
-    margin-left: auto;
-    margin-right: auto;
-}
-.lable {
-    font-size: 20px;
-    text-align: right;
+#osImg{
+    float:left;
+    z-index: 2;
+    position:fixed;
 }
 
-.boxes {
-    padding:15px;
-    font-size: 25px;
-    border-color: green;
+.boxes{
+    position: relative;
+    border-color: rgba(00,00,00,0);
+    border-bottom-color: green;
     border-style: solid;
-    background-color: black;
+    background-color: rgba(11,11,11,0);
     outline: none;
-    margin-bottom: 5px;
+    z-index:5;
 }
 
-.submit {
-    padding:15px;
-    font-size: 25px;
-    border-color: green;
+.submit{
+    border-color:rgba(00,00,00,0);
+    border-bottom-color: green;
     border-style: solid;
-    background-color: black;
+    background-color: rgba(00,00,00,0.5);
     outline: none;
     cursor: pointer;
+    position: fixed;
+    z-index:5
 }
 
-.submit:hover {
+.submit:hover, .submit:active {
     background-color: greenyellow;
 }
 
-.submit:active {
-    background-color: greenyellow;
-  }
-
-.message {
-    font-size: 25px;
+table{
+    position:relative;
+    background-color: rgba(00,00,00,0.8);
+    z-index:5;
 }
 
 #sound {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width:7%;
-    height:auto;
     float:left;
     position: fixed;
-    bottom:1%;
+    z-index:5
+
 }
 
 #music {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width:7%;
-    height:auto;
     float:left;
     position: fixed;
-    bottom:1%;
-    left: 8%;
+    z-index:5
+
+}
+
+.message {
+    justify-content: center;
+    position: relative;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    background-color:rgba(00,00,00,0.7);
+    z-index:20;
+    text-align: center;
+}
+
+/*
+this @media rule applies when the width < height of browser.
+*/
+@media only screen and (orientation: portrait) {
+
+    body {
+        font-size: 8vh;
+        width: 100vw;
+        height: auto;
+    }
+
+    #register{
+        margin: 5vh;
+        font-size: 4vh;
+    }
+
+    #osImg{
+        width: auto;
+        height: 120vh;
+        top: 5vh;
+        right: 5vw;
+    }
+
+    table {
+        margin-left: 3vw;
+        margin-right: auto;
+        margin-bottom: 3vh;
+    }
+
+    .lable {
+        font-size: 2.5vw;
+        text-align: center;
+    }
+
+    .boxes {
+        top: -3vh;
+        font-size: 4vw;
+        width: 50vw;
+        margin-right: 5vw;
+        height: 5vh;
+        justify-content: left;
+    }
+
+    .submit {
+        right: 10vw;
+        bottom: 10vh;
+        padding:auto;
+        font-size: 3vh;
+        width: auto;
+    }
+
+    .message {
+        font-size: 3vw;
+    }
+
+    #sound{
+        width:10vw;
+        height:auto;
+        left: 3vw;
+        bottom: 4vw;
+    }
+
+    #music{
+        width:10vw;
+        height:auto;
+        left: 15vw;
+        bottom: 4vw;
+    }
+
+}
+
+/*
+this @media rule applies when the height < width of browser.
+*/
+@media only screen and (orientation: landscape) {
+
+    body {
+        font-size: 8vh;
+        width: 80vw;
+        height: auto;
+    }
+
+    #register{
+        margin: 5vh;
+    }
+
+    #osImg{
+        width: auto;
+        height: 120vh;
+        top: 5vh;
+        right: 5vw;
+    }
+
+    table {
+        margin-left: 3vw;
+        margin-right: auto;
+        width:80vw;
+    }
+
+    .lable {
+        font-size: 2vh;
+        text-align: right;
+    }
+
+    .boxes {
+        padding:1vw;
+        top: -2vh;
+        font-size: 4vh;
+        margin-left: 1vw;
+        width: 60vw;
+        max-width: 70vw;
+        height: 8vh;
+    }
+
+    .submit {
+        right: 10vw;
+        bottom: 10vh;
+        padding:auto;
+        font-size: 3vw;
+        width: auto;
+    }
+
+    .message {
+        font-size: 2vh;
+    }
+
+    #sound{
+        width:10vh;
+        height:auto;
+        left: 3vw;
+        bottom: 4vh;
+    }
+
+    #music{
+        width:10vh;
+        height:auto;
+        left: 10vw;
+        bottom: 4vh;
+    }
+
 }

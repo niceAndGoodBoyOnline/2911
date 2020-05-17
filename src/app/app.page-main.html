@@ -8,7 +8,7 @@
     <div id='gameContainer'>
         <div id="hackTarget" ngDraggable>
             <span id="hackText">Current target: {{currentFirewallName}}</span>
-            <img class="firewall" src='{{currentFirewallImg}}' (click)="hackFirewall()" >
+            <img class="firewall" src='{{currentFirewallImg}}' (click)="hackFirewall()">
             <div id='hackStat' class="stats">Hack Power: {{totalClickPower}} VS Security:{{currentSecurity}} <br> Bitcoin: {{bitcoin}}</div>
         </div>
 

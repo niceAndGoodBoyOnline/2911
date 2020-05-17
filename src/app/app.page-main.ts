@@ -89,7 +89,7 @@ export class PageMainComponent {
         this.musicPlayer.loop = true;
         this.musicPlayer.volume = 0.5;
         await this.checkLoggedIn()
-        await this.getBitcoin()
+        // await this.getBitcoin()
         // await this.getUserPrestigeItems()
         await this.getUserItemArray()
         await this.startAutosave()
@@ -328,6 +328,7 @@ export class PageMainComponent {
         }
         this.totalClickPower = ((1 + this.totalPower) * this.prestigeMultiplier) * this.tempPowerIncrease
         console.log('totalpower: ', this.totalPower, 'Prestige Multiplier: ', this.prestigeMultiplier, 'tempowerincrease: ', this.tempPowerIncrease, 'hackMod(bitcoin): ', this.hackMod)
+        this.getBitcoin()
     }
 
 

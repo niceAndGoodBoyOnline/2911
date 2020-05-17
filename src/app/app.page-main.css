@@ -18,8 +18,6 @@ body{
 .ram{
     position: absolute;
     z-index: 10;
-    top: 10vh;
-    right: 0;
 }
 
 
@@ -76,6 +74,8 @@ this @media rule applies when the width < height of browser.
 
     .ram{
         width: 10vw;
+        top: 50vh;
+        right: 15vw;;
     }
     
     .bitcoin {
@@ -97,6 +97,8 @@ this @media rule applies when the width < height of browser.
 
     .ram{
         width: 10vh;
+        bottom: 10vh;
+        right: 50vw;;
     }
     
 

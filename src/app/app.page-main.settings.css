@@ -1,20 +1,16 @@
 #settingsImg {
     float: left;
-    position: absolute;
-    bottom: 1vh;
+    position: fixed;
 }
-
 
 #sound {
   float: left;
   position: fixed;
-  bottom: 1vh;
 }
 
 #music {
   float: left;
   position: fixed;
-  bottom: 1vh;
 }
 
 #settings {
@@ -56,6 +52,7 @@ input:active {
 .modal-content {
   background-color:black;
   text-align: center;
+  
   padding: 20px;
   overflow: auto;
   border: 1px solid green;
@@ -144,18 +141,22 @@ this @media rule applies when the width < height of browser.
     
     #sound {
         width:10vw;
+        left: 3vw;
         height:auto;
+        bottom: 1vh;
     }
     
     #music {
         width:10vw;
-        left: 12vw;
+        left: 15vw;
+        bottom: 1vh;
     }
 
     #settingsImg {
         width:10vw;
         height:auto;
         right: 2vw;
+        bottom: 1vh
     }
 
     .closeSettings {
@@ -203,12 +204,16 @@ this @media rule applies when the width < height of browser.
     #sound {
         width:10vh;
         height:auto;
+        bottom: 2vh;
+        left: 3vh;
+
     }
     
     #music {
         width:10vh;
         height:auto;
-        left: 12vh;
+        bottom: 2vh;
+        left: 15vh;
     }
 
     .stats{
@@ -217,7 +222,8 @@ this @media rule applies when the width < height of browser.
     
     #settingsImg {
         width:10vh;
-        right: 0;
+        right: 1vw;
+        bottom: 2vh;
     }
 
     .closeSettings {

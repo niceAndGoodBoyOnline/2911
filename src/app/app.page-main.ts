@@ -104,6 +104,7 @@ export class PageMainComponent {
         console.log("-----------------------------------MAIN PAGE SETUP -----------------------------------------")
     }
 
+    // simple boolean open/close switch for the outbreakSource menu (shop, prestige etc)
     toggleGUI(){
         if (this.guiState === true){
             this.guiState = false
@@ -115,6 +116,7 @@ export class PageMainComponent {
         }
     }
 
+    // simple boolean open/close switch for the Network/Firewall selection menu
     toggleNetworkMenu(){
         if (this.networkSelectMenuState == true){
             this.networkSelectMenuState = false;
@@ -126,9 +128,13 @@ export class PageMainComponent {
         }
     }
 
+    // sets the stats of firewalls on load and when they are "hacked"
     setFirewallStats(i){
+        // i is the index passed from this.firewallArray through HTML/user interaction
         this.currentFirewallStats = [i, this.firewallArray[i].securityMod, this.firewallArray[i].rewardMod]
+        // the 8 here is arbitrary. potentially should be an exponential formula, e.g. 2^this.currentFirewallStats[1]
         this.currentSecurity = this.currentFirewallStats[1] * 8;
+        // sets image and name for GUI
         this.currentFirewallName = this.firewallArray[i].name;
         this.currentFirewallImg = "assets/images/firewalls/" + this.firewallArray[i].image;
         console.log('currentFirewall: ', i, 'securityMod: ', this.firewallArray[i].securityMod, 'rewardMod: ', this.firewallArray[i].rewardMod)
@@ -146,6 +152,7 @@ export class PageMainComponent {
 
     // Get the amount of bitcoins the user has from the database to display in the main page
     getBitcoin() {
+        console.log("get Bitcoin")
         // Locate what appropriate controller to use in the backend.
         // (This path refers to a path in router.js)
         let url = this.site + 'user/getBitcoin'
@@ -159,8 +166,13 @@ export class PageMainComponent {
                 // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
                 // If data is recieved from the backend,
                 (data) => {
-                    // Assign this.bitcoin to whatever returned from the backend.
-                    this.bitcoin = data
+                    //Assign this.bitcoin to whatever returned from the backend.
+                    if (data == 'null'){
+                        this.bitcoin = 0;
+                    }
+                    else{
+                        this.bitcoin = data
+                    }
                 } )
     }
 

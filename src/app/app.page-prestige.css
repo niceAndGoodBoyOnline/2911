@@ -3,21 +3,48 @@
     src: url(src/assets/text/font.ttf)
 }
 
-* {
+body{
     font-family: HackerFont;
     color: green;
     text-align: center;
-}
-table {
-    margin-left: auto;
-    margin-right: auto;
+    overflow-x: hidden;
+    height: auto;
 }
 
-input {
-    padding:5px;
-    font-size: 15px;
+.prestigeInfo{
+    margin-left: 3vw;
+    max-width: 95vw;
+}
+
+.tableRow{
+    border-color: rgba(00,00,00,0);
+    border: solid;
+    max-width: 90vw;
+}
+
+#shopContainer{
+    width: 90vw;
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+.tableCell{
+    padding: 1vw;
+}
+
+#sound {
+    float: left;
+    position:   fixed;
+}
+
+#music {
+    float: left;
+    position: fixed;
+}
+
+.menuButton {
     border-color: green;
-    border-style: solid;
+    background: linear-gradient(176deg, rgba(00,00,00,0.5) 66%, green);
     outline: none;
     cursor: pointer;
 }
@@ -30,25 +57,107 @@ input:active {
     background-color: greenyellow;
   }
 
-#sound {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width:7%;
-    height:auto;
-    float:left;
-    position: fixed;
-    bottom:1%;
+
+  /*
+this @media rule applies when the width < height of browser.
+*/
+@media only screen and (orientation: portrait) {
+
+
+    body {
+        font-size: 5vw;
+    }
+
+    #shopContainer{
+        font-size: 2vw;
+        margin-bottom: 10vh;
+    }
+
+    .prestigeInfo{
+       font-size: 2vw;
+    }
+    
+    .tableCell{
+        padding: .5vw;
+    }
+    
+    h1{
+        font-size: 5vw
+    }
+    
+    h2 {
+        font-size:3vw;
+    }
+    
+    #sound {
+        width:auto;
+        top:92vh;
+        height:7vh;
+        left: 2vw;
+    }
+    
+    #music {
+        width:auto;
+        height:7vh;
+        top:92vh;
+        left: 17vw;
+    }
+    
+    .bitcoin {
+        font-size:4vw;
+    }
+
+    .menuButton {
+        padding:1vw;
+        font-size: 2vw;
+        margin:2vw;
+    }
+
 }
 
-#music {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width:7%;
-    height:auto;
-    float:left;
-    position: fixed;
-    bottom:1%;
-    left: 8%;
+@media only screen and (orientation: landscape) {
+
+
+    body {
+        font-size: 4vh;
+        width: auto;
+    }
+
+    #shopContainer{
+        font-size: 2vh;
+        margin-bottom: 15vh;
+    }
+
+    .prestigeInfo{
+        font-size: 2vh;
+     }
+    
+    .tableCell{
+        padding: 1vh;
+    }
+    
+    h2 {
+        font-size:4vh;
+    }
+    
+    #sound {
+        width:auto;
+        height:10vh;
+        top:88vh;
+        left: 5vw;
+    }
+    
+    #music {
+        width:auto;
+        height:10vh;
+        top:88vh;
+        left: 15vw;
+    }
+    
+    .menuButton {
+        padding:3vh;
+        font-size: 4vh;
+        margin:3vh;
+    }
+
 }

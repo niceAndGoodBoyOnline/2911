@@ -6,10 +6,8 @@
 }
 
 .networkButton{
-    background-color: rgba(00,00,00,.5);
-    border-color: rgba(00,00,00,0);
-    border-bottom-color: green;
-    border-right-color: green;
+    background: linear-gradient(176deg, rgba(00,00,00,0.5) 66%, green);
+    border-color: green;
     padding: 1vh;
     margin: 1vh;    
 }
@@ -20,6 +18,7 @@
 
 #networksButton{
     z-index:7;
+    justify-content: center;
     position:absolute;
 }
 
@@ -45,8 +44,13 @@ this @media rule applies when the width < height of browser.
 */
 @media only screen and (orientation: portrait) {
 
+    #hackTarget{
+        top: 10vh;
+        left: 20vw;
+    }
+
     #hackText{
-        font-size: 3vw;
+        font-size: 2vw;
     }
 
     #networkSelect{
@@ -59,17 +63,23 @@ this @media rule applies when the width < height of browser.
     .networkButton{
         font-size: 2.5vw;
         width: 80vw;
+        max-width: 90vw;
         height: 6vh;
     }
 
-
     #networksButton{
         width: 20vw;
+        bottom: 15vh;
+        right: 15vw;
     }
 
     .firewall {
         width:auto;
         height:33vh;
+    }
+
+    .stats{
+        font-size: 1.8vw;
     }
 
 }
@@ -86,22 +96,28 @@ this @media rule applies when the width < height of browser.
     }
 
     .networkButton{
-        font-size: 2.5vh;
+        font-size: 2vh;
         width: 40vw;
         height: 6vh;
     }
 
-
     #networksButton{
         height: 20vh;
+        bottom: 10vh;
+        left: 17vw;
     }
 
     #hackTarget{
-        left: 30vw;
+        top: 10vh;
+        left: 35vw;
     }
 
     #hackText{
-        font-size: 3vh;
+        font-size: 2vh;
+    }
+
+    .stats{
+        font-size: 1vw;
     }
     
     .firewall {

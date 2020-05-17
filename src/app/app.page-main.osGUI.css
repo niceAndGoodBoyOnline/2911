@@ -51,15 +51,10 @@
     overflow:hidden;
 }
 
-
-
-
   /*
 this @media rule applies when the width < height of browser.
 */
 @media only screen and (orientation: portrait) {
-
-
 
     #osGUI{
         width: auto;
@@ -77,27 +72,18 @@ this @media rule applies when the width < height of browser.
     }
 
     #shopGUI{
-        top: 0vh;
+        top: 2vw;
         left: 20vw;
         width: 10vw;
         height: auto;
-    }
-    
-    #multiGUI{
-        top: 5vh;
-        left: 20vw;
-        height: auto;
-        width: 10vw;
     }
     
     #prestigeGUI{
-        top:10vh;
+        top:8vh;
         left: 20vw;
         height: auto;
         width: 10vw;
     }
-
-
 }
 
 @media only screen and (orientation: landscape) {
@@ -106,7 +92,7 @@ this @media rule applies when the width < height of browser.
     #osGUI{
         width: 23vw;
         height: 30vh;
-        top: 33vh;
+        top: 20vh;
         left: 5vw;
     }
     
@@ -117,21 +103,14 @@ this @media rule applies when the width < height of browser.
     }
     
     #shopGUI{
-        top: 0;
+        top: 3vh;
         left: 15vw;
         width: 15vh;
         height: auto;
-    }
-    
-    #multiGUI{
-        top: 15vh;
-        left: 15vw;
-        height: auto;
-        width: 15vh;
     }
     
     #prestigeGUI{
-        top: 30vh;
+        top: 18vh;
         left: 15vw;
         height: auto;
         width: 15vh;

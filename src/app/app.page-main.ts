@@ -101,7 +101,6 @@ export class PageMainComponent {
         await this.setSoundVolume()
         await this.setMusicVolume()
         // await this.getFirewallArray()
-        //console.log("Setup Complete!")
         console.log("-----------------------------------MAIN PAGE SETUP -----------------------------------------")
     }
 
@@ -337,7 +336,6 @@ export class PageMainComponent {
 
     // This is how bitcoin is increased each click.
     increaseBitcoin() {
-
         if (this.bitcoin == 'null'){
             this.bitcoin = 0;
         }

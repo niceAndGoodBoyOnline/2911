@@ -158,7 +158,8 @@ export class PagePrestigeComponent {
             this.nextPrestige = 0
             let url = this.site + "user/resetGainPrestige"
             this.http.post<any>(url, {
-                email: sessionStorage.getItem("email")
+                email: sessionStorage.getItem("email"),
+                prestigeArray: this.prestigeArray
             })
             .subscribe(
                 (data) => {

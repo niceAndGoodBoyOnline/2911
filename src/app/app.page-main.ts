@@ -18,7 +18,7 @@ export class PageMainComponent {
     _apiService:ApiService;
 
     // User stuff for the game
-    bitcoin: number
+    bitcoin;
     totalPower: number
     prestigeMultiplier: number = 1
     hackMod: number = 1
@@ -337,6 +337,10 @@ export class PageMainComponent {
 
     // This is how bitcoin is increased each click.
     increaseBitcoin() {
+
+        if (this.bitcoin == 'null'){
+            this.bitcoin = 0;
+        }
 
         this.bitcoin += Math.floor( ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease * this.currentFirewallStats[2])
         this.totalClickPower = ((1 + this.totalPower) * this.prestigeMultiplier) * this.tempPowerIncrease

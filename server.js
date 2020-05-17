@@ -15,7 +15,7 @@ var distDir = __dirname + "/dist/";
 app.use(express.static(distDir));
 
 // Connect to the database before starting the application server.
-mongoose.connect(process.env.MONGODB_URI, function (err, client) {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/Outbreak', function (err, client) {
   if (err) {
     console.log(err);
     process.exit(1);

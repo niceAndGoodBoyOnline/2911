@@ -33,16 +33,13 @@ body{
     bottom:1vh;
 }
 
-#coins{
-    position:sticky;
-}
-
-.menuButton {
+input {
     border-color: green;
     border-style: solid;
     background-color: black;
     outline: none;
     cursor: pointer;
+    padding: 10px;
 }
 
 input:hover {
@@ -130,7 +127,24 @@ and sound & music buttons).*/
     width: fit-content;
   }
 
+table {
+    border: 3px solid green;
+}
 
+td {
+    border: 3px solid green;
+    padding: 20px;
+    text-align: center;
+}
+
+#coins {
+    float: left;
+    position: fixed;
+    left: 0;
+    border: 2px solid green;
+    padding: 5px;
+    background-color: greenyellow;
+}
 
   /*
 this @media rule applies when the width < height of browser.
@@ -201,6 +215,14 @@ this @media rule applies when the width < height of browser.
         height: 84vw;
     }
 
+    td {
+        font-size: 3vw;
+    }
+
+    #coins {
+        bottom: 10vw;
+    }
+
 }
 
 @media only screen and (orientation: landscape) {
@@ -265,6 +287,14 @@ this @media rule applies when the width < height of browser.
 
     #shopOverlay {
         height: 84vh;
+    }
+
+    td {
+        font-size: 3vh;
+    }
+
+    #coins {
+        bottom: 10vh;
     }
 
 }

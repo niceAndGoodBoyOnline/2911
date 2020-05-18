@@ -36,18 +36,20 @@ body{
 input {
     border-color: green;
     border-style: solid;
-    background-color: black;
+    background: linear-gradient(176deg, rgba(00,00,00,0.5) 66%, green);
     outline: none;
     cursor: pointer;
     padding: 10px;
 }
 
 input:hover {
-    background-color: greenyellow;
+    background: linear-gradient(176deg, rgba(00,00,00,0.5) 66%, greenyellow);
+    color: white;
 }
 
 input:active {
     background-color: greenyellow;
+    color: white;
   }
 
 /*Area that the shop elements are in (aka everything except the top nav 

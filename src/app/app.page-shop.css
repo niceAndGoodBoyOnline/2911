@@ -15,6 +15,16 @@ body{
     margin: 5vw;
 }
 
+#coins {
+    border: 2px solid green;
+    padding: 5px;
+    background-color: greenyellow;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    position: sticky;
+    
+}
 #sound {
     display: block;
     margin-left: auto;
@@ -112,9 +122,8 @@ and sound & music buttons).*/
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
     left: 0;
-    top: 0;
+    bottom: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     pointer-events: none;
@@ -122,7 +131,8 @@ and sound & music buttons).*/
   
   /* Modal Content */
   .modal-content {
-    background-color: rgb(10,10,10,0.2);
+    background-color: rgb(100,100,100,0.6);
+    color: greenyellow;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
@@ -137,15 +147,6 @@ td {
     border: 3px solid green;
     padding: 20px;
     text-align: center;
-}
-
-#coins {
-    float: left;
-    position: fixed;
-    left: 0;
-    border: 2px solid green;
-    padding: 5px;
-    background-color: greenyellow;
 }
 
   /*
@@ -221,8 +222,17 @@ this @media rule applies when the width < height of browser.
         font-size: 3vw;
     }
 
+    #shopContainer{
+        width: 90vw;
+        margin: 5vw;
+    }
+
     #coins {
-        bottom: 10vw;
+        top: 3vw;
+    }
+
+    #purchaseModal {
+        padding-top: 70vw;
     }
 
 }
@@ -295,8 +305,18 @@ this @media rule applies when the width < height of browser.
         font-size: 3vh;
     }
 
-    #coins {
-        bottom: 10vh;
+    #shopContainer{
+        width: 200vh;
+        margin: 10vh;
     }
+
+    #coins {
+        top: 3vh;
+    }
+
+    #purchaseModal {
+        padding-top: 70vh;
+    }
+
 
 }

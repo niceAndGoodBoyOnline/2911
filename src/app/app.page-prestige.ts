@@ -408,5 +408,24 @@ export class PagePrestigeComponent {
         }
     }
 
+    // Opens a modal for message when you attempt to purchase something from the shop
+    // Not prefect, but sort of works :P
+    openTempModal(){
+        let modal = document.getElementById("purchaseModal")
+        modal.style.display="block"
+
+        var timeOutFunction = setTimeout(function(){
+            modal.style.display="none"
+            sessionStorage.setItem("modalOpen", "false")
+        }, 2000)
+
+        if (sessionStorage.getItem("modalOpen") != "true"){
+            sessionStorage.setItem("modalOpen", "true")
+        }
+        else {
+            clearTimeout(timeOutFunction)
+        }
+    }
+
 
 }

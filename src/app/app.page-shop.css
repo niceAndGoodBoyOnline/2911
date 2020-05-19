@@ -10,11 +10,6 @@ body{
     overflow: hidden;
 }
 
-#shopContainer{
-    width: 90vw;
-    margin: 5vw;
-}
-
 #coins {
     border: 2px solid green;
     padding: 5px;
@@ -22,8 +17,7 @@ body{
     width: fit-content;
     margin-left: auto;
     margin-right: auto;
-    position: sticky;
-    
+    position: sticky; 
 }
 #sound {
     display: block;
@@ -69,7 +63,6 @@ and sound & music buttons).*/
     animation-duration: 0.8s;
     border-top: 2px solid green;
     border-bottom: 2px solid green;
-    height: 84vh;
     overflow: auto;
     z-index: 3;
 }
@@ -117,7 +110,7 @@ and sound & music buttons).*/
     background-color: greenyellow
 }
 
-/* The Modal (background) */
+/* The Modal at the bottom of the screen */
 #purchaseModal{
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -129,13 +122,13 @@ and sound & music buttons).*/
     pointer-events: none;
   }
   
-  /* Modal Content */
+  /* Content of the modal at the bottom of the screen */
   .modal-content {
-    background-color: rgb(100,100,100,0.6);
+    background-color: black;
     color: greenyellow;
     margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
+    padding: 10px;
+    border: 2px solid green;
     width: fit-content;
   }
 
@@ -160,10 +153,6 @@ this @media rule applies when the width < height of browser.
         width: 100w;
         height: auto;
     }
-
-    #shopContainer{
-       font-size: 2vw;
-    }
     
     #osImg{
         height: auto;
@@ -172,25 +161,12 @@ this @media rule applies when the width < height of browser.
         right: 5vw;
     }
 
-    #terminal{
-        font-size: 3vw;
-        width:50vw;
-        height: 4vw;
-        right: 5vw;
-        bottom: 5vh;
-    }
-
     h1{
         font-size: 5vw
     }
     
     h2 {
         font-size:3vw;
-    }
-    
-    .firewall {
-        width:auto;
-        height:50vh;
     }
     
     #sound {
@@ -215,7 +191,7 @@ this @media rule applies when the width < height of browser.
     }
 
     #shopOverlay {
-        height: 84vw;
+        height: 83.5vw;
     }
 
     td {
@@ -225,6 +201,11 @@ this @media rule applies when the width < height of browser.
     #shopContainer{
         width: 90vw;
         margin: 5vw;
+        font-size: 2vw;
+    }
+
+    #shopScreen {
+        height: 84vw;
     }
 
     #coins {
@@ -232,7 +213,7 @@ this @media rule applies when the width < height of browser.
     }
 
     #purchaseModal {
-        padding-top: 70vw;
+        padding-top: 90vw;
     }
 
 }
@@ -246,34 +227,15 @@ this @media rule applies when the width < height of browser.
         height: 100vh;
     }
 
-
-    #shopContainer{
-        font-size: 4vh;
-     }
-    
-
     #osImg{
         height: auto;
         width: 10vh;
         top: 10vh;
         right: 5vw;
     }
-
-    #terminal{
-        font-size: 3vh;
-        width:40vw;
-        height: 4vh;
-        right: 5vw;
-        bottom: 5vh;
-    }
     
     h2 {
         font-size:4vh;
-    }
-    
-    .firewall {
-        width:auto;
-        height:50vh;
     }
     
     #sound {
@@ -298,7 +260,7 @@ this @media rule applies when the width < height of browser.
     }
 
     #shopOverlay {
-        height: 83vh;
+        height: 83.5vh;
     }
 
     td {
@@ -308,6 +270,11 @@ this @media rule applies when the width < height of browser.
     #shopContainer{
         width: 200vh;
         margin: 10vh;
+        font-size: 4vh;
+    }
+
+    #shopScreen {
+        height: 84vh;
     }
 
     #coins {
@@ -315,7 +282,7 @@ this @media rule applies when the width < height of browser.
     }
 
     #purchaseModal {
-        padding-top: 70vh;
+        padding-top: 90vh;
     }
 
 

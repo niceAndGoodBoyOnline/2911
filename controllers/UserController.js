@@ -8,8 +8,12 @@ const _itemRepo = new ItemRepo();
 const PrestigeRepo = require('../data/PrestigeRepo')
 const _prestigeRepo = new PrestigeRepo();
 
+const CommandRepo = require('../data/CommandRepo')
+const _commandRepo = new CommandRepo();
+
 var   passport       = require('passport');
 const RequestService = require('../services/RequestService');
+
 
 //This variable is to prevent multiple instances of autosaves / autobitcoin
 var timer = false;
@@ -58,10 +62,11 @@ exports.RegisterUser  = async function(req, res){
         var newUser = new User({
             email:        req.body.email,
             username:     req.body.username,
-            bitcoin:      1,
+            bitcoin:        0,
             prestigePoints: 0,
-            items: req.body.items,
-            prestige: req.body.prestige
+            items:        req.body.items,
+            prestige:     req.body.prestige,
+            commands:     req.body.commands
         });
        
         // Uses passport to register the user.
@@ -158,6 +163,15 @@ exports.getItemArray = async function(req, res){
     res.json(itemArray)
 }
 
+exports.getCommandArray = async function(req, res){
+    // Call getItemCommand() from UserRepo.js with email from POST request as parameter
+    let commandArray = await _userRepo.getCommandArray(req.body.email)
+    
+    // Return whatever is returned from getItemArray from UserRepo.js
+    // This data is recieved by "(data) => " in whatever function in the frontend that called this function.
+    res.json(commandArray)
+}
+
 // Increase bitcoin for ALL USERS every 5 seconds.
 // This is the afk bitcoin gain function.
 exports.autoBitcoin = async function(req, res){
@@ -211,7 +225,6 @@ exports.resetGainPrestige = async function(req, res){
 exports.makePrestigeTransaction = async function(req, res){
     let index = await _prestigeRepo.getPrestigeIndex(req.body.name)
     let respond = await _userRepo.makePrestigeTransaction(req.body.email, index)
-
     res.json(respond)
 }
 
@@ -219,4 +232,21 @@ exports.getUserPrestigeItems = async function(req, res){
     let prestigeItems = await _userRepo.getUserPrestigeItems(req.body.email)
 
     res.json(prestigeItems)
+}
+
+exports.executeCommand = async function(req, res){
+    command = req.body.command;
+    let allCommands = await _commandRepo.getCommands();
+    let userCommandStatus = await _userRepo.findCommand(command, req.body.email)
+    
+    if (userCommandStatus == true){
+        for (let i=0;i<allCommands.length;i++){
+            if (command == allCommands[i].command){
+                res.json(allCommands[i])
+            }
+        }   
+    }
+    else{
+        res.json(userCommandStatus)
+    }
 }

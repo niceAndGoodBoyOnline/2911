@@ -36,6 +36,17 @@ class UserRepo {
         //return the user's bitcoin
         return bitcoin
     }
+    async findCommand(command, email){
+        let userCommand = await User.findOne({email:email});
+
+        for (let i = 0;i<userCommand.commands.length;i++){
+            if (command == userCommand.commands[i]){
+                return true
+            }
+        }
+        return false
+    }
+
 
     // Save the user's bitcoin to the database
     async saveProgress(email, bitcoin) {
@@ -79,6 +90,14 @@ class UserRepo {
         let user = await User.findOne({email:email})
         // return the user's item quantity
         return user.items
+    }
+
+    // Get the user's known commands
+    async getCommandArray(email){
+        // findOne() means to find the user with the following information
+        let user = await User.findOne({email:email})
+        // return the user's item quantity
+        return user.commands
     }
 
     // Increase ALL user's bitcoins.

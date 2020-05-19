@@ -11,6 +11,9 @@ const Firewalls       = require('../models/Firewall');
 const FirewallRepo   = require('../data/FirewallRepo')
 const _firewallRepo  = new FirewallRepo();
 
+const CommandRepo   = require('../data/CommandRepo')
+const _commandRepo  = new CommandRepo();
+
 //Get all the items from the database
 exports.getItems = async function(req, res){
     //Call getItems() in ItemRepo.js and assign returned value to items
@@ -33,4 +36,11 @@ exports.getFirewalls = async function(req,res){
     let firewallList = await _firewallRepo.getFirewalls();
 
     res.json(firewallList)
+}
+
+
+exports.getCommands = async function(req,res){
+    let commandList = await _commandRepo.getCommands();
+
+    res.json(commandList)
 }

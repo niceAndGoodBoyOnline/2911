@@ -8,7 +8,7 @@ import { pathService } from './services/path.service';
   selector: 'app-root',
   // Assign which html page to this component.
   templateUrl: './app.page-main.html',
-  styleUrls: ['./app.page-main.css', './app.page-main.settings.css', './app.page-main.firewalls.css', './app.page-main.osGUI.css']
+  styleUrls: ['./app.page-main.css', './app.page-main.settings.css', './app.page-main.firewalls.css', './app.page-main.osGUI.css', '/app.page-main.terminal.css']
 })
 export class PageMainComponent {
  
@@ -18,7 +18,7 @@ export class PageMainComponent {
     _apiService:ApiService;
 
     // User stuff for the game
-    bitcoin: number
+    bitcoin;
     totalPower: number
     prestigeMultiplier: number = 1
     hackMod: number = 1
@@ -45,13 +45,14 @@ export class PageMainComponent {
     ramImg: string = "assets/images/ram.png";
     
 
-    // expUI stuff
+    // UI stuff
+    settingsState: boolean = false;
+    osImgArray = ["os0p1.gif", "os1p1.gif", "os2p1.gif", "os3p1.gif", "os4p1.gif"]
     osState:boolean=false;
     guiState:boolean=false;
-    osImg = 'assets/images/title_animations/os0p1.gif'
-    shopImg = "assets/images/gui/shop.png"
-    multiImg = "assets/images/gui/multi.png"
-    prestigeImg = "assets/images/gui/prestige.png"
+    osImgPath = 'assets/image/title-animation/os0p1.gif'
+    shopImg = "assets/images/gui/shop.gif"
+    prestigeImg = "assets/images/gui/prestige.gif"
     imgState = "hidden"
    
     // networkmenu stuff
@@ -66,8 +67,15 @@ export class PageMainComponent {
     currentFirewallStats;
     currentSecurity: number = 1;
 
-    // mission stuff
-    currentMission;
+    // cli stuff
+    commandArray;
+    terminalState: boolean = false;
+    userCommandArray;
+    errorImg = 'assets/images/gui/error.gif'
+    errorState = 'hidden'
+    cliMessage;
+    cliValue;
+    cliMessageWidth: string = 'width:0vw;';
 
     public site: string;
     path: any
@@ -97,9 +105,11 @@ export class PageMainComponent {
         await this.setSound()
         await this.setCurrentMusic()
         await this.setMusic()
+        await this.getCommandArray()
         //await this.moveRam()
         await this.setSoundVolume()
         await this.setMusicVolume()
+        this.osShuffle()
         // await this.getFirewallArray()
         //console.log("Setup Complete!")
         console.log("-----------------------------------MAIN PAGE SETUP -----------------------------------------")
@@ -129,6 +139,109 @@ export class PageMainComponent {
         }
     }
 
+    
+    toggleTerminalOutput(){
+        if (this.terminalState == false){
+            this.terminalState = true;
+            this.cliMessageWidth = 'width:80vw';
+        }
+        else if (this.terminalState == true){
+            this.cliMessageWidth = 'width:0vw;';
+            this.cliMessage = ''
+            this.errorState = 'hidden';
+        }
+    }
+
+    // handles false returns on cli commands
+    unknownCommand(command){
+        this.terminalState = true;
+        this.cliMessageWidth = 'width:80vw;';
+        this.cliMessage = command + " is not a command you know. \n\n\n Use help command to see known commands."
+        this.errorState = 'visible'
+    }
+
+    // recursive function to change the osImg randomly cause it looks cool
+    osShuffle() {
+        let rollNum = Math.floor(Math.random() * (this.osImgArray.length) );
+        this.osImgPath = "assets/images/title_animations/" + this.osImgArray[rollNum];
+        setTimeout (() => {
+            this.osShuffle();
+         }, 12000);
+    }
+
+
+    async getCommandArray(){
+              // make a new array here
+              var array = []
+              // Locate what appropriate controller to use in the backend
+              // (This path refers to a path in router.js)
+              let url = this.site + 'Game/getCommands'
+              // Send a GET request.
+              // GET requests dont need to send any data from frontend to backend. GET is to just "get" stuff. Usually everything.
+              this.http.get<any>(url)
+                  .subscribe(
+                      // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                      // If data is recieved from backend,
+                      (data) => {
+                          for(let i=0;i<data.length;i++){
+                              array.push(data[i])
+                          }
+                          console.log('full command array: ', array)
+                          this.commandArray = array;
+                      } )
+    }
+
+    // Get the quantity of items the user bought from the database
+    async getUserCommandArray(){
+        // Locate what appropriate controller to use in the backend
+        // (This path refers to a path in router.js)
+        let url = this.site + 'user/getCommandArray'
+        // Send a POST request with email data.
+        // In UserController.js, this email data is recieved by "req.body.email"
+        // This is how we get data from frontend(Andular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
+        this.http.post<any>(url, {
+            email: sessionStorage.getItem("email")
+        })
+            .subscribe(
+                // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                // If data is recieved from the backend,
+                (data) => {
+                    //console log the data (for debugging purposes)
+                    //console.log(data)
+                    // create a variable here and assign it to data
+                    let userCommandArray = data
+                    // use that variable as parameter to getItems function
+                    console.log('usercommandarray: ', userCommandArray)
+                } )
+    }
+
+    async cli(command){
+        // Locate what appropriate controller to use in the backend.
+        // (This path refers to a path in router.js)
+        let url = this.site + 'user/executeCommand'
+        // Send a POST request with email data.
+        // In UserController.js, this email data is recieved by "req.body.email".
+        // This is how we get data from frontend(Angular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
+        this.http.post<any>(url, {
+            command: command, email: sessionStorage.getItem("email")
+        })
+            .subscribe(
+                // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                // If data is recieved from the backend,
+                (data) => {
+                    //Assign this.bitcoin to whatever returned from the backend.
+                    this.toggleTerminalOutput();
+                    if (data == false){
+                        this.unknownCommand(command)
+                    }
+                    else{
+                        eval(data.function)
+                    }
+                    this.cliValue = "";
+                } )
+    }
+
+
     // sets the stats of firewalls on load and when they are "hacked"
     setFirewallStats(i){
         // i is the index passed from this.firewallArray through HTML/user interaction
@@ -153,7 +266,6 @@ export class PageMainComponent {
 
     // Get the amount of bitcoins the user has from the database to display in the main page
     getBitcoin() {
-        console.log("get Bitcoin")
         // Locate what appropriate controller to use in the backend.
         // (This path refers to a path in router.js)
         let url = this.site + 'user/getBitcoin'
@@ -335,6 +447,10 @@ export class PageMainComponent {
 
     // This is how bitcoin is increased each click.
     increaseBitcoin() {
+
+        if (this.bitcoin == 'null'){
+            this.bitcoin = 0;
+        }
 
         this.bitcoin += Math.floor( ((1 + this.totalPower) * this.hackMod) * this.tempPowerIncrease * this.currentFirewallStats[2])
         this.totalClickPower = ((1 + this.totalPower) * this.prestigeMultiplier) * this.tempPowerIncrease
@@ -622,11 +738,21 @@ export class PageMainComponent {
 
     }
     // Function to open settings modal
-    openSettings(){
+    toggleSettings(){
         // Get the modal through the id
         var modal = document.getElementById("settingsBox");
-        // Change css of modal to display it
-        modal.style.display = "block"
+        console.log(modal)
+        if (this.settingsState == false){
+            this.settingsState = true;
+            this.settingsImg = 'assets/images/gui/close.gif'
+            // Change css of modal to display it
+            modal.style.display = "block"
+        }
+        else if (this.settingsState == true){
+            this.settingsState = false;
+            this.settingsImg = 'assets/images/Settings.png'
+            modal.style.display = "none"
+        }
         }
 
     // Function to close settings modal

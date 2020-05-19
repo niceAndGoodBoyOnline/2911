@@ -20,19 +20,6 @@ body{
     z-index: 10;
 }
 
-
-#terminal{
-    position: absolute;
-    z-index: 10;
-    border-color: rgba(00,00,00,0);
-    border-bottom-color: green;
-    border-style: solid;
-    background-color: rgba(96, 160, 155, 0.3);
-    float:right;
-    top:80vh;
-    right: 20vw;
-}
-
 img {
     display: block;
     margin-left: auto;
@@ -53,23 +40,12 @@ this @media rule applies when the width < height of browser.
         height: 95vh;
     }
 
-    #terminal{
-        width: 50vw;
-        height: 3vh;
-        font-size: 2vh;
-    }
-
     h2 {
         font-size:5vw;
     }
     
     .stats{
         font-size: 3vw;
-    }
-
-    .firewall {
-        width:auto;
-        height:50vh;
     }
 
     .ram{
@@ -101,24 +77,11 @@ this @media rule applies when the width < height of browser.
         right: 50vw;;
     }
     
-
-
-    #terminal{
-        font-size: 3vh;
-        width:30vw;
-        height: 4vh;
-        right: 5vw;
-        top: 66vh;
-    }
     
     h2 {
         font-size:4vh;
     }
-    
-    .firewall {
-        width:auto;
-        height:50vh;
-    }
+
     
     .bitcoin {
         font-size:3vh;

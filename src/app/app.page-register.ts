@@ -20,6 +20,7 @@ export class PageRegisterComponent {
 
     itemArray: any;
     prestigeArray: any;
+    commandArray: any;
 
     
     token                 = '';
@@ -57,6 +58,7 @@ export class PageRegisterComponent {
     async setup() {
         await this.getItems()
         await this.getPrestigeItems()
+        await this.getCommandArray()
         await this.setSound()
         await this.setMusic()
         await this.setSoundVolume()
@@ -65,7 +67,7 @@ export class PageRegisterComponent {
     }
 
         // Get all of the items in the database
-    getItems() {
+    async getItems() {
         // make a new array here
         var array = []
         // Locate what appropriate controller to use in the backend
@@ -98,6 +100,28 @@ export class PageRegisterComponent {
                 } )
     }
 
+    async getCommandArray(){
+        // make a new array here
+        console.log("trying to get commands?")
+        var array = []
+        // Locate what appropriate controller to use in the backend
+        // (This path refers to a path in router.js)
+        let url = this.site + 'Game/getCommands'
+        // Send a GET request.
+        // GET requests dont need to send any data from frontend to backend. GET is to just "get" stuff. Usually everything.
+        this.http.get<any>(url)
+            .subscribe(
+                // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                // If data is recieved from backend,
+                (data) => {
+                    for(let i=0;i<data.length;i++){
+                        array.push(data[i])
+                    }
+                    console.log('full command array: ', array)
+                    this.commandArray = array;
+                } )
+    }
+
     titleShuffle() {
         let rollNum = Math.floor(Math.random() * (this.osImgArray.length) );
 
@@ -114,11 +138,15 @@ export class PageRegisterComponent {
 
         let items = []
         let prestige = []
+        let commands = []
         for(let i=0;i<this.itemArray.length;i++){
             items.push(0)
         }
         for(let i=0;i<this.prestigeArray.length;i++){
             prestige.push(0)
+        }
+        for(let i=0;i<this.commandArray.length;i++){
+            commands.push("-help")
         }
     
         // Send a POST request with below data.
@@ -132,7 +160,8 @@ export class PageRegisterComponent {
                 email: this.email,
                 username: this.username,
                 items: items,
-                prestige: prestige
+                prestige: prestige,
+                commands: commands
             })
         .subscribe( 
         // Data is received from the post request.

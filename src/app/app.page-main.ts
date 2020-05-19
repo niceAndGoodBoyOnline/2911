@@ -8,7 +8,7 @@ import { pathService } from './services/path.service';
   selector: 'app-root',
   // Assign which html page to this component.
   templateUrl: './app.page-main.html',
-  styleUrls: ['./app.page-main.css', './app.page-main.settings.css', './app.page-main.firewalls.css', './app.page-main.osGUI.css']
+  styleUrls: ['./app.page-main.css', './app.page-main.settings.css', './app.page-main.firewalls.css', './app.page-main.osGUI.css', '/app.page-main.terminal.css']
 })
 export class PageMainComponent {
  
@@ -66,8 +66,11 @@ export class PageMainComponent {
     currentFirewallStats;
     currentSecurity: number = 1;
 
-    // mission stuff
-    currentMission;
+    // cli stuff
+    commandArray;
+    userCommandArray;
+    cliMessage;
+    cliMessageWidth: string = "width:0;";
 
     public site: string;
     path: any
@@ -97,6 +100,7 @@ export class PageMainComponent {
         await this.setSound()
         await this.setCurrentMusic()
         await this.setMusic()
+        await this.getCommandArray()
         //await this.moveRam()
         await this.setSoundVolume()
         await this.setMusicVolume()
@@ -127,6 +131,77 @@ export class PageMainComponent {
             this.networkSelectMenuState = true;
             this.networkSelectMenu = "netOpen"
         }
+    }
+
+    async getCommandArray(){
+              // make a new array here
+              var array = []
+              // Locate what appropriate controller to use in the backend
+              // (This path refers to a path in router.js)
+              let url = this.site + 'Game/getCommands'
+              // Send a GET request.
+              // GET requests dont need to send any data from frontend to backend. GET is to just "get" stuff. Usually everything.
+              this.http.get<any>(url)
+                  .subscribe(
+                      // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                      // If data is recieved from backend,
+                      (data) => {
+                          for(let i=0;i<data.length;i++){
+                              array.push(data[i])
+                          }
+                          console.log('full command array: ', array)
+                          this.commandArray = array;
+                      } )
+    }
+
+    // Get the quantity of items the user bought from the database
+    async getUserCommandArray(){
+        // Locate what appropriate controller to use in the backend
+        // (This path refers to a path in router.js)
+        let url = this.site + 'user/getCommandArray'
+        // Send a POST request with email data.
+        // In UserController.js, this email data is recieved by "req.body.email"
+        // This is how we get data from frontend(Andular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
+        this.http.post<any>(url, {
+            email: sessionStorage.getItem("email")
+        })
+            .subscribe(
+                // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                // If data is recieved from the backend,
+                (data) => {
+                    //console log the data (for debugging purposes)
+                    //console.log(data)
+                    // create a variable here and assign it to data
+                    let userCommandArray = data
+                    // use that variable as parameter to getItems function
+                    console.log('usercommandarray: ', userCommandArray)
+                } )
+    }
+
+    async cli(command){
+        console.log("sending command")
+        // Locate what appropriate controller to use in the backend.
+        // (This path refers to a path in router.js)
+        let url = this.site + 'user/executeCommand'
+        // Send a POST request with email data.
+        // In UserController.js, this email data is recieved by "req.body.email".
+        // This is how we get data from frontend(Angular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
+        this.http.post<any>(url, {
+            command: command, email: sessionStorage.getItem("email")
+        })
+            .subscribe(
+                // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                // If data is recieved from the backend,
+                (data) => {
+                    //Assign this.bitcoin to whatever returned from the backend.
+                    console.log(data)
+                    if (data == false){
+                        console.log('unknown command, handle later')
+                    }
+                    else{
+                        eval(data.function)
+                    }
+                } )
     }
 
     // sets the stats of firewalls on load and when they are "hacked"

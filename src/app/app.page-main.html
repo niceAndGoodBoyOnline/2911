@@ -32,9 +32,16 @@
             <img id='prestigeGUI' class={{imgState}} src={{prestigeImg}} (click)="openPrestige();clickSound()" >
         </div>
 
+        <!--
         <div id='console' ngDraggable>
-            <input id='terminal' type='text' value='$:' (click)='cli()'>
+            <input id='terminal' type='text' value='' (keydown.enter)='cli(value)'>
+            <div id='cliMessage' style={{cliMessageWidth}}>{{cliMessage}}</div>
         </div>
+        -->
+        <form id='console' ngDraggable ng-controller="cliCtrl">     
+            <input #terminal id='terminal' type='text' (keydown.enter)='cli(terminal.value)'>        </form>
+
+        <div id='cliMessage' style={{cliMessageWidth}}>{{cliMessage}}</div>
 
         <!-- The (click) attribute is basically: "execute this function when clicked on" -->
         <!-- In this case, when the shop button is clicked, execute openShop() in app.page-main.ts -->

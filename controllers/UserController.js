@@ -59,7 +59,9 @@ exports.RegisterUser  = async function(req, res){
             email:        req.body.email,
             username:     req.body.username,
             bitcoin:      1,
-            prestigePoints: 0
+            prestigePoints: 0,
+            items: req.body.items,
+            prestige: req.body.prestige
         });
        
         // Uses passport to register the user.
@@ -196,8 +198,12 @@ exports.savePrestigeProgress = async function(req, res){
 }
 
 exports.resetGainPrestige = async function(req, res){
+    let prestigeArray = req.body.prestigeArray
+    if(prestigeArray == undefined){
+        prestigeArray = await _prestigeRepo.getPrestigeItems()
+    }
     let prestige = await _userRepo.calculatePrestige(req.body.email)
-    let respond = await _userRepo.resetGainPrestige(req.body.email, prestige)
+    let respond = await _userRepo.resetGainPrestige(req.body.email, prestige, prestigeArray)
 
     res.json(respond)
 }

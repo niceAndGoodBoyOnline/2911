@@ -18,6 +18,9 @@ export class PageRegisterComponent {
     password = '';
     passwordConfirmation = '';
 
+    itemArray: any;
+    prestigeArray: any;
+
     
     token                 = '';
     message               = '';
@@ -52,11 +55,47 @@ export class PageRegisterComponent {
     }
 
     async setup() {
+        await this.getItems()
+        await this.getPrestigeItems()
         await this.setSound()
         await this.setMusic()
         await this.setSoundVolume()
         await this.setMusicVolume()
         console.log("Setup Complete!")
+    }
+
+        // Get all of the items in the database
+    getItems() {
+        // make a new array here
+        var array = []
+        // Locate what appropriate controller to use in the backend
+        // (This path refers to a path in router.js)
+        let url = this.site + 'Game/getItems'
+        // Send a GET request.
+        // GET requests dont need to send any data from frontend to backend. GET is to just "get" stuff. Usually everything.
+        this.http.get<any>(url)
+            .subscribe(
+                // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                // If data is recieved from backend,
+                (data) => {
+                    console.log('full item array: ', data)
+                    this.itemArray = data
+                } )
+    }
+
+    // Get all the prestige items in the database
+    async getPrestigeItems() {
+        // Locate which approrpiate controller function to use. In this case, we use getPrestigeItems function in GameController.js
+        // You can find this out in router.js
+        let url = this.site + 'Game/getPrestigeItems'
+        this.http.get<any>(url)
+            .subscribe(
+                // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                // If data is recieved,
+                (data) => {
+                    console.log('full prestige items: ', data)
+                    this.prestigeArray = data
+                } )
     }
 
     titleShuffle() {
@@ -72,6 +111,15 @@ export class PageRegisterComponent {
         // Locate which appropriate controller function to use. In this case, we're using RegisterUser in UserController.js.
         // (You can find where this leads in router.js file.)
         let url = this.site + "user/RegisterUser";
+
+        let items = []
+        let prestige = []
+        for(let i=0;i<this.itemArray.length;i++){
+            items.push(0)
+        }
+        for(let i=0;i<this.prestigeArray.length;i++){
+            prestige.push(0)
+        }
     
         // Send a POST request with below data.
         // In UserController.js, this below data is recieved by "req.body.[whatever we want to grab]"
@@ -82,7 +130,9 @@ export class PageRegisterComponent {
                 firstName: this.firstName,
                 lastName: this.lastName,
                 email: this.email,
-                username: this.username
+                username: this.username,
+                items: items,
+                prestige: prestige
             })
         .subscribe( 
         // Data is received from the post request.

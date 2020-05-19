@@ -89,7 +89,7 @@ export class PageMainComponent {
         this.musicPlayer.loop = true;
         this.musicPlayer.volume = 0.5;
         await this.checkLoggedIn()
-        await this.getBitcoin()
+        // await this.getBitcoin()
         // await this.getUserPrestigeItems()
         await this.getUserItemArray()
         await this.startAutosave()
@@ -217,11 +217,9 @@ export class PageMainComponent {
                 // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
                 // If data is recieved from backend,
                 (data) => {
-                    // for each item in the recieved data, put the item power in the array we just made.
                     for(let i=0;i<data.length;i++){
                         array.push(data[i])
                     }
-                    // Calculate the total power with the array we made and the array we have that was passed from getUserItemArray.
                     console.log('full item array: ', array)
                     this.getFirewallArray(array, userItemArray)
                     // this.calculatePowers(array, userItemArray)
@@ -270,7 +268,6 @@ export class PageMainComponent {
                 // If data is recieved,
                 (data) => {
                     console.log('full prestige items: ', data)
-                    // console log the data (For debugging purposes).
                     this.calculatePrestigeMultiplier(itemArray, userItemArray, firewallArray, userPrestigeItems, data)
                 } )
     }
@@ -331,6 +328,7 @@ export class PageMainComponent {
         }
         this.totalClickPower = ((1 + this.totalPower) * this.prestigeMultiplier) * this.tempPowerIncrease
         console.log('totalpower: ', this.totalPower, 'Prestige Multiplier: ', this.prestigeMultiplier, 'tempowerincrease: ', this.tempPowerIncrease, 'hackMod(bitcoin): ', this.hackMod)
+        this.getBitcoin()
     }
 
 

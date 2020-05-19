@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <td><p class="lable">Password Confirmation:</p></td>
-                <td><input class="boxes" type='password' [(ngModel)]='passwordConfirmation'/></td>
+                <td><input class="boxes" type='password' [(ngModel)]='passwordConfirmation' (keydown.enter)='register($event);clickSound($event)'/></td>
             </tr>
         </table>
         

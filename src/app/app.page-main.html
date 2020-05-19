@@ -27,7 +27,7 @@
         <!-- In this case, we grab bitcoin data from app.page-main.ts and put it here. -->
         <!-- You can find out what data is available by looking at the variables below "export class PageMainComponent" in app.page-main.ts -->
         <div id='osGUI' ngDraggable>
-            <img id='osImg' src={{osImg}} (click)='toggleGUI();clickSound()' (mouseenter)="hoverSound()">
+            <img id='osImg' src={{osImgPath}} (click)='toggleGUI();clickSound()' (mouseenter)="hoverSound()">
             <img id='shopGUI' class={{imgState}} src={{shopImg}} (click)="openShop();clickSound()" >
             <img id='prestigeGUI' class={{imgState}} src={{prestigeImg}} (click)="openPrestige();clickSound()" >
         </div>
@@ -39,21 +39,19 @@
         </div>
         -->
         <form id='console' ngDraggable ng-controller="cliCtrl">     
-            <input #terminal id='terminal' type='text' (keydown.enter)='cli(terminal.value)'>        </form>
+            <input #terminal id='terminal' type='text' value='{{cliValue}}' (keydown.enter)='cli(terminal.value)'>
+        </form>
 
-        <div id='cliMessage' style={{cliMessageWidth}}>{{cliMessage}}</div>
+        
+        <div id='cliContainer' style='{{cliMessageWidth}}' (click)='toggleTerminalOutput()'>
+            <br><img id='errorImg' src={{errorImg}} class='{{errorState}}'>
+            <div id="cliText">{{cliMessage}}</div> 
+        </div>
 
-        <!-- The (click) attribute is basically: "execute this function when clicked on" -->
-        <!-- In this case, when the shop button is clicked, execute openShop() in app.page-main.ts -->
-        <!--  Old UI
-        <input class='menuButton' type="button" value="Shop" (click)="openShop();clickSound()" (mouseenter)="hoverSound()">
-        <input class='menuButton' type="button" value="Prestige Shop" (click)="openPrestige();clickSound()" (mouseenter)="hoverSound()">
-        <input class='menuButton' type="button" value="Save Game" (click)="saveProgress();clickSound()" (mouseenter)="hoverSound()">
-        -->
         
         <img src='{{soundImg}}' (click)="changeSound(this);clickSound()" id="sound">
         <img src='{{musicImg}}' (click)="changeMusic(this);clickSound()" id="music">
-        <img src='{{settingsImg}}' (click)="openSettings(this);clickSound()" id="settingsImg">        
+        <img src='{{settingsImg}}' (click)="toggleSettings(this);clickSound()" id="settingsImg">        
         <img src='{{ramImg}}' (click)="increaseTempPower();clickSound()" id="ram" class="ram" ngDraggable>
        
 
@@ -65,7 +63,6 @@
        
         <div id="settingsBox" class="modal">
             <div class="modal-content">
-                <span class="closeSettings" (click)="closeSettings(this)">&times;</span>
                 <p>Settings</p>
                 <hr class="horizontalLine">
                 <div class="soundSettings">

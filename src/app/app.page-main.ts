@@ -45,13 +45,14 @@ export class PageMainComponent {
     ramImg: string = "assets/images/ram.png";
     
 
-    // expUI stuff
+    // UI stuff
+    settingsState: boolean = false;
+    osImgArray = ["os0p1.gif", "os1p1.gif", "os2p1.gif", "os3p1.gif", "os4p1.gif"]
     osState:boolean=false;
     guiState:boolean=false;
-    osImg = 'assets/images/title_animations/os0p1.gif'
-    shopImg = "assets/images/gui/shop.png"
-    multiImg = "assets/images/gui/multi.png"
-    prestigeImg = "assets/images/gui/prestige.png"
+    osImgPath = 'assets/image/title-animation/os0p1.gif'
+    shopImg = "assets/images/gui/shop.gif"
+    prestigeImg = "assets/images/gui/prestige.gif"
     imgState = "hidden"
    
     // networkmenu stuff
@@ -68,9 +69,13 @@ export class PageMainComponent {
 
     // cli stuff
     commandArray;
+    terminalState: boolean = false;
     userCommandArray;
+    errorImg = 'assets/images/gui/error.gif'
+    errorState = 'hidden'
     cliMessage;
-    cliMessageWidth: string = "width:0;";
+    cliValue;
+    cliMessageWidth: string = 'width:0vw;';
 
     public site: string;
     path: any
@@ -104,6 +109,7 @@ export class PageMainComponent {
         //await this.moveRam()
         await this.setSoundVolume()
         await this.setMusicVolume()
+        this.osShuffle()
         // await this.getFirewallArray()
         //console.log("Setup Complete!")
         console.log("-----------------------------------MAIN PAGE SETUP -----------------------------------------")
@@ -132,6 +138,37 @@ export class PageMainComponent {
             this.networkSelectMenu = "netOpen"
         }
     }
+
+    
+    toggleTerminalOutput(){
+        if (this.terminalState == false){
+            this.terminalState = true;
+            this.cliMessageWidth = 'width:80vw';
+        }
+        else if (this.terminalState == true){
+            this.cliMessageWidth = 'width:0vw;';
+            this.cliMessage = ''
+            this.errorState = 'hidden';
+        }
+    }
+
+    // handles false returns on cli commands
+    unknownCommand(command){
+        this.terminalState = true;
+        this.cliMessageWidth = 'width:80vw;';
+        this.cliMessage = command + " is not a command you know. \n\n\n Use help command to see known commands."
+        this.errorState = 'visible'
+    }
+
+    // recursive function to change the osImg randomly cause it looks cool
+    osShuffle() {
+        let rollNum = Math.floor(Math.random() * (this.osImgArray.length) );
+        this.osImgPath = "assets/images/title_animations/" + this.osImgArray[rollNum];
+        setTimeout (() => {
+            this.osShuffle();
+         }, 12000);
+    }
+
 
     async getCommandArray(){
               // make a new array here
@@ -179,7 +216,6 @@ export class PageMainComponent {
     }
 
     async cli(command){
-        console.log("sending command")
         // Locate what appropriate controller to use in the backend.
         // (This path refers to a path in router.js)
         let url = this.site + 'user/executeCommand'
@@ -194,15 +230,17 @@ export class PageMainComponent {
                 // If data is recieved from the backend,
                 (data) => {
                     //Assign this.bitcoin to whatever returned from the backend.
-                    console.log(data)
+                    this.toggleTerminalOutput();
                     if (data == false){
-                        console.log('unknown command, handle later')
+                        this.unknownCommand(command)
                     }
                     else{
                         eval(data.function)
                     }
+                    this.cliValue = "";
                 } )
     }
+
 
     // sets the stats of firewalls on load and when they are "hacked"
     setFirewallStats(i){
@@ -228,7 +266,6 @@ export class PageMainComponent {
 
     // Get the amount of bitcoins the user has from the database to display in the main page
     getBitcoin() {
-        console.log("get Bitcoin")
         // Locate what appropriate controller to use in the backend.
         // (This path refers to a path in router.js)
         let url = this.site + 'user/getBitcoin'
@@ -701,11 +738,21 @@ export class PageMainComponent {
 
     }
     // Function to open settings modal
-    openSettings(){
+    toggleSettings(){
         // Get the modal through the id
         var modal = document.getElementById("settingsBox");
-        // Change css of modal to display it
-        modal.style.display = "block"
+        console.log(modal)
+        if (this.settingsState == false){
+            this.settingsState = true;
+            this.settingsImg = 'assets/images/gui/close.gif'
+            // Change css of modal to display it
+            modal.style.display = "block"
+        }
+        else if (this.settingsState == true){
+            this.settingsState = false;
+            this.settingsImg = 'assets/images/Settings.png'
+            modal.style.display = "none"
+        }
         }
 
     // Function to close settings modal

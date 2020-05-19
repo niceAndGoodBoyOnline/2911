@@ -138,16 +138,14 @@ export class PageRegisterComponent {
 
         let items = []
         let prestige = []
-        let commands = []
+        let commands = ["help"]
         for(let i=0;i<this.itemArray.length;i++){
             items.push(0)
         }
         for(let i=0;i<this.prestigeArray.length;i++){
             prestige.push(0)
         }
-        for(let i=0;i<this.commandArray.length;i++){
-            commands.push("-help")
-        }
+
     
         // Send a POST request with below data.
         // In UserController.js, this below data is recieved by "req.body.[whatever we want to grab]"

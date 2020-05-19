@@ -26,7 +26,15 @@ img {
     margin-right: auto;
 }
 
+.hidden{
+    visibility: hidden;
+    transition: all 1s;
+}
 
+.visible{
+   visibility: visible;
+   transition: all 1s;
+}
 
   /*
 this @media rule applies when the width < height of browser.

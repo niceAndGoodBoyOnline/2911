@@ -6,25 +6,6 @@
     left:0;
 }
 
-.hidden{
-    opacity:0;
-    animation: fadeOut .5s;
-}
-
-@keyframes fadeOut {
-    0% {opacity: 1;}
-    100% {opacity: 0;} 
- } 
-
-.visible{
-   animation: fadeIn .5s;
-}
-
-@keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;} 
- } 
-
 
 #osImg{
     z-index: 5;
@@ -37,6 +18,7 @@
     position: absolute;
     z-index: 6;
     overflow:hidden;
+    transition: all .5s;
 }
 
 #multiGUI{
@@ -49,6 +31,13 @@
     position: absolute;
     z-index: 6;
     overflow:hidden;
+}
+
+.animateShopGUI{
+    top: 2vw;
+    left:0vw;
+    width: 2vw;
+    height: auto;
 }
 
   /*
@@ -104,14 +93,14 @@ this @media rule applies when the width < height of browser.
     
     #shopGUI{
         top: 3vh;
-        left: 15vw;
+        left: 30vh;
         width: 15vh;
         height: auto;
     }
     
     #prestigeGUI{
         top: 18vh;
-        left: 15vw;
+        left: 30vh;
         height: auto;
         width: 15vh;
     }

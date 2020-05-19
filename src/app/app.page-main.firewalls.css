@@ -2,7 +2,7 @@
     background-color: rgba(00,00,00,.7);
     border-bottom-color:green;
     position: absolute;
-    z-index: 20;
+    z-index: 15;
 }
 
 .networkButton{
@@ -58,6 +58,8 @@ this @media rule applies when the width < height of browser.
         margin: 5vw;
         height: 80vh;
         font-size: 3vw;
+        border-top: green solid 1vw;
+        border-bottom: green solid 1vw;
     }
 
     .networkButton{
@@ -93,6 +95,9 @@ this @media rule applies when the width < height of browser.
         font-size: 3vw;
         top:0;
         right:0;
+        border-top: green solid 1vh;
+        border-bottom: green solid 1vh;
+
     }
 
     .networkButton{

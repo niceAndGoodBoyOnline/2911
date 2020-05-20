@@ -68,14 +68,14 @@ export class PageMainComponent {
     currentSecurity: number = 1;
 
     // cli stuff
+    outputState = 'outputClosed';
     commandArray;
     terminalState: boolean = false;
     userCommandArray;
     errorImg = 'assets/images/gui/error.gif'
     errorState = 'hidden'
     cliMessage;
-    cliValue;
-    cliMessageWidth: string = 'width:0vw;';
+    cliMessageWidth: string = 'height:0vw;';
 
     public site: string;
     path: any
@@ -140,24 +140,31 @@ export class PageMainComponent {
     }
 
     
-    toggleTerminalOutput(){
-        if (this.terminalState == false){
-            this.terminalState = true;
-            this.cliMessageWidth = 'width:80vw';
-        }
-        else if (this.terminalState == true){
-            this.cliMessageWidth = 'width:0vw;';
-            this.cliMessage = ''
-            this.errorState = 'hidden';
-        }
+    openTerminalOutput(){
+            console.log("opening")
+            this.cliMessageWidth = 'auto';
+            this.outputState = 'outputOpen'
     }
+
+    closeTerminalOutput(){
+        console.log("closing")
+        this.cliMessageWidth = 'height:0vw;';
+        this.cliMessage = ''
+        this.errorState = 'hidden';
+        this.outputState = 'outputClosed'
+
+    }
+
 
     // handles false returns on cli commands
     unknownCommand(command){
-        this.terminalState = true;
-        this.cliMessageWidth = 'width:80vw;';
-        this.cliMessage = command + " is not a command you know. \n\n\n Use help command to see known commands."
+        this.cliMessage = command + " is not a command you know. Use help command to see known commands."
         this.errorState = 'visible'
+    }
+
+    clearInput(cli){
+        console.log(cli)
+        cli= '';
     }
 
     // recursive function to change the osImg randomly cause it looks cool
@@ -229,15 +236,14 @@ export class PageMainComponent {
                 // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
                 // If data is recieved from the backend,
                 (data) => {
-                    //Assign this.bitcoin to whatever returned from the backend.
-                    this.toggleTerminalOutput();
+                    this.openTerminalOutput()
                     if (data == false){
                         this.unknownCommand(command)
                     }
                     else{
+                        this.errorState = 'hidden';
                         eval(data.function)
                     }
-                    this.cliValue = "";
                 } )
     }
 

@@ -1,26 +1,30 @@
 #terminal{
     position: absolute;
-    z-index: 10;
+    z-index: 30;
     border-color: rgba(00,00,00,0);
     border-bottom-color: green;
     border-style: solid;
     background-color: rgba(96, 160, 155, 0.3);
-    float:right;
-    top:80vh;
-    right: 20vw;
 }
 
 #cliContainer{
-    position: fixed;
+    position: absolute;
     text-align: justify;
-    z-index: 100;
-    height: 90vh;
-    width: 0vw;
+    z-index: 30;
+    height: auto;
+    width: 20vw;
     transition: all .17s;
     background-color: rgba(00,00,00,0.8);
-    line-break: pre-wrap;
+    line-break: pre-line;
+
 }
 
+.outputClosed{
+    border-top: green solid 0vw;
+    border-bottom: green solid 0vw;
+    padding-bottom: 0vh;
+
+}
 
 
   /*
@@ -29,23 +33,28 @@ this @media rule applies when the width < height of browser.
 @media only screen and (orientation: portrait) {
 
     #errorImg{
-        width: 60vw;
+        width: 50vw;
     }
 
     #terminal{
         width: 50vw;
         height: 3vh;
+        top:77vh;
+        left:30vw;
         font-size: 2vh;
     }
 
     #cliContainer{
-        font-size: 3vw;
-        top: 5vh;
-        left: 5vw;
-        margin-left: 5vw;
+        font-size: 2vw;
+        width:50vw;
+        top:80vh;
+        left: 30vw;
+    }
+
+    .outputOpen{
         border-top: green solid 1vw;
         border-bottom: green solid 1vw;
-
+        padding-bottom: 3vh;
     }
 
     #cliText{
@@ -59,7 +68,7 @@ this @media rule applies when the width < height of browser.
 @media only screen and (orientation: landscape) {
 
     #errorImg{
-        width: 60vw;
+        width: 20vw;
     }
 
     #terminal{
@@ -71,12 +80,10 @@ this @media rule applies when the width < height of browser.
     }
 
     #cliContainer{
-        font-size: 3vh;
-        top: 5vh;
-        left: 5vw;
-        margin-left: 5vw;
-        border-top: green solid 1vh;
-        border-bottom: green solid 1vh;
+        top:70vh;
+        left: 65vw;
+        width:30vw;
+        font-size: 2vh;
     }
 
     #cliText{
@@ -84,6 +91,9 @@ this @media rule applies when the width < height of browser.
         padding-right: 2vh;
     }
 
-
-
+    .outputOpen{
+        border-top: green solid 1vh;
+        border-bottom: green solid 1vh;
+        padding-bottom: 3vh;
+    }
 }

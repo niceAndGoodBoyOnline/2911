@@ -436,6 +436,8 @@ export class PageMainComponent {
         this.totalPower = 0
         this.autoClickPower = 0
         this.tempPowerIncrease = 1
+        console.log(itemArray)
+        console.log(userItemArray)
         // for each item in userItemArray
         for(let i=0;i < userItemArray.length;i++){
             if(itemArray[i].item.includes('(Auto)')){
@@ -767,7 +769,7 @@ export class PageMainComponent {
         var modal = document.getElementById("settingsBox");
         // Change css of modal to be unable to see it
         modal.style.display = "none"
-        }1
+        }
 
     // Function to set the sound volume when entering the page
     async setSoundVolume(){

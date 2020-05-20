@@ -29,8 +29,12 @@ export class PageRegisterComponent {
     public site:string;
     path:       any;
 
-    soundImg: string = "assets/images/SoundOn.png";
-    musicImg: string = "assets/images/musicOn.png"
+    soundOn = "assets/images/settings/SoundOn.png";
+    soundOff = "assets/images/settings/SoundOff.png";
+    soundImg = this.soundOn;
+    musicOn =  "assets/images/settings/musicOn.png";
+    musicOff =  "assets/images/settings/musicOff.png";
+    musicImg = this.musicOn;
     musicPlayer = <HTMLAudioElement>document.getElementById("musicPlayer")
     currentSong: string = "assets/sounds/songs/theme.mp3";
     hoverSoundFile = 'assets/sounds/HoverSound.mp3'
@@ -42,8 +46,9 @@ export class PageRegisterComponent {
     osImgArray = ["os0p1.gif", "os1p1.gif", "os2p1.gif", "os3p1.gif", "os4p1.gif"]
    
     // Volume Settings Stuff
-    soundVolumeImg: string = 'assets/images/VolumeSettings0.6.png'
-    musicVolumeImg: string = 'assets/images/VolumeSettings0.6.png'
+    volumeBase = 'assets/images/settings/'
+    soundVolumeImg = this.volumeBase + 'VolumeSettings0.6.png'
+    musicVolumeImg = this.volumeBase + 'VolumeSettings0.6.png'
 
     // Since we are using a provider above we can receive 
     // an instance through an constructor.
@@ -184,19 +189,19 @@ export class PageRegisterComponent {
         if (sessionStorage.getItem('sound') == 'true'){
             // Keep sound on and change the image accordingly
             sessionStorage.setItem('sound', 'true')
-            this.soundImg = "assets/images/SoundOn.png";
+            this.soundImg = this.soundOff;
         }
         // If sound is turned off
         else if (sessionStorage.getItem('sound') == 'false'){
             // Keep sound off and change the image accordingly
             sessionStorage.setItem('sound', 'false')
-            this.soundImg = "assets/images/SoundOff.png";
+            this.soundImg = this.soundOff;
         }
         // If sound has not been set this session
         else {
             // Turn sound on
             sessionStorage.setItem('sound', 'true')
-            this.soundImg = "assets/images/SoundOn.png";
+            this.soundImg = this.soundOn;
         }
     }
 
@@ -206,14 +211,14 @@ export class PageRegisterComponent {
         if (sessionStorage.getItem('sound') == 'true') {
             //Set the session variable "sound" to false and change the image accordingly
             sessionStorage.setItem('sound', 'false');
-            this.soundImg = "assets/images/SoundOff.png";
+            this.soundImg = this.soundOff;
         }
 
         // If the session variable "sound" is set to "false"
         else if (sessionStorage.getItem('sound') == 'false') {
             //Set the session variable "sound" to true and change the image accordingly
             sessionStorage.setItem('sound', 'true');
-            this.soundImg = "assets/images/SoundOn.png";
+            this.soundImg = this.soundOn;
         }
     }
 
@@ -225,7 +230,7 @@ export class PageRegisterComponent {
             // Keep music on
             sessionStorage.setItem('music', 'true')
             // Change image accordingly
-            this.musicImg = "assets/images/musicOn.png"
+            this.musicImg = this.musicOn;
             // If music has already been playing, tell this in the console
             if (this.musicPlayer.duration > 0 && !this.musicPlayer.paused) {
                 console.log("Music already playing")
@@ -236,7 +241,6 @@ export class PageRegisterComponent {
                 this.musicPlayer.src = this.currentSong;
                 this.musicPlayer.load();
                 this.musicPlayer.play();
-                
             }
         }
 
@@ -246,7 +250,7 @@ export class PageRegisterComponent {
             sessionStorage.setItem('music', 'false');
             // Pause music and change image accordingly
             this.musicPlayer.pause()
-            this.musicImg = "assets/images/musicOff.png"
+            this.musicImg = this.musicOff
         }
 
         // If music has not been set yet
@@ -256,7 +260,7 @@ export class PageRegisterComponent {
             this.musicPlayer.src = this.currentSong;
             this.musicPlayer.load();
             this.musicPlayer.play();
-            this.musicImg = "assets/images/musicOn.png"
+            this.musicImg = this.musicOn;
         }
     }
 
@@ -267,7 +271,7 @@ export class PageRegisterComponent {
             // Turn off music, pause music, and change image accordingly
             sessionStorage.setItem('music', 'false');
             this.musicPlayer.pause()
-            this.musicImg = "assets/images/musicOff.png"
+            this.musicImg = this.musicOff;
             console.log("music off")
         }
 
@@ -276,9 +280,10 @@ export class PageRegisterComponent {
             // Turn on music, play music, and change image accordingly
             sessionStorage.setItem('music', 'true')
             this.musicPlayer.play();
-            this.musicImg = "assets/images/musicOn.png"
+            this.musicImg = this.musicOff;
         }
     }
+    
     // This function plays a sound when the user hovers over a button.
     hoverSound() {
         // If sound is turned on
@@ -320,7 +325,7 @@ export class PageRegisterComponent {
             // Get the current sound volume
             let volume = sessionStorage.getItem('soundVolume')
             // Change the sound volume image in the settings based on the current sound volume
-            this.soundVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            this.soundVolumeImg = this.volumeBase + volume + ".png";
         }
         // If the sound volume has not been set
         else {
@@ -329,7 +334,7 @@ export class PageRegisterComponent {
             // Get the newly set sound volume
             let volume = sessionStorage.getItem('soundVolume')
             // Change the sound volume image in the settings based on the new sound volume
-            this.soundVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            this.soundVolumeImg = this.volumeBase + volume + ".png";
         }
     }
     
@@ -340,7 +345,7 @@ export class PageRegisterComponent {
             // Get the current music volume
             let volume = sessionStorage.getItem('musicVolume')
             // Change the music volume image in the settings based on the current music volume
-            this.musicVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            this.musicVolumeImg = this.volumeBase + volume + ".png";
             // Change the volume of the music to the current music volume
             this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
         }
@@ -351,7 +356,7 @@ export class PageRegisterComponent {
             // Get the newly set music volume
             let volume = sessionStorage.getItem('musicVolume')
             // Change the music volume image in the settings based on the new music volume
-            this.musicVolumeImg = "assets/images/VolumeSettings" + volume + ".png";
+            this.musicVolumeImg = this.volumeBase + volume + ".png";
             // Change the volume of the music to the current music volume
             this.musicPlayer.volume = parseFloat(sessionStorage.getItem('musicVolume'))
         }

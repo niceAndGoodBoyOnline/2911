@@ -222,26 +222,32 @@ export class PageMainComponent {
     async cli(command){
         // Locate what appropriate controller to use in the backend.
         // (This path refers to a path in router.js)
-        let url = this.site + 'user/executeCommand'
-        // Send a POST request with email data.
-        // In UserController.js, this email data is recieved by "req.body.email".
-        // This is how we get data from frontend(Angular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
-        this.http.post<any>(url, {
-            command: command, email: sessionStorage.getItem("email")
-        })
-            .subscribe(
-                // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
-                // If data is recieved from the backend,
-                (data) => {
-                    this.openTerminalOutput()
-                    if (data == false){
-                        this.unknownCommand(command)
-                    }
-                    else{
-                        this.errorState = 'hidden';
-                        eval(data.function)
-                    }
-                } )
+        if (command != ""){
+            this.openTerminalOutput()
+            let url = this.site + 'user/executeCommand'
+            // Send a POST request with email data.
+            // In UserController.js, this email data is recieved by "req.body.email".
+            // This is how we get data from frontend(Angular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
+            this.http.post<any>(url, {
+                command: command, email: sessionStorage.getItem("email")
+            })
+                .subscribe(
+                    // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                    // If data is recieved from the backend,
+                    (data) => {
+                        this.openTerminalOutput()
+                        if (data == false){
+                            this.unknownCommand(command)
+                        }
+                        else{
+                            this.errorState = 'hidden';
+                            eval(data.function)
+                        }
+                    })
+        }
+        else{
+            this.closeTerminalOutput()
+        }
     }
 
 

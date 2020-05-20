@@ -11,8 +11,8 @@ body{
 }
 
 #coins {
-    border: 2px solid green;
-    padding: 5px;
+    border: .3vw solid green;
+    padding: .3vw;
     background-color: greenyellow;
     width: fit-content;
     margin-left: auto;
@@ -35,27 +35,19 @@ body{
     margin-right: auto;
     float:left;
     position: fixed;
-    bottom:1vh;
+    bottom: 1vh;
 }
 
-input {
-    border-color: green;
-    border-style: solid;
-    background: linear-gradient(176deg, rgba(00,00,00,0.5) 66%, green);
-    outline: none;
-    cursor: pointer;
-    padding: 10px;
-}
 
-input:hover {
+.buyCell:hover {
     background: linear-gradient(176deg, rgba(00,00,00,0.5) 66%, greenyellow);
     color: white;
 }
 
-input:active {
+.buyCell:active {
     background-color: greenyellow;
     color: white;
-  }
+}
 
 /*Area that the shop elements are in (aka everything except the top nav 
 and sound & music buttons).*/
@@ -64,7 +56,7 @@ and sound & music buttons).*/
     animation-duration: 0.8s;
     border-top: 2px solid green;
     border-bottom: 2px solid green;
-    overflow: auto;
+    overflow-x: hidden;
     z-index: 3;
 }
 
@@ -82,8 +74,8 @@ and sound & music buttons).*/
   }
 /*Animation on top of the shop screen*/
 #shopOverlay {
-    opacity: 0.45;
-    width: 100%;
+    opacity: 0.49;
+    width:99vw;
     position:absolute;
     display: block;
     margin-left: auto;
@@ -134,13 +126,42 @@ and sound & music buttons).*/
   }
 
 table {
-    border: 3px solid green;
+    table-layout:fixed;
+    border: .3vw solid green;
+    word-wrap: break-word;
 }
 
 td {
-    border: 3px solid green;
-    padding: 20px;
+    border: .3vw solid green;
+    text-align: left;
+    word-wrap: break-word;
+}
+
+.itemCell{   
+    text-align: right;
+    width: 25vw;
+}
+
+.powerCell{
     text-align: center;
+    width: 8vw;
+}
+
+.priceCell{
+    text-align: center;
+
+    width: 15vw;
+}
+
+.descCell{
+    width: 35vw;
+}
+
+.buyCell{
+    text-align: center;
+    width: 10vw;
+    background: linear-gradient(176deg, rgba(00,00,00,0.5) 66%, green);
+    cursor: pointer;
 }
 
   /*
@@ -149,16 +170,6 @@ this @media rule applies when the width < height of browser.
 @media only screen and (orientation: portrait) {
 
 
-    body {
-        font-size: 5vw;
-    }
-    
-    #osImg{
-        height: auto;
-        width: 10vw;
-        top: 10vh;
-        right: 5vw;
-    }
 
     h1{
         font-size: 5vw
@@ -193,21 +204,25 @@ this @media rule applies when the width < height of browser.
     }
 
     #shopOverlay {
-        height: 83.5vw;
+        height: 96vh;
     }
 
     td {
-        font-size: 3vw;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        padding-left: .5vw;
+        padding-right: .5vw;
+        font-size: 2vw;
     }
 
     #shopContainer{
-        width: 90vw;
-        margin: 5vw;
+        width: 96vw;
+        margin: 2vw;
         font-size: 2vw;
     }
 
     #shopScreen {
-        height: 84vw;
+        height: 100vh;
     }
 
     #coins {
@@ -261,21 +276,25 @@ this @media rule applies when the width < height of browser.
     }
 
     #shopOverlay {
-        height: 83.5vh;
+        height: 95vh;
     }
 
     td {
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+        padding-left: .5vw;
+        padding-right: .5vw;
         font-size: 3vh;
     }
 
     #shopContainer{
-        width: 200vh;
-        margin: 10vh;
+        width: 94vw;
+        margin: 3vw;
         font-size: 4vh;
     }
 
     #shopScreen {
-        height: 84vh;
+        height: 100vh;
     }
 
     #coins {

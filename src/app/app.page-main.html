@@ -39,7 +39,7 @@
         </div>
         -->
         <form id='console' #console ngDraggable NgForm>     
-            <input #terminal id='terminal' autocomplete="off" type='text' (keydown.enter)='cli(terminal.value);openTerminalOutput();console.reset()'>
+            <input #terminal id='terminal' autocomplete="off" type='text' (keydown.enter)='cli(terminal.value);console.reset()'>
             <br>
             <div id='cliContainer' class={{outputState}} style={{cliMessageWidth}} (click)='closeTerminalOutput()'>
                 <br><img id='errorImg' src={{errorImg}} class='{{errorState}}'>

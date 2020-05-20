@@ -81,7 +81,7 @@ module.exports = {
 
   makePrestigeTransaction(email) {
     return axios
-      .post("http://localhost:3000/user/makePrestigeTransaction", {email:email, index:0})
+      .post("http://localhost:3000/user/makePrestigeTransaction", {email:email, index:0, name:"botnet (command)"})
       .then(res => res.data)
       .catch(error => console.log(error));
   },

@@ -72,6 +72,7 @@ describe('User controller functions', () => {
   it('Confirm prestige transaction', () => {
     return User.makePrestigeTransaction(email)
       .then(response => {
+        console.log(response)
         expect(typeof response).to.equal('string');
       });
     }).timeout(5000);

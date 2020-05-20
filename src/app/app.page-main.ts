@@ -140,7 +140,6 @@ export class PageMainComponent {
             this.networkSelectMenu = "netOpen"
         }
     }
-
     
     openTerminalOutput(){
             console.log("opening")
@@ -162,11 +161,6 @@ export class PageMainComponent {
     unknownCommand(command){
         this.cliMessage = command + " is not a command you know. Use help command to see known commands."
         this.errorState = 'visible'
-    }
-
-    clearInput(cli){
-        console.log(cli)
-        cli= '';
     }
 
     // recursive function to change the osImg randomly cause it looks cool

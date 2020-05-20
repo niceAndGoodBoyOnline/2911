@@ -3,66 +3,73 @@
     <head>
     </head>
     <body>
-        <h1>Welcome to the Deep Web Shop!</h1>
+        <div id="shopScreen">
+            <img src="assets/images/vhs.gif" id="shopOverlay">
+            <h1>Welcome to the Deep Web Shop!</h1>
+            <h2 id="coins">Your bitcoins: {{bitcoin}}</h2>
             <!-- Stuff that is in {{}} means to grab data from the .ts file and put it there. -->
-        <!-- In this case, we grab bitcoin data from app.page-shop.ts and put it here. -->
-        <!-- You can find out what data is available to grab by looking at the variables below "export class PageShopComponent" in app.page-shop.ts -->
-        <h2 id="coins">Your bitcoins: {{bitcoin}}</h2>
-        <div id='shopContainer'>
-        <table>
-            <tr>
-                <td class='tableHeadCell'>
-                    ITEM
-                </td>
-                <td class='tableHeadCell'>
-                    POWER
-                </td>
-                <td class='tableHeadCell'>
-                    COST
-                </td>
-                <td class='tableHeadCell'>
-                    Description
-                </td>
-            </tr>
-            <!-- *ngFor attribute is basically a for loop. -->
-            <!-- In this case, we make a new table row for each item in itemArray -->
-            <tr class='tableRow' *ngFor="let thing of pricedItemArray">
-                <td class='tableCell'>
+            <!-- In this case, we grab bitcoin data from app.page-shop.ts and put it here. -->
+            <!-- You can find out what data is available to grab by looking at the variables below "export class PageShopComponent" in app.page-shop.ts -->
+            <div id='shopContainer'>
+            <table>
+                <tr>
+                    <td>
+                        ITEM
+                    </td>
+                    <td>
+                        POWER
+                    </td>
+                    <td>
+                        PRICE
+                    </td>
+                    <td>
+                        DESCRIPTION
+                    </td>
+                </tr>
+                <!-- *ngFor attribute is basically a for loop. -->
+                <!-- In this case, we make a new table row for each item in itemArray -->
+                <tr *ngFor="let thing of pricedItemArray">
+                    <td>
+                        <!-- Stuff that is in {{}} means to grab data from the .ts file and put it there. -->
+                        <!-- In a *ngFor loop, its a bit different. I think you can figure it out. -->
+                        <!-- We use a for loop to parse itemArray from app.page-shop.ts and we can use the variable we assigned in the for loop to display each item. -->
+                        {{thing.item}}
+                    </td>
+                    <td>
+                        {{thing.power}}
+                    </td>
+                    <td>
+                        {{thing.price}}
+                    </td>
+                    <td>
+                        {{thing.desc}}
+                    </td>
+                    <td>
+                        <!-- The (click) attribute is basically: "execute this function when clicked on" -->
+                        <!-- In this case, when the Buy button is clicked, execute buy() in app.page-register.ts with parameters of item name and price in the for loop. -->
+                        <input type='button' value='Buy' (click)='buy(thing.item, thing.price, 1);clickSound();openTempModal()' (mouseenter)='hoverSound()'/>
+
+
+                        <!-- These buy 5 and buy 10 buttons are commented because they dont fit with the current price scaling formula. -->
+                        <!-- In other words, they're a way to buy more items for a cheaper price. -->
+                        <!--                                                                                                            -->
+                        <!-- <input type='button' value='Buy 5' (click)='buy(thing.item, thing.price, 5);clickSound()' (mouseenter)='hoverSound()'/>
+                        <input type='button' value='Buy 10' (click)='buy(thing.item, thing.price, 10);clickSound()' (mouseenter)='hoverSound()'/> -->
+                    </td>
+                </tr>
+                
+            </table>
+            <div id="purchaseModal">
+                <div class="modal-content">
                     <!-- Stuff that is in {{}} means to grab data from the .ts file and put it there. -->
-                    <!-- In a *ngFor loop, its a bit different. I think you can figure it out. -->
-                    <!-- We use a for loop to parse itemArray from app.page-shop.ts and we can use the variable we assigned in the for loop to display each item. -->
-                    {{thing.item}}
-                </td>
-                <td  class='tableCell'>
-                    {{thing.power}}
-                </td>
-                <td  class='tableCell'>
-                    {{thing.price}}
-                </td>
-                <td  class='tableCell'>
-                    {{thing.desc}}
-                </td>
-                <td  class='tableCell'>
-                    <!-- The (click) attribute is basically: "execute this function when clicked on" -->
-                    <!-- In this case, when the Buy button is clicked, execute buy() in app.page-register.ts with parameters of item name and price in the for loop. -->
-                    <input class='menuButton' type='button' value='Buy' (click)='buy(thing.item, thing.price, 1);clickSound()' (mouseenter)='hoverSound()'/>
-
-
-                    <!-- These buy 5 and buy 10 buttons are commented because they dont fit with the current price scaling formula. -->
-                    <!-- In other words, they're a way to buy more items for a cheaper price. -->
-                    <!--                                                                                                            -->
-                    <!-- <input type='button' value='Buy 5' (click)='buy(thing.item, thing.price, 5);clickSound()' (mouseenter)='hoverSound()'/>
-                    <input type='button' value='Buy 10' (click)='buy(thing.item, thing.price, 10);clickSound()' (mouseenter)='hoverSound()'/> -->
-                </td>
-            </tr>
-            
-        </table>
+                    <!-- In this case, we grab message data from app.page-shop.ts and put it here. -->
+                    <!-- You can find out what data is available to grab by looking at the variables below "export class PageShopComponent" in app.page-shop.ts -->
+                    <p>{{message}}</p>
+                </div>
+            </div>
+        </div>  
         
-        <!-- Stuff that is in {{}} means to grab data from the .ts file and put it there. -->
-        <!-- In this case, we grab message data from app.page-shop.ts and put it here. -->
-        <!-- You can find out what data is available to grab by looking at the variables below "export class PageShopComponent" in app.page-shop.ts -->
-        </div>
-        <p>{{message}}</p>
+    </div>
         <img src='{{soundImg}}' (click)="changeSound(this)" id="sound">
         <img src='{{musicImg}}' (click)="changeMusic(this)" id="music">
     </body>

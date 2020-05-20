@@ -10,7 +10,18 @@
     border-color: green;
     padding: 1vh;
     margin: 1vh;    
+    outline: none;
 }
+
+.networkButton:hover {
+    background: linear-gradient(176deg, rgba(00,00,00,0.5) 66%, greenyellow);
+    color: white;
+}
+
+.networkButton:active {
+    background-color: greenyellow;
+    color: white;
+  }
 
 #networkList{
     list-style-type: none;

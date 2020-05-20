@@ -38,16 +38,14 @@
             <div id='cliMessage' style={{cliMessageWidth}}>{{cliMessage}}</div>
         </div>
         -->
-        <form id='console' ngDraggable ng-controller="cliCtrl">     
-            <input #terminal id='terminal' type='text' value='{{cliValue}}' (keydown.enter)='cli(terminal.value)'>
+        <form id='console' #console ngDraggable NgForm>     
+            <input #terminal id='terminal' autocomplete="off" type='text' (keydown.enter)='cli(terminal.value);openTerminalOutput();console.reset()'>
+            <br>
+            <div id='cliContainer' class={{outputState}} style={{cliMessageWidth}} (click)='closeTerminalOutput()'>
+                <br><img id='errorImg' src={{errorImg}} class='{{errorState}}'>
+                <div id="cliText">{{cliMessage}}</div> 
+            </div>
         </form>
-
-        
-        <div id='cliContainer' style='{{cliMessageWidth}}' (click)='toggleTerminalOutput()'>
-            <br><img id='errorImg' src={{errorImg}} class='{{errorState}}'>
-            <div id="cliText">{{cliMessage}}</div> 
-        </div>
-
         
         <img src='{{soundImg}}' (click)="changeSound(this);clickSound()" id="sound">
         <img src='{{musicImg}}' (click)="changeMusic(this);clickSound()" id="music">

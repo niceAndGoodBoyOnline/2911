@@ -49,7 +49,7 @@ export class PagePrestigeComponent {
     // Used when page is loaded up. Loads each function one at a time in order to fix potential
     // issues with functions relying on other functions finishing to work.
     async setup(){
-        await this.getPrestigeItems()
+        await this.getUserPrestigeItems()
         await this.getPrestigePoints()
         await this.getBitcoin()
         await this.setSound()
@@ -104,8 +104,21 @@ export class PagePrestigeComponent {
                 } )
     }
 
+    async getUserPrestigeItems(){
+        let url = this.site + 'user/getUserPrestigeItems'
+        this.http.post<any>(url, {
+            email: sessionStorage.getItem('email')
+        })
+            .subscribe(
+                (data) => {
+                    console.log('userprestigeitems: ', data)
+                    this.getPrestigeItems(data)
+                }
+            )
+    }
+
     // Get all the prestige items in the database
-    getPrestigeItems() {
+    getPrestigeItems(userPrestigeItems) {
         // Locate which approrpiate controller function to use. In this case, we use getPrestigeItems function in GameController.js
         // You can find this out in router.js
         let url = this.site + 'Game/getPrestigeItems'
@@ -117,8 +130,19 @@ export class PagePrestigeComponent {
                     // console log the data (For debugging purposes).
                     console.log('all prestige items: ', data)
                     this.prestigeArray = data
+                    for(let i=0;i<data.length;i++){
+                        if(data[i].item == "botnet (command)"){
+                            if(userPrestigeItems[i] > 0){
+                                data[i].price = 0
+                                data[i].desc = 'Sold out.'
+                            }
+                            break
+                        }
+                    }
                 } )
     }
+
+
 
     // Calculates how many prestige points you can buy with your current bitcoin
     // * This is all visual. The actual calculations are in the user repo.
@@ -208,9 +232,7 @@ export class PagePrestigeComponent {
                     // console log the data (for debugging purposes)
                     console.log(data)
                     if(data.includes('Command')){
-                        this.specialMessage = data
-                    } else {
-                        this.specialMessage = ''
+                        this.message = data
                     }
                     this.saveProgress()
                 }

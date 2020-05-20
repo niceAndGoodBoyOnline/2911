@@ -125,7 +125,7 @@ and sound & music buttons).*/
   /* Content of the modal at the bottom of the screen */
   .modal-content {
     background-color: black;
-    color: greenyellow;
+    color: green;
     margin: auto;
     padding: 10px;
     border: 2px solid green;

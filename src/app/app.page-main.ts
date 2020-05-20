@@ -25,6 +25,7 @@ export class PageMainComponent {
     tempPowerIncrease: number = 1
     autoClickPower: number
     totalClickPower: number
+    autoBitcoin = "false"
 
     //Sound stuff
     audioArray = ['assets/sounds/sfx1.mp3', 'assets/sounds/sfx2.mp3', 'assets/sounds/sfx3.mp3']
@@ -101,11 +102,12 @@ export class PageMainComponent {
         // await this.getUserPrestigeItems()
         await this.getUserItemArray()
         await this.startAutosave()
-        await this.startAutoBitcoin()
+        // await this.startAutoBitcoin()
         await this.setSound()
         await this.setCurrentMusic()
         await this.setMusic()
         await this.getCommandArray()
+        await this.getUserCommandArray()
         //await this.moveRam()
         await this.setSoundVolume()
         await this.setMusicVolume()
@@ -210,6 +212,7 @@ export class PageMainComponent {
                     //console.log(data)
                     // create a variable here and assign it to data
                     let userCommandArray = data
+                    this.userCommandArray = data
                     // use that variable as parameter to getItems function
                     console.log('usercommandarray: ', userCommandArray)
                 } )
@@ -689,6 +692,10 @@ export class PageMainComponent {
     }
 
     startAutoBitcoin() {
+        if(this.autoBitcoin == "true"){
+            return
+        }
+        this.autoBitcoin = "true"
             let autoClick = setInterval(() => {
                 if((sessionStorage.getItem('auth_token') == null) || ((sessionStorage.getItem('inshop') != 'false'))){
                     clearInterval(autoClick)
@@ -696,6 +703,7 @@ export class PageMainComponent {
                     return
                 }
                 this.bitcoin += this.autoClickPower
+                console.log('yes')
             }, 100)
         }
 

@@ -15,6 +15,7 @@ export class PagePrestigeComponent {
     
     token                 = '';
     message               = '';
+    specialMessage = '';
     _apiService:ApiService;
     site: string;
 
@@ -206,6 +207,11 @@ export class PagePrestigeComponent {
                 (data) => {
                     // console log the data (for debugging purposes)
                     console.log(data)
+                    if(data.includes('Command')){
+                        this.specialMessage = data
+                    } else {
+                        this.specialMessage = ''
+                    }
                     this.saveProgress()
                 }
             )

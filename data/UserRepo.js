@@ -234,6 +234,18 @@ class UserRepo {
         return "Thank you come again!"
     }
 
+    async unlockCommand(name, email){
+        let user = await User.findOne({email:email})
+        let commands = user.commands
+        commands.push(name.replace(' (command)', ''))
+        let updated = await User.updateOne(
+            {email:email},
+            {$set: {commands:commands}}
+        )
+        name = name.replace(' (command)', '')
+        return 'Command ' + name + ' has been unlocked.'
+    }
+
     async getUserPrestigeItems(email) {
         let user = await User.findOne({email:email})
         let prestigeItems = user.prestige

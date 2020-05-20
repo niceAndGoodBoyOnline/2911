@@ -223,8 +223,15 @@ exports.resetGainPrestige = async function(req, res){
 }
 
 exports.makePrestigeTransaction = async function(req, res){
+    if(req.body.name.includes("(command)")){
+        var respond2 = await _userRepo.unlockCommand(req.body.name, req.body.email)
+    }
     let index = await _prestigeRepo.getPrestigeIndex(req.body.name)
     let respond = await _userRepo.makePrestigeTransaction(req.body.email, index)
+    if(respond2){
+        res.json(respond2)
+        return
+    }
     res.json(respond)
 }
 

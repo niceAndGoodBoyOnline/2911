@@ -49,7 +49,7 @@ export class PageShopComponent {
     // Used when page is loaded up. Loads each function one at a time in order to fix potential
     // issues with functions relying on other functions finishing to work.
     async setup(){
-        await this.getUserPrestigeItems()
+        await this.getUserCommandArray()
         await this.getBitcoin()
         await this.setSound()
         await this.setMusic()
@@ -58,7 +58,32 @@ export class PageShopComponent {
         console.log("-----------------------------------SHOP PAGE SETUP -----------------------------------------")
     }
 
-    async getUserPrestigeItems(){
+        // Get the quantity of items the user bought from the database
+    async getUserCommandArray(){
+        // Locate what appropriate controller to use in the backend
+        // (This path refers to a path in router.js)
+        let url = this.site + 'user/getCommandArray'
+        // Send a POST request with email data.
+        // In UserController.js, this email data is recieved by "req.body.email"
+        // This is how we get data from frontend(Andular, files in "src/app" folder) to backend(Node.JS, controllers folder and data folder).
+        this.http.post<any>(url, {
+            email: sessionStorage.getItem("email")
+        })
+            .subscribe(
+                // You can see and change what data is being received by looking at "res.json()" in the appropriate controller function.
+                // If data is recieved from the backend,
+                (data) => {
+                    //console log the data (for debugging purposes)
+                    //console.log(data)
+                    // create a variable here and assign it to data
+                    let userCommandArray = data
+                    // use that variable as parameter to getItems function
+                    console.log('usercommandarray: ', userCommandArray)
+                    this.getUserPrestigeItems(userCommandArray)
+                } )
+    }
+
+    async getUserPrestigeItems(userCommandArray){
         let url = this.site + 'user/getUserPrestigeItems'
         return this.http.post<any>(url, {
             email: sessionStorage.getItem('email')
@@ -67,22 +92,22 @@ export class PageShopComponent {
                 (data) => {
                     let userPrestigeItems = data
                     console.log('userPrestigeItems: ', data)
-                    this.getPrestigeDiscount(userPrestigeItems)
+                    this.getPrestigeDiscount(userPrestigeItems, userCommandArray)
                 }
             )
     }
 
-    async getPrestigeDiscount(userPrestigeItems) {
+    async getPrestigeDiscount(userPrestigeItems, userCommandArray) {
         let url = this.site + 'Game/getPrestigeItems'
         this.http.get<any>(url)
             .subscribe(
                 (data) => {
                     console.log('all prestige items: ', data)
-                    this.calculateDiscount(userPrestigeItems, data)
+                    this.calculateDiscount(userPrestigeItems, userCommandArray, data)
                 } )
     }
 
-    async calculateDiscount(userPrestigeItems, prestigeItems) {
+    async calculateDiscount(userPrestigeItems, userCommandArray, prestigeItems) {
         let discount = 0
         discount = userPrestigeItems[1] * prestigeItems[1].power
         if(discount >= 0.9){
@@ -90,7 +115,7 @@ export class PageShopComponent {
         }
         this.discount = discount
         console.log('discount: ', discount)
-        this.getItems(discount)
+        this.getItems(discount, userCommandArray)
     }
 
 
@@ -117,7 +142,7 @@ export class PageShopComponent {
     }
 
     // Get all the items in the database
-    async getItems(discount) {
+    async getItems(discount, userCommandArray) {
         let itemPriceArray = []
         // Locate which approrpiate controller function to use. In this case, we use getItems function in GameController.js
         // You can find this out in router.js
@@ -130,8 +155,18 @@ export class PageShopComponent {
                     // console log the data (For debugging purposes).
                     console.log('all items: ', data)
                     for(let i=0;i<data.length;i++){
+                        if(data[i].item == "botnet (Auto)"){
+                            if(!(userCommandArray.includes("botnet"))){
+                                data[i].item = "???"
+                                data[i].price = "???"
+                                data[i].power = "???"
+                                data[i].desc = "Encrpyted."
+                                continue
+                            }
+                        }
                         itemPriceArray.push(data[i].price)
                     }
+                    console.log('updated', data)
                     this.itemArray = itemPriceArray
                     this.getUserItemArray(data, discount)
                 } )
@@ -166,7 +201,9 @@ export class PageShopComponent {
     async calculateFinalPrices(itemArray, discount, userItemArray){
         for(let i=0;i<itemArray.length;i++){
             if(userItemArray[i] == 0){
-                itemArray[i].price -= (itemArray[i].price * discount)
+                if(!(itemArray[i].item == "???" )){
+                    itemArray[i].price -= (itemArray[i].price * discount)
+                }
                 continue
             } else {
                 // let subtotal = (Math.pow(this.itemArray[i], this.userItemArray[i]))

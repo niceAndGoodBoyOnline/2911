@@ -11,7 +11,7 @@
     position: absolute;
     text-align: justify;
     z-index: 30;
-    height: auto;
+    height: 0;
     width: 20vw;
     transition: all .17s;
     background-color: rgba(00,00,00,0.8);
@@ -32,7 +32,7 @@ this @media rule applies when the width < height of browser.
 */
 @media only screen and (orientation: portrait) {
 
-    #errorImg{
+    #cliImg{
         width: 50vw;
     }
 
@@ -67,7 +67,7 @@ this @media rule applies when the width < height of browser.
 
 @media only screen and (orientation: landscape) {
 
-    #errorImg{
+    #cliImg{
         width: 20vw;
     }
 
@@ -81,7 +81,7 @@ this @media rule applies when the width < height of browser.
 
     #cliContainer{
         top:70vh;
-        left: 65vw;
+        left: 63vw;
         width:30vw;
         font-size: 2vh;
     }

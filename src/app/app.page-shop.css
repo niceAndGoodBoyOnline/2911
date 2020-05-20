@@ -7,7 +7,7 @@ body{
     font-family: HackerFont;
     color: green;
     text-align: center;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 #coins {
@@ -20,38 +20,24 @@ body{
     position: sticky; 
     pointer-events: none;
 }
-#sound {
+
+/*Animation on top of the shop screen*/
+#shopOverlay {
+    opacity: 0.49;
+    width:99vw;
+    position:absolute;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    z-index:2;
     float:left;
-    position: fixed;
-    bottom:1vh;
-}
-
-#music {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    float:left;
-    position: fixed;
-    bottom: 1vh;
-}
-
-
-.buyCell:hover {
-    background: linear-gradient(176deg, rgba(00,00,00,0.5) 66%, greenyellow);
-    color: white;
-}
-
-.buyCell:active {
-    background-color: greenyellow;
-    color: white;
+    pointer-events: none;
 }
 
 /*Area that the shop elements are in (aka everything except the top nav 
 and sound & music buttons).*/
 #shopScreen{
+    width: 100vw;
     animation-name: unfoldIn;
     animation-duration: 0.8s;
     border-top: 2px solid green;
@@ -72,18 +58,6 @@ and sound & music buttons).*/
       transform:scaleY(1) scaleX(1);
     }
   }
-/*Animation on top of the shop screen*/
-#shopOverlay {
-    opacity: 0.49;
-    width:99vw;
-    position:absolute;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    z-index:2;
-    float:left;
-    pointer-events: none;
-}
 
 /*Scrollbar styling*/
 ::-webkit-scrollbar {
@@ -164,6 +138,17 @@ td {
     cursor: pointer;
 }
 
+
+.buyCell:hover {
+    background: linear-gradient(176deg, rgba(00,00,00,0.5) 66%, greenyellow);
+    color: white;
+}
+
+.buyCell:active {
+    background-color: greenyellow;
+    color: white;
+}
+
   /*
 this @media rule applies when the width < height of browser.
 */
@@ -178,33 +163,13 @@ this @media rule applies when the width < height of browser.
     h2 {
         font-size:3vw;
     }
-    
-    #sound {
-        width:auto;
-        top:92vh;
-        height:7vh;
-        left: 2vw;
-    }
-    
-    #music {
-        width:auto;
-        height:7vh;
-        top:92vh;
-        left: 17vw;
-    }
-    
-    .bitcoin {
-        font-size:4vw;
-    }
-    
-    .menuButton {
-        padding:1vw;
-        font-size: 2vw;
-        margin:2vw;
-    }
 
     #shopOverlay {
         height: 96vh;
+    }
+
+    table{
+        margin-left: 1.5vw;
     }
 
     td {
@@ -222,7 +187,7 @@ this @media rule applies when the width < height of browser.
     }
 
     #shopScreen {
-        height: 100vh;
+        height: 88vh;
     }
 
     #coins {
@@ -241,39 +206,17 @@ this @media rule applies when the width < height of browser.
     body {
         font-size: 4vh;
         width: auto;
-    }
-
-    #osImg{
-        height: auto;
-        width: 10vh;
-        top: 10vh;
-        right: 5vw;
-    }
-    
+    }    
     
     h2 {
         font-size:4vh;
     }
-    
-    #sound {
-        width:auto;
-        top:90vh;
-        height:10vh;
-        left: 5vw;
+
+    table{
+        margin-left: 1.5vw;
     }
+
     
-    #music {
-        width:auto;
-        height:10vh;
-        top:90vh;
-        left: 15vw;
-    }
-    
-    .menuButton {
-        padding:3vh;
-        font-size: 4vh;
-        margin:3vh;
-    }
 
     #shopOverlay {
         height: 95vh;
@@ -287,14 +230,8 @@ this @media rule applies when the width < height of browser.
         font-size: 3vh;
     }
 
-    #shopContainer{
-        width: 94vw;
-        margin: 3vw;
-        font-size: 4vh;
-    }
-
     #shopScreen {
-        height: 100vh;
+        height: 83vh;
     }
 
     #coins {

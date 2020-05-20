@@ -11,6 +11,7 @@ import { PagePrestigeComponent } from './app.page-prestige'
 import { routing } from './app.routing';
 import { AngularDraggableModule } from 'angular2-draggable';
 import { pathService } from './services/path.service';
+import { soundService } from './services/sound.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import { pathService } from './services/path.service';
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, routing, AngularDraggableModule],
-  providers: [pathService],
+  providers: [pathService, soundService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

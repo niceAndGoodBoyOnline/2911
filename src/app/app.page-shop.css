@@ -7,53 +7,141 @@ body{
     font-family: HackerFont;
     color: green;
     text-align: center;
-    overflow-x: hidden;
-    height: auto;
+    overflow: hidden;
 }
 
-.tableHeadCell{
-    padding: 1vw;
+#coins {
+    border: 2px solid green;
+    padding: 5px;
+    background-color: greenyellow;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    position: sticky; 
+    pointer-events: none;
 }
-
-.tableRow{
-    border-color: rgba(00,00,00,0);
-    border: solid;
-}
-
-#shopContainer{
-    width: 90vw;
-    margin-left: 5vw;
-}
-
-.tableCell{
-    padding: 1vw;
-}
-
 #sound {
-    float: left;
-    position:   fixed;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    float:left;
+    position: fixed;
+    bottom:1vh;
 }
 
 #music {
-    float: left;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    float:left;
     position: fixed;
+    bottom:1vh;
 }
 
-.menuButton {
+input {
     border-color: green;
+    border-style: solid;
     background: linear-gradient(176deg, rgba(00,00,00,0.5) 66%, green);
     outline: none;
     cursor: pointer;
+    padding: 10px;
 }
 
 input:hover {
-    background-color: greenyellow;
+    background: linear-gradient(176deg, rgba(00,00,00,0.5) 66%, greenyellow);
+    color: white;
 }
 
 input:active {
     background-color: greenyellow;
+    color: white;
   }
 
+/*Area that the shop elements are in (aka everything except the top nav 
+and sound & music buttons).*/
+#shopScreen{
+    animation-name: unfoldIn;
+    animation-duration: 0.8s;
+    border-top: 2px solid green;
+    border-bottom: 2px solid green;
+    overflow: auto;
+    z-index: 3;
+}
+
+/*Keyframes for shop screen animation*/
+@keyframes unfoldIn {
+    0% {
+      transform:scaleY(.005) scaleX(0);
+    }
+    50% {
+      transform:scaleY(.005) scaleX(1);
+    }
+    100% {
+      transform:scaleY(1) scaleX(1);
+    }
+  }
+/*Animation on top of the shop screen*/
+#shopOverlay {
+    opacity: 0.45;
+    width: 100%;
+    position:absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    z-index:2;
+    float:left;
+    pointer-events: none;
+}
+
+/*Scrollbar styling*/
+::-webkit-scrollbar {
+    width: 15px;
+}
+  
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: green;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: greenyellow
+}
+
+/* The Modal at the bottom of the screen */
+#purchaseModal{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    bottom: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    pointer-events: none;
+  }
+  
+  /* Content of the modal at the bottom of the screen */
+  .modal-content {
+    background-color: black;
+    color: green;
+    margin: auto;
+    padding: 10px;
+    border: 2px solid green;
+    width: fit-content;
+  }
+
+table {
+    border: 3px solid green;
+}
+
+td {
+    border: 3px solid green;
+    padding: 20px;
+    text-align: center;
+}
 
   /*
 this @media rule applies when the width < height of browser.
@@ -64,16 +152,14 @@ this @media rule applies when the width < height of browser.
     body {
         font-size: 5vw;
     }
+    
+    #osImg{
+        height: auto;
+        width: 10vw;
+        top: 10vh;
+        right: 5vw;
+    }
 
-    #shopContainer{
-        font-size: 2vw;
-        margin-bottom: 10vh;
-    }
-    
-    .tableCell{
-        padding: 1vw;
-    }
-    
     h1{
         font-size: 5vw
     }
@@ -106,6 +192,32 @@ this @media rule applies when the width < height of browser.
         margin:2vw;
     }
 
+    #shopOverlay {
+        height: 83.5vw;
+    }
+
+    td {
+        font-size: 3vw;
+    }
+
+    #shopContainer{
+        width: 90vw;
+        margin: 5vw;
+        font-size: 2vw;
+    }
+
+    #shopScreen {
+        height: 84vw;
+    }
+
+    #coins {
+        top: 3vw;
+    }
+
+    #purchaseModal {
+        padding-top: 90vw;
+    }
+
 }
 
 @media only screen and (orientation: landscape) {
@@ -116,13 +228,11 @@ this @media rule applies when the width < height of browser.
         width: auto;
     }
 
-    #shopContainer{
-        font-size: 2vh;
-        margin-bottom: 10vh;
-    }
-    
-    .tableCell{
-        padding: 1vh;
+    #osImg{
+        height: auto;
+        width: 10vh;
+        top: 10vh;
+        right: 5vw;
     }
     
     
@@ -149,5 +259,32 @@ this @media rule applies when the width < height of browser.
         font-size: 4vh;
         margin:3vh;
     }
+
+    #shopOverlay {
+        height: 83.5vh;
+    }
+
+    td {
+        font-size: 3vh;
+    }
+
+    #shopContainer{
+        width: 200vh;
+        margin: 10vh;
+        font-size: 4vh;
+    }
+
+    #shopScreen {
+        height: 84vh;
+    }
+
+    #coins {
+        top: 3vh;
+    }
+
+    #purchaseModal {
+        padding-top: 90vh;
+    }
+
 
 }

@@ -56,6 +56,7 @@ hr {
     margin-left: auto;
     margin-right: auto;
     position: sticky; 
+    pointer-events: none;
 }
 
 table {

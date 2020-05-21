@@ -212,12 +212,13 @@ exports.savePrestigeProgress = async function(req, res){
 }
 
 exports.resetGainPrestige = async function(req, res){
-    let prestigeArray = req.body.prestigeArray
-    if(prestigeArray == undefined){
-        prestigeArray = await _prestigeRepo.getPrestigeItems()
-    }
+    let userItemArray = await _userRepo.getItemArray(req.body.email)
+    // let prestigeArray = req.body.prestigeArray
+    // if(prestigeArray == undefined){
+    //     prestigeArray = await _prestigeRepo.getPrestigeItems()
+    // }
     let prestige = await _userRepo.calculatePrestige(req.body.email)
-    let respond = await _userRepo.resetGainPrestige(req.body.email, prestige, prestigeArray)
+    let respond = await _userRepo.resetGainPrestige(req.body.email, prestige, userItemArray)
 
     res.json(respond)
 }

@@ -161,10 +161,10 @@ class UserRepo {
     }
 
     // Resets the user's bitcoins and items in exchance for prestige points
-    async resetGainPrestige(email, prestige, prestigeArray){
+    async resetGainPrestige(email, prestige, userItemArray){
         // Set a variable for the items the user will have (aka nothing)
         let items = []
-        for(let i=0;i<prestigeArray.length;i++){
+        for(let i=0;i<userItemArray.length;i++){
             items.push(0)
         }
         // Set a variable for the bitcoin the user will have (aka 0)

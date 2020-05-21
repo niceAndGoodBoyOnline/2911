@@ -6,13 +6,13 @@
 
     <h2>outbreak:Source</h2>
     <div id='gameContainer'>
-        <div id="hackTarget" ngDraggable>
+        <div id="hackTarget" (click)='sound.hackSound()'ngDraggable>
             <span id="hackText">Current target: {{currentFirewallName}}</span>
             <img class="firewall" src='{{currentFirewallImg}}' (click)="hackFirewall()">
             <div id='hackStat' class="stats">Hack Power: {{totalClickPower}} VS Security:{{currentSecurity}} <br> Bitcoin: {{bitcoin}}</div>
         </div>
 
-        <img id='networksButton' src='{{networkStatus}}' (click)="toggleNetworkMenu();clickSound()" ngDraggable>
+        <img id='networksButton' src='{{networkStatus}}' (click)="toggleNetworkMenu();sound.clickSound()" ngDraggable>
        
         <div id='networkSelect' class='{{networkSelectMenu}}' (click)="toggleNetworkMenu()">
             <h2>Select a Network to Hack</h2>
@@ -27,9 +27,9 @@
         <!-- In this case, we grab bitcoin data from app.page-main.ts and put it here. -->
         <!-- You can find out what data is available by looking at the variables below "export class PageMainComponent" in app.page-main.ts -->
         <div id='osGUI' ngDraggable>
-            <img id='osImg' src={{osImgPath}} (click)='toggleGUI();clickSound()' (mouseenter)="hoverSound()">
-            <img id='shopGUI' class={{imgState}} src={{shopImg}} (click)="openShop();clickSound()" >
-            <img id='prestigeGUI' class={{imgState}} src={{prestigeImg}} (click)="openPrestige();clickSound()" >
+            <img id='osImg' src={{osImgPath}} (click)='toggleGUI();sound.clickSound()' (mouseenter)='sound.hoverSound()'>
+            <img id='shopGUI' class={{imgState}} src={{shopImg}} (click)="openShop();sound.clickSound()" >
+            <img id='prestigeGUI' class={{imgState}} src={{prestigeImg}} (click)="openPrestige();sound.clickSound()" >
         </div>
 
         <!--
@@ -39,18 +39,18 @@
         </div>
         -->
         <form id='console' #console ngDraggable NgForm>     
-            <input #terminal id='terminal' autocomplete="off" type='text' (keydown.enter)='cli(terminal.value);openTerminalOutput();console.reset()'>
+            <input #terminal id='terminal' autocomplete="off" type='text' (keydown.enter)='cli(terminal.value);console.reset()'>
             <br>
-            <div id='cliContainer' class={{outputState}} style={{cliMessageWidth}} (click)='closeTerminalOutput()'>
-                <br><img id='errorImg' src={{errorImg}} class='{{errorState}}'>
+            <div id='cliContainer' class={{outputState}} (click)='closeTerminalOutput()'>
+                <br><img id='cliImg' src={{cliImg}} class='{{cliState}}'>
                 <div id="cliText">{{cliMessage}}</div> 
             </div>
         </form>
         
-        <img src='{{soundImg}}' (click)="changeSound(this);clickSound()" id="sound">
-        <img src='{{musicImg}}' (click)="changeMusic(this);clickSound()" id="music">
-        <img src='{{settingsImg}}' (click)="toggleSettings(this);clickSound()" id="settingsImg">        
-        <img src='{{ramImg}}' (click)="increaseTempPower();clickSound()" id="ram" class="ram" ngDraggable>
+        <img src='{{sound.soundImg}}' (click)="sound.changeSound(this);sound.clickSound()" id="sound">
+        <img src='{{sound.musicImg}}' (click)="sound.changeMusic(this);sound.clickSound()" id="music">
+        <img src='{{settingsImg}}' (click)="toggleSettings(this);sound.clickSound()" id="settingsImg">        
+        <img src='{{strongImg}}' (click)="strongManager()" id="strong" class="{{strongAnimation}}">
        
 
         <!-- Stuff that is in {{}} means to grab data from the .ts file and put it there. -->
@@ -65,20 +65,20 @@
                 <hr class="horizontalLine">
                 <div class="soundSettings">
                     <p>Sound Volume</p>
-                    <img src="{{soundVolumeImg}}" class="Volume"><br>
-                    <input class="Minus" class="menuButton" type="button" value="-" (click)="lowerSoundVolume();clickSound()" (mouseenter)="hoverSound()">
-                    <input class="Plus" class="menuButton" type="button" value="+" (click)="raiseSoundVolume();clickSound()" (mouseenter)="hoverSound()">
+                    <img src="{{sound.soundVolumeImg}}" class="Volume"><br>
+                    <input class="Minus" class="menuButton" type="button" value="-" (click)="sound.lowerSoundVolume();sound.clickSound()" (mouseenter)='sound.hoverSound()'>
+                    <input class="Plus" class="menuButton" type="button" value="+" (click)="sound.raiseSoundVolume();sound.clickSound()" (mouseenter)='sound.hoverSound()'>
                 </div>
                 <hr class="horizontalLine">
                 <div class="musicSettings">
                     <p>Music Volume</p>
-                    <img src="{{musicVolumeImg}}" class="Volume"><br>
-                    <input class="Minus" class="menuButton" type="button" value="-" (click)="lowerMusicVolume();clickSound()" (mouseenter)="hoverSound()">
-                    <input class="Plus" class="menuButton" type="button" value="+" (click)="raiseMusicVolume();clickSound()" (mouseenter)="hoverSound()">
+                    <img src="{{sound.musicVolumeImg}}" class="Volume"><br>
+                    <input class="Minus" class="menuButton" type="button" value="-" (click)="sound.lowerMusicVolume();sound.clickSound()" (mouseenter)='sound.hoverSound()'>
+                    <input class="Plus" class="menuButton" type="button" value="+" (click)="sound.raiseMusicVolume();sound.clickSound()" (mouseenter)='sound.hoverSound()'>
                 </div>
                 <hr class="horizontalLine">
                     <p>Music Selection</p>
-                    <select id="musicSelection" (change)="musicSelection()">
+                    <select id="musicSelection" (change)="sound.musicSelection()">
                         <option id="Outbreak" class="options" value="Outbreak">Outbreak</option>
                         <option id="Theme" class="options" value="Theme">Main Theme</option>
                     </select>

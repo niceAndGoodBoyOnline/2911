@@ -26,7 +26,7 @@
             </tr>
             <tr>
                 <td><p class="lable">Password Confirmation:</p></td>
-                <td><input class="boxes" type='password' [(ngModel)]='passwordConfirmation' (keydown.enter)='register($event);clickSound($event)'/></td>
+                <td><input class="boxes" type='password' [(ngModel)]='passwordConfirmation' (keydown.enter)='register($event);sound.clickSound($event)'/></td>
             </tr>
         </table>
         
@@ -39,10 +39,10 @@
         <br>
              <!-- The (click) attribute is basically: "execute this function when clicked on" -->
         <!-- In this case, when the Register button is clicked, execute register() in app.page-register.ts -->
-        <input class="submit" type='button' value='Register' (click)='register();clickSound()' (mouseenter)='hoverSound()'/>
+        <input class="submit" type='button' value='Register' (click)='register();sound.clickSound()' (mouseenter)='sound.hoverSound()'/>
 
         
-        <img src='{{soundImg}}' (click)="changeSound(this)" id="sound">
-        <img src='{{musicImg}}' (click)="changeMusic(this)" id="music">
+        <img src='{{sound.soundImg}}' (click)="sound.changeSound(this)" id="sound">
+        <img src='{{sound.musicImg}}' (click)="sound.changeMusic(this)" id="music">
     </body>
 </html>

@@ -204,6 +204,14 @@ export class PagePrestigeComponent {
 
     // This function is to increase the user's quantity of the item
     make_transaction(name){
+        for(let i=0;i<this.prestigeArray.length;i++){
+            if(name == "botnet (command)"){
+                if(this.prestigeArray[i].item == name){
+                    this.prestigeArray[i].price = 0
+                    this.prestigeArray[i].desc = "Sold out."
+                }
+            }
+        }
         // Locate whic appropriate controller function to use. In this case, we use makeTransaction function in UserController.js
         // You can tell how by looking in router.js
         let url = this.site + 'user/makePrestigeTransaction'

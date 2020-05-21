@@ -160,6 +160,9 @@ export class PageRegisterComponent {
             console.log(JSON.stringify(data));
             // let the user know what happened
             this.message = data["message"]
+            if(data["errorMessage"]){
+                this.message = data["errorMessage"]
+            }
             if(data["message"] == "Registration successful. Please login."){
                 console.log('Navigating...')
                 this.router.navigate(['/page-login'])

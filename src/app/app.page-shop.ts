@@ -149,7 +149,6 @@ export class PageShopComponent {
                                 data[i].price = "???"
                                 data[i].power = "???"
                                 data[i].desc = "Encrpyted."
-                                continue
                             }
                         }
                         itemPriceArray.push(data[i].price)
@@ -207,6 +206,9 @@ export class PageShopComponent {
 
     // Buy. This function is called whenver user buys something. In the parameters, name is the item name and price is the item price.
     buy(name, price, quantity) {
+        if(name == "???"){
+            return
+        }
         quantity = parseInt(quantity)
         // If user doesnt have enough bitcoins,
         if(this.bitcoin < (price * quantity)){
@@ -255,6 +257,9 @@ export class PageShopComponent {
     
     update_price(name, data) {
         for(let i=0;i<this.itemArray.length;i++){
+            if(this.pricedItemArray[i].item == "???"){
+                continue
+            }
             if(this.pricedItemArray[i].item == name){
                 // let subtotal = (this.itemArray[i] * quantity) * 5
                 // let subtotal = Math.round(Math.round(this.pricedItemArray[i].price * ((Math.pow(1.1, quantity) * (Math.pow(1.1, 1) - 1))) / (1.1 - 1)))
